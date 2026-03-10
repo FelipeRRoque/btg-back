@@ -1,23 +1,26 @@
-# TÍTULO DO PROJETO
+# Best Time to Grow
 
-`CURSO`
+`Sistemas de Informação - PUC Minas`
 
-`DISCIPLINA`
+`Trabalho Interdisciplinar: Aplicações para sustentabilidade`
 
-`SEMESTRE`
+`Quinto Semestre`
 
-Descrever resumidamente, em um ou dois parágrafos, o projeto que está sendo desenvolvido.
+O sistema proposto tem como objetivo auxiliar agricultores familiares na tomada de decisão sobre o momento ideal para o plantio. A partir da análise de dados climáticos, como temperatura, índice de chuvas e sazonalidade, a plataforma identifica os períodos mais favoráveis para o cultivo de diferentes culturas. Com essas informações, o sistema apresenta de forma simples e visual quais são os melhores dias e meses para realizar o plantio, contribuindo para aumentar as chances de sucesso da produção e reduzir riscos relacionados às condições climáticas.
+
+Além disso, o sistema é desenvolvido considerando a realidade dos agricultores familiares, priorizando facilidade de uso e acesso às informações mais relevantes para o planejamento agrícola. Por meio de uma interface intuitiva, o agricultor pode consultar previsões e recomendações específicas para sua região, permitindo um melhor aproveitamento do clima ao longo do ano. Dessa forma, a ferramenta busca apoiar práticas agrícolas mais eficientes, auxiliando no planejamento das atividades no campo e promovendo maior segurança na produção de alimentos.
 
 ## Integrantes
 
-* Nome completo do aluno 1
-* Nome completo do aluno 2
-* Nome completo do aluno 3
-* Nome completo do aluno 4
+* Felipe Rodrigues Roque
+* Gabrielle Maia de Andrade Souza
+* Júlio César de Ávila Silva
+* Raphael dos Reis Jamil
+* Wagner Alexsander de Carvalho Viana
 
 ## Orientador
 
-* Nome completo do professor 1
+* Cléia Márcia Gomes Amaral
 
 ## Instruções de utilização
 
