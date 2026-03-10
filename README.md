@@ -4,7 +4,7 @@
 
 `Trabalho Interdisciplinar: Aplicações para sustentabilidade`
 
-`Quinto Semestre`
+`5.p 1/2026`
 
 O sistema proposto tem como objetivo auxiliar agricultores familiares na tomada de decisão sobre o momento ideal para o plantio. A partir da análise de dados climáticos, como temperatura, índice de chuvas e sazonalidade, a plataforma identifica os períodos mais favoráveis para o cultivo de diferentes culturas. Com essas informações, o sistema apresenta de forma simples e visual quais são os melhores dias e meses para realizar o plantio, contribuindo para aumentar as chances de sucesso da produção e reduzir riscos relacionados às condições climáticas.
 
