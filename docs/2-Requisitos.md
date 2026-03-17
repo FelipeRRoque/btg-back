@@ -2,9 +2,62 @@
 Nesta seção (2) deve-se descrever os requisitos comtemplados na descrição arquitetural, divididos em dois grupos: funcionais e não funcionais. 
 
 ## 2.1 Lista de Atores
-Nesta seção secundária devem ser apresentados os atores  da sua aplicação. Para iniciar o trabalho, recomenda-se utilizar a abordagem *Design Thinking*, disponível em: 
-* https://designthinking.ideo.com/ e;
-* https://sebrae.com.br/sites/PortalSebrae/artigos/design-thinking-inovacao-pela-criacao-de-valor-para-o-cliente,c06e9889ce11a410VgnVCM1000003b74010aRCRD. 
+
+### 1. João Batista – O Produtor Familiar  
+- **Idade:** 52 anos  
+- **Gênero:** Masculino  
+- **Emprego:** Agricultor familiar (produção de milho e feijão)  
+- **Escolaridade:** Ensino Fundamental incompleto  
+
+João vive em uma pequena propriedade rural herdada do pai. Sempre trabalhou com agricultura tradicional, guiando-se pela experiência e pelo “feeling” das estações. Nos últimos anos, porém, tem sofrido com mudanças climáticas imprevisíveis, perdendo parte da produção. Ele deseja evitar prejuízos causados pelo clima e também quer saber o melhor momento para plantar e colher, buscando mais segurança para sustentar sua família.
+
+### 2. Mariana Alves – A Engenheira Agrônoma  
+- **Idade:** 34 anos  
+- **Gênero:** Feminino  
+- **Emprego:** Engenheira Agrônoma (consultora independente)  
+- **Escolaridade:** Ensino Superior completo + especialização  
+
+Mariana atende diversos produtores rurais e percebe que muitos tomam decisões com base em informações imprecisas. Ela quer usar tecnologia para levar recomendações mais confiáveis e baseadas em dados. Seu objetivo é validar recomendações técnicas no sistema e acompanhar os resultados das orientações aplicadas para melhorar continuamente seu trabalho.
+
+### 3. Carlos Henrique – O Administrador do Sistema  
+- **Idade:** 29 anos  
+- **Gênero:** Masculino  
+- **Emprego:** Analista de Sistemas / Administrador da plataforma  
+- **Escolaridade:** Ensino Superior em TI  
+
+Carlos é responsável por manter o sistema funcionando corretamente. Ele gerencia usuários, integra APIs de clima e garante a segurança das informações. Seu foco é garantir estabilidade e segurança do sistema, além de automatizar processos administrativos para tornar a plataforma mais eficiente e confiável.
+
+## 4. Luciana Rocha – A Extensionista Rural  
+- **Idade:** 41 anos  
+- **Gênero:** Feminino  
+- **Emprego:** Técnica em extensão rural  
+- **Escolaridade:** Ensino Técnico agrícola  
+
+Luciana trabalha diretamente com pequenos produtores, visitando propriedades e oferecendo orientação. Muitas vezes, sente falta de dados atualizados para tomar decisões rápidas. Ela quer acessar informações atualizadas no campo e registrar visitas e recomendações no sistema para melhorar o acompanhamento dos produtores.
+
+### 5. Roberto Lima – O Gestor de Cooperativa  
+- **Idade:** 47 anos  
+- **Gênero:** Masculino  
+- **Emprego:** Gerente de cooperativa agrícola  
+- **Escolaridade:** Ensino Superior em Administração  
+
+Roberto coordena dezenas de produtores e precisa tomar decisões estratégicas para o grupo, como definir períodos de plantio e organizar a logística de produção. Ele busca visualizar dados consolidados dos produtores e planejar ações coletivas com base em informações confiáveis para reduzir perdas e aumentar a produtividade.
+
+### 6. Fernanda Souza – A Pesquisadora  
+- **Idade:** 31 anos  
+- **Gênero:** Feminino  
+- **Emprego:** Pesquisadora em sustentabilidade agrícola  
+- **Escolaridade:** Mestrado/Doutorado  
+
+Fernanda estuda o impacto das mudanças climáticas na agricultura familiar e precisa de dados reais para validar suas pesquisas. Ela deseja acessar dados confiáveis e organizados e analisar padrões climáticos e produtivos para gerar conhecimento científico relevante.
+
+### 7. Pedro Santos – O Usuário Visitante  
+- **Idade:** 22 anos  
+- **Gênero:** Masculino  
+- **Emprego:** Estudante de Agronomia  
+- **Escolaridade:** Ensino Superior em andamento  
+
+Pedro está começando sua jornada na área agrícola e busca ferramentas para aprender mais sobre o setor. Ele ainda não é produtor, mas pretende se tornar um. Seu interesse é explorar informações agrícolas de forma simples e aprender sobre boas práticas de plantio para se preparar para o futuro.
 
 ## 2.2 Lista de Funcionalidades
 Apresentem aqui uma lista das funcionalidades a serem atendidas no projeto, na visão do cliente.
