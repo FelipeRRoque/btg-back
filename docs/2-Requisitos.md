@@ -90,7 +90,6 @@ Enumerem os requisitos funcionais previstos para a aplicação a ser desenvolvid
 | RF08 | Manter o registro e consulta do histórico de culturas plantadas e eventos climáticos. | M | M |
 
 *B=Baixa, M=Média, A=Alta.
-Obs: acrescente quantas linhas forem  necessárias.
 
 ## 2.4 Requisitos Não Funcionais
 Os requisitos não funcionais definem características de qualidade e restrições operacionais do sistema BTG (Best Time to Grow). Diferentemente dos requisitos funcionais, que descrevem as funcionalidades do sistema, os requisitos não funcionais estabelecem critérios relacionados ao desempenho, usabilidade, segurança, disponibilidade e compatibilidade da aplicação.
