@@ -54,9 +54,26 @@ Pedro está começando sua jornada na área agrícola e busca ferramentas para a
 ## 2.2 Lista de Funcionalidades
 Apresentem aqui uma lista das funcionalidades a serem atendidas no projeto, na visão do cliente.
 Os requisitos aqui apresentados correspondem às funcionalidades solicitadas pelo parceiro/cliente na visão de negócio, tais como:
-* Cadastrar...
-* Gerenciar...
-* Gerar relatórios ou gráficos...
+
+* Cadastrar usuários (produtores) no sistema.  
+* Realizar login e autenticação para acesso seguro à plataforma.
+* Gerenciar o perfil do produtor.
+* Cadastrar e gerenciar áreas de plantio com sua respectiva localização.  
+* Registrar as culturas atualmente plantadas em cada área. 
+* Visualizar informações climáticas atuais da região da propriedade.  
+* Consultar a previsão do tempo para os próximos dias.  
+* Acessar o histórico climático da região.  
+* Receber sugestões de culturas adequadas para a região da propriedade.  
+* Obter recomendações de plantio baseadas na estação do ano.  
+* Receber sugestões de plantio considerando a previsão climática.  
+* Utilizar um calendário agrícola para acompanhamento dos períodos de plantio.
+* Permitir o acesso simultâneo de múltiplos usuários ao sistema sem comprometer o desempenho da aplicação.
+* Permitir que o sistema seja acessado por meio de navegadores web em computadores e dispositivos móveis.
+* Manter alta disponibilidade do sistema durante seu funcionamento, garantindo que os usuários possam acessar a aplicação na maior parte do tempo.
+* Exibir mensagens informativas ao usuário em situações de indisponibilidade da API externa de dados climáticos, mantendo o funcionamento das demais funcionalidades do sistema.
+* Integrar o sistema com APIs externas de dados climáticos para obtenção de informações meteorológicas atualizadas.
+* Disponibilizar uma interface responsiva que se adapte automaticamente a diferentes dispositivos e tamanhos de tela.
+* Permitir a evolução do sistema.
 
 ## 2.3 Requisitos Funcionais
 Enumerem os requisitos funcionais previstos para a aplicação a ser desenvolvida. Lembrem-se de listar todos os requisitos que serão implementados, com a dificuldade e a prioridade relativa de cada um no projeto. A dificuldade prevista tem relação com o esforço necessário para implementação, e a prioridade tem relação com a importância daquele requisito específico.
