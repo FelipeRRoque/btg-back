@@ -19,15 +19,7 @@ João vive em uma pequena propriedade rural herdada do pai. Sempre trabalhou com
 
 Mariana atende diversos produtores rurais e percebe que muitos tomam decisões com base em informações imprecisas. Ela quer usar tecnologia para levar recomendações mais confiáveis e baseadas em dados. Seu objetivo é validar recomendações técnicas no sistema e acompanhar os resultados das orientações aplicadas para melhorar continuamente seu trabalho.
 
-### 3. Carlos Henrique – O Administrador do Sistema  
-- **Idade:** 29 anos  
-- **Gênero:** Masculino  
-- **Emprego:** Analista de Sistemas / Administrador da plataforma  
-- **Escolaridade:** Ensino Superior em TI  
-
-Carlos é responsável por manter o sistema funcionando corretamente. Ele gerencia usuários, integra APIs de clima e garante a segurança das informações. Seu foco é garantir estabilidade e segurança do sistema, além de automatizar processos administrativos para tornar a plataforma mais eficiente e confiável.
-
-## 4. Luciana Rocha – A Extensionista Rural  
+### 3. Luciana Rocha – A Extensionista Rural  
 - **Idade:** 41 anos  
 - **Gênero:** Feminino  
 - **Emprego:** Técnica em extensão rural  
@@ -35,7 +27,7 @@ Carlos é responsável por manter o sistema funcionando corretamente. Ele gerenc
 
 Luciana trabalha diretamente com pequenos produtores, visitando propriedades e oferecendo orientação. Muitas vezes, sente falta de dados atualizados para tomar decisões rápidas. Ela quer acessar informações atualizadas no campo e registrar visitas e recomendações no sistema para melhorar o acompanhamento dos produtores.
 
-### 5. Roberto Lima – O Gestor de Cooperativa  
+### 4. Roberto Lima – O Gestor de Cooperativa  
 - **Idade:** 47 anos  
 - **Gênero:** Masculino  
 - **Emprego:** Gerente de cooperativa agrícola  
@@ -43,7 +35,7 @@ Luciana trabalha diretamente com pequenos produtores, visitando propriedades e o
 
 Roberto coordena dezenas de produtores e precisa tomar decisões estratégicas para o grupo, como definir períodos de plantio e organizar a logística de produção. Ele busca visualizar dados consolidados dos produtores e planejar ações coletivas com base em informações confiáveis para reduzir perdas e aumentar a produtividade.
 
-### 6. Fernanda Souza – A Pesquisadora  
+### 5. Fernanda Souza – A Pesquisadora  
 - **Idade:** 31 anos  
 - **Gênero:** Feminino  
 - **Emprego:** Pesquisadora em sustentabilidade agrícola  
@@ -51,7 +43,7 @@ Roberto coordena dezenas de produtores e precisa tomar decisões estratégicas p
 
 Fernanda estuda o impacto das mudanças climáticas na agricultura familiar e precisa de dados reais para validar suas pesquisas. Ela deseja acessar dados confiáveis e organizados e analisar padrões climáticos e produtivos para gerar conhecimento científico relevante.
 
-### 7. Pedro Santos – O Usuário Visitante  
+### 6. Pedro Santos – O Usuário Visitante  
 - **Idade:** 22 anos  
 - **Gênero:** Masculino  
 - **Emprego:** Estudante de Agronomia  
