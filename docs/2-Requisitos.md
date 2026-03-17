@@ -26,15 +26,23 @@ Enumerem os requisitos funcionais previstos para a aplicação a ser desenvolvid
 Obs: acrescente quantas linhas forem  necessárias.
 
 ## 2.4 Requisitos Não Funcionais
-Enumere, nesta seção secundária, os requisitos não-funcionais previstos para sua aplicação. Entre os requisitos não funcionais, inclua todos os que julgar importante do ponto de vista arquitetural, ou seja, os requisitos que terão impacto na definição da arquitetura. Os requisitos devem ser descritos de forma completa e preferencialmente quantitativa.
+Os requisitos não funcionais definem características de qualidade e restrições operacionais do sistema BTG (Best Time to Grow). Diferentemente dos requisitos funcionais, que descrevem as funcionalidades do sistema, os requisitos não funcionais estabelecem critérios relacionados ao desempenho, usabilidade, segurança, disponibilidade e compatibilidade da aplicação.
+
+Esses requisitos são fundamentais para garantir que o sistema seja confiável, acessível e eficiente para os usuários finais, especialmente considerando o público-alvo composto por pequenos produtores e agricultores familiares que utilizam predominantemente dispositivos móveis para acesso à plataforma.
+
+Além disso, os requisitos não funcionais influenciam diretamente as decisões arquiteturais do sistema, como a escolha de tecnologias, a organização modular da aplicação e a integração com serviços externos, como APIs meteorológicas utilizadas para obtenção de dados climáticos.
 
 | ID | Descrição Resumida | Prioridade <br> (B/M/A)* |
 | -- | ------------------ | ------------------------ |
-| RNF01 | O sistema deve ser acessível nas plataformas web e móvel | A |
-| RNF02 | ...  |  |
-| ... | ... | ...|
-
-Obs: acrescente quantas linhas seja necessário.
+| RNF01 | O sistema deve suportar múltiplos usuários simultâneos sem comprometer o desempenho geral da aplicação. | B |
+| RNF02 | O sistema deve ser acessível nas plataformas web e dispositivos móveis por meio de navegadores. | A |
+| RNF03 | O sistema deve ser compatível com os principais navegadores: Google Chrome, Microsoft Edge e Mozilla Firefox. | M |
+| RNF04 | O sistema deve manter disponibilidade mínima de 95% durante seu período de funcionamento. | M |
+| RNF05 | Em caso de indisponibilidade da API climática externa, o sistema deve exibir uma mensagem informativa ao usuário sem comprometer o funcionamento das demais funcionalidades. | M |
+| RNF06 | O sistema deve garantir que cada usuário tenha acesso apenas aos seus próprios dados e registros de plantio. | B |
+| RNF07 | A aplicação deve permitir integração com APIs externas de dados climáticos para obtenção de informações meteorológicas atualizadas. | A |
+| RNF08 | A interface do sistema deve ser responsiva, adaptando-se automaticamente a diferentes tamanhos de tela. | A |
+| RNF09 | A arquitetura do sistema deve ser modular, permitindo a adição futura de novos serviços ou funcionalidades sem impacto significativo no sistema existente. | B |
 
 ## 2.5 Descrição Resumida dos Casos de Uso ou Histórias de Usuários
 Apresente uma modelagem dos requisitos funcionais previstos para sua aplicação, utilizando a descrição resumida de Casos de Uso ou o formato de Histórias de Usuário.
