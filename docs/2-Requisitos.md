@@ -63,9 +63,14 @@ Enumerem os requisitos funcionais previstos para a aplicação a ser desenvolvid
 
 | ID | Descrição Resumida | Dificuldade <br> (B/M/A)* | Prioridade <br> (B/M/A)* |
 | -- | ------------------ | -------------------- | ------------------- |
-| RF01 | O sistema deve permitir o cadastramento do usuário | B | A |
-| RF02 | ...  |  | |
-| ... | ... | ...| ... |
+| RF01 | Realizar o login e a autenticação de segurança para acesso às funcionalidades restritas. | B | A |
+| RF02 | Efetuar o registro de novos usuários e produtores na plataforma. | B | A |
+| RF03 | Exibir as condições meteorológicas atuais da região via integração com APIs de clima. | M | A |
+| RF04 | Apresentar a previsão do tempo detalhada para os próximos dias. | M | A |
+| RF05 | Disponibilizar informações técnicas e perfis sobre os tipos de cultivos mais comuns. | B | M |
+| RF06 | Permitir o cadastramento da localização da propriedade e das áreas de plantio. | M | A |
+| RF07 | Gerar recomendações de plantio baseadas na estação do ano e na previsão climática. | A | A |
+| RF08 | Manter o registro e consulta do histórico de culturas plantadas e eventos climáticos. | M | M |
 
 *B=Baixa, M=Média, A=Alta.
 Obs: acrescente quantas linhas forem  necessárias.
