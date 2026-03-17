@@ -44,6 +44,8 @@ Além disso, os requisitos não funcionais influenciam diretamente as decisões 
 | RNF08 | A interface do sistema deve ser responsiva, adaptando-se automaticamente a diferentes tamanhos de tela. | A |
 | RNF09 | A arquitetura do sistema deve ser modular, permitindo a adição futura de novos serviços ou funcionalidades sem impacto significativo no sistema existente. | B |
 
+*B=Baixa, M=Média, A=Alta.
+
 ## 2.5 Descrição Resumida dos Casos de Uso ou Histórias de Usuários
 Apresente uma modelagem dos requisitos funcionais previstos para sua aplicação, utilizando a descrição resumida de Casos de Uso ou o formato de Histórias de Usuário.
 
