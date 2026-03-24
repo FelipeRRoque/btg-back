@@ -142,19 +142,15 @@ As histórias de usuário representam as necessidades dos principais atores iden
 * O código do sistema deverá ser versionado utilizando Git, com armazenamento em repositório remoto.
 
 ## 2.7 Mecanismos Arquiteturais 
-Esta seção deve apresentar uma visão geral dos mecanismos que compõem a arquitetura do sosftware baseando-se em três estados: (1) análise, (2) design e (3) implementação. 
-Na coluna Análise devem ser listados os aspectos gerais que compõem a arquitetura do software, tais como: persistência, integração com sistemas legados, geração de logs do sistema, ambiente de Front-End, tratamento de exceções, formato dos testes, formato de distribuição/implantação (deploy), dentre outros. 
-A coluna Design deve identificar o padrão tecnológico a seguir para cada mecanismo identificado na Análise.
-A coluna Implementação deve identificar o produto/ferramenta a ser utilizado na solução específica.
+A tabela abaixo descreve as escolhas técnicas para sustentar as funcionalidades do BTG.
 
 | Análise | Design | Implementação | 
 |--- | --- | --- |
-| Persistência | ORM | Hibernate |
-| Front end | Biblioteca JS | React, JavaScript, HTML |
-| Back end | Biblioteca JS | Node, com o framework Next.JS |
-| Integração | | |
-| Teste de Software | | |
-| Deploy | | |
-| ... | | |
+| Persistência | ORM | PostgreSQL ou MySQL |
+| Front end | Interface Web Responsiva / JS | JavaScript |
+| Back end | API RESTful / Arquitetura em Camadas | C# (ASP.NET Core) |
+| Integração | Consumo de API Externa (JSON/HTTP) | HttpClient (C#) para APIs Meteorológicas |
+| Deploy | Versionamento e Hospedagem | Git / GitHub e Provedor de Nuvem |
+| Tratamento de Exceções | Mensagens Informativas / Middleware | Blocos Try-Catch e Global Error Handling |
 
 
