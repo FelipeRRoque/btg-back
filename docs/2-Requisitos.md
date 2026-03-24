@@ -113,24 +113,21 @@ Além disso, os requisitos não funcionais influenciam diretamente as decisões 
 *B=Baixa, M=Média, A=Alta.
 
 ## 2.5 Descrição Resumida dos Casos de Uso ou Histórias de Usuários
-Apresente uma modelagem dos requisitos funcionais previstos para sua aplicação, utilizando a descrição resumida de Casos de Uso ou o formato de Histórias de Usuário.
 
-Exemplo de descrição resumida de Casos de Uso:
-
-| UC01 – NOME DO CASO DE USO |
-| -------------------------- |
-| Descrição |  |
-| Atores    | Teste  |
-| Prioridade | |
-| Requisitos associados | |
-| Fluxo Principal | |
-
-
-Exemplo de História de Usuários:
+As histórias de usuário representam as necessidades dos principais atores identificados no sistema BTG (Best Time to Grow). Elas descrevem, de forma simples e orientada ao valor, o que cada usuário espera realizar dentro da plataforma.
 
 | EU, <br> COMO... <br> PAPEL |  QUERO/PRECISO... <br> FUNCIONALIDADE | PARA... <br> MOTIVO/VALOR |
 | ---- | ---- | ---- |
-| José, Gestor da ONG... | Como um gestor, quero... | Melhorar o atendimento... |
+| João Batista, Produtor Familiar | Criar uma conta e acessar o sistema com login seguro | Conseguir utilizar a plataforma para planejar meu plantio |
+| João Batista, Produtor Familiar | Cadastrar minha propriedade e áreas de plantio | Organizar melhor minhas culturas e acompanhar minha produção |
+| João Batista, Produtor Familiar | Consultar a previsão do tempo da minha região | Decidir o melhor momento para plantar |
+| João Batista, Produtor Familiar | Receber recomendações de plantio baseadas no clima e na estação | Reduzir perdas causadas por mudanças climáticas |
+| Mariana Alves, Engenheira Agrônoma | Visualizar dados climáticos e informações de cultivo | Validar recomendações técnicas para os produtores |
+| Luciana Rocha, Extensionista Rural | Acessar informações atualizadas durante visitas ao campo | Orientar produtores de forma mais rápida e precisa |
+| Roberto Lima, Gestor de Cooperativa | Acompanhar informações de diferentes produtores | Planejar ações estratégicas para melhorar a produtividade coletiva |
+| Fernanda Souza, Pesquisadora | Acessar dados históricos de clima e plantio | Analisar padrões e gerar conhecimento científico |
+| Pedro Santos, Usuário Visitante | Explorar informações sobre culturas e clima | Aprender sobre boas práticas agrícolas |
+| Administrador do Sistema | Gerenciar o funcionamento da plataforma e integrações com APIs climáticas | Garantir estabilidade, segurança e atualização dos dados do sistema |
 
 
 ## 2.6 Restrições Arquiteturais
