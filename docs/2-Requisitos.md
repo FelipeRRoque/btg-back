@@ -134,10 +134,15 @@ Exemplo de História de Usuários:
 
 
 ## 2.6 Restrições Arquiteturais
-Enumerem as principais restrições arquiteturais. Restrições arquiteturais geralmente não são consideradas requisitos, mas apenas limitam a solução a ser desenvolvida, obrigando-a a atendê-las. 
- As restrições impostas ao projeto que afetam sua arquitetura podem ser, por ex.:
- * O software deverá ser desenvolvido em Python, no framework Django;
- * A API desenvolvida deve seguir o padrão ReSTful.
+* O sistema deverá ser desenvolvido utilizando arquitetura cliente-servidor, com separação entre frontend e backend.
+* O backend da aplicação deverá ser desenvolvido utilizando C#, implementando uma API no padrão RESTful para comunicação com o frontend.
+* O frontend deverá ser desenvolvido utilizando JavaScript, garantindo uma interface web responsiva e de fácil utilização para produtores rurais.
+* A comunicação entre frontend e backend deverá ocorrer através de requisições HTTP utilizando JSON como formato padrão de troca de dados.
+* O sistema deverá integrar-se com APIs externas de dados meteorológicos para obtenção de informações de clima atual e previsão do tempo.
+* O sistema deverá utilizar um banco de dados relacional, como MySQL ou PostgreSQL, para armazenamento das informações de usuários e culturas cadastradas.
+* O sistema deverá ser desenvolvido seguindo o modelo de arquitetura em camadas, separando responsabilidades entre camada de apresentação, camada de aplicação e camada de persistência.
+* O sistema deverá ser compatível com navegadores web modernos, garantindo acesso por dispositivos desktop e móveis.
+* O código do sistema deverá ser versionado utilizando Git, com armazenamento em repositório remoto.
 
 ## 2.7 Mecanismos Arquiteturais 
 Esta seção deve apresentar uma visão geral dos mecanismos que compõem a arquitetura do sosftware baseando-se em três estados: (1) análise, (2) design e (3) implementação. 
