@@ -1,10 +1,10 @@
 # 3 Modelagem e diagramas arquiteturais: (Modelo C4)
-Descrevam brevemente a modelagem da solução apresentando seu diagrama geral com as camadas da arquitetura projetada de forma simples e direta.
+A solução do sistema BTG (Best Time to Grow) é baseada em uma arquitetura cliente-servidor em três camadas. A camada de apresentação (frontend), desenvolvida em JavaScript, fornece uma interface web responsiva acessada por navegadores, permitindo que o usuário interaja com o sistema. Essa camada se comunica via HTTP/JSON com a camada de aplicação (backend), implementada em C# com API REST, responsável pela lógica de negócio, autenticação e geração de recomendações de plantio com base em clima e estação. Por fim, a camada de persistência utiliza um banco de dados relacional (PostgreSQL/MySQL) para armazenar usuários, propriedades e dados agrícolas, além da integração com uma API meteorológica externa para obtenção de informações climáticas.
 
-Exemplo:
+
 
 <p align="center">
-  <img src="./images/solucao_geral.png" alt="Diagrama de Contexto"> <br>
+  <img src="./images/solucao_geral_BTG.pn" alt="Diagrama de Contexto"> <br>
   Figura 1: Visão Geral da Solução (camadas)
 </p>
 
