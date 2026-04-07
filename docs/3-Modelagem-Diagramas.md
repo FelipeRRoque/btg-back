@@ -4,7 +4,7 @@ A solução do sistema BTG (Best Time to Grow) é baseada em uma arquitetura cli
 
 
 <p align="center">
-  <img src="./images/solucao_geral_BTG.pn" alt="Diagrama de Contexto"> <br>
+  <img src="./images/solucao_geral_BTG.png" alt="Diagrama de Contexto"> <br>
   Figura 1: Visão Geral da Solução (camadas)
 </p>
 
