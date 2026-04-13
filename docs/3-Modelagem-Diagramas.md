@@ -15,7 +15,7 @@ A solução do sistema BTG (Best Time to Grow) é baseada em uma arquitetura cli
 
 O diagrama de contexto apresenta uma visão macro do sistema **BTG Web**, destacando sua interação com os principais atores e sistemas externos. No centro está o sistema, utilizado pelo **Usuário do BTG**, que representa o consumidor da aplicação com acesso às funcionalidades por meio de uma interface web.
 
-O usuário interage com o sistema para consultar informações climáticas e gerenciar dados relacionados ao plantio. Além disso, o sistema se integra a um serviço externo, o **OpenWeteo**, responsável por fornecer dados de previsão do tempo em tempo real (figura 2).
+O usuário interage com o sistema para consultar informações climáticas e gerenciar dados relacionados ao plantio. Além disso, o sistema se integra a um serviço externo, o **OpenMeteo**, responsável por fornecer dados de previsão do tempo em tempo real (figura 2).
 
 
 
@@ -65,7 +65,7 @@ A arquitetura segue principalmente os padrões **MVC (Model-View-Controller)** e
 - **Repository Plantio**  
   Responsável pelo acesso aos dados, executando operações no banco de dados, como inserções e consultas.
 
-O backend também se comunica com um serviço externo de previsão do tempo (OpenWeather), integrando esses dados às funcionalidades do sistema (figura 4).
+O backend também se comunica com um serviço externo de previsão do tempo (OpenMeteo), integrando esses dados às funcionalidades do sistema (figura 4).
 
 
 <p align="center">
