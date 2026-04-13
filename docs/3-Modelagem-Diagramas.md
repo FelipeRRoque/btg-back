@@ -12,41 +12,67 @@ A solução do sistema BTG (Best Time to Grow) é baseada em uma arquitetura cli
 
 
 ## 3.1 Nível 1: Diagrama de Contexto
-Apresente um diagrama mostrando seu sistema como uma caixa no centro cercada por seus usuários e outros sistemas com os quais ele interage. Demonstre uma visão geral da paisagem do sistema. O foco deve estar nas pessoas (atores, papéis, personas, etc.) e sistemas de software, em vez de tecnologias, protocolos e outros detalhes de baixo nível, conforme figura 2. 
 
-Obs: Este é o tipo de diagrama que se pode mostrar para pessoas não técnicas.
+O diagrama de contexto apresenta uma visão macro do sistema **BTG Web**, destacando sua interação com os principais atores e sistemas externos. No centro está o sistema, utilizado pelo **Usuário do BTG**, que representa o consumidor da aplicação com acesso às funcionalidades por meio de uma interface web.
+
+O usuário interage com o sistema para consultar informações climáticas e gerenciar dados relacionados ao plantio. Além disso, o sistema se integra a um serviço externo, o **OpenWeteo**, responsável por fornecer dados de previsão do tempo em tempo real (figura 2).
+
+
 
 <p align="center">
-  <img src="./images/diagrama_contexto.png" alt="Diagrama de Contexto"><br>
-  Figura 2: Diagrama de Contexto  (fonte: https://c4model.com/)
+  <img src="./images/diagrama-de-contexto-nivel-1.jpg" alt="Diagrama de Contexto"><br>
+  Figura 2: Diagrama de Contexto  (fonte: própria)
 </p>
 
-Escreva aqui uma breve explicação sobre o diagrama da Figura 2.
 
 
 ## 3.2 Nível 2: Diagrama de Contêiner
-Apresente a forma de alto nível da arquitetura de software e como as responsabilidades são distribuídas por ela. Mostre as principais opções de tecnologia e como os contêineres se comunicam entre si. É um diagrama simples e focado em tecnologia de alto nível que é útil tanto para desenvolvedores de software quanto para equipes de suporte/operações (figura 3).
+
+O diagrama de contêiner apresenta a arquitetura de alto nível do sistema, evidenciando como as responsabilidades estão distribuídas entre diferentes partes da aplicação e quais tecnologias são utilizadas.
+
+O sistema é composto por quatro principais contêineres:
+
+- **Web Page (SPA)**: Desenvolvida em React, é responsável pela interface com o usuário, permitindo a visualização de dados climáticos e o gerenciamento de informações de plantio.
+- **Web Application (NGINX)**: Atua como servidor web, responsável por entregar o conteúdo estático da aplicação (HTML, CSS, JavaScript).
+- **Sistema BackEnd BTG**: Desenvolvido em .NET, concentra a lógica de negócio, processa as requisições do usuário e realiza integrações externas.
+- **Database (MySQL)**: Responsável pelo armazenamento persistente dos dados dos usuários e das informações de plantio.
+
+A comunicação entre os contêineres ocorre principalmente via HTTP/HTTPS e troca de dados em formato JSON. O frontend consome a API do backend, que por sua vez acessa o banco de dados e integra-se com a API externa do OpenMeteo para obtenção de dados climáticos (figura 3).
 
 <p align="center">
-  <img src="./images/diagrama_conteiner.png" alt="Diagrama de Contêiner"><br>
-  Figura 3 – Diagrama de Contêiner  (fonte: https://c4model.com/)
+  <img src="./images/diagrama-de-contexto-nivel-2.jpg" alt="Diagrama de Contêiner"><br>
+  Figura 3 – Diagrama de Contêiner  (fonte: própria)
 </p>
 
-Escreva aqui uma breve explicação sobre o diagrama da Figura 3.
 
 
 ## 3.3 Nível 3: Diagrama de Componentes
-Apresente a composição do contêiner em vários "componentes". O que são cada um desses componentes, suas responsabilidades e os detalhes de tecnologia/implementação.
+O diagrama de componentes detalha a estrutura interna do contêiner de backend, evidenciando os principais componentes, suas responsabilidades e os padrões arquiteturais adotados.
 
-O diagrama de componentes da aplicação, indica, os elementos da arquitetura e as interfaces entre eles. Liste os estilos/padrões arquiteturais utilizados e faz uma descrição sucinta dos componentes indicando o papel de cada um deles dentro da arquitetura/estilo/padrão arquitetural. Indique também quais componentes serão reutilizados (navegadores, SGBDs, middlewares, etc), quais componentes serão adquiridos por serem proprietários e quais componentes precisam ser desenvolvidos, conforme figura 4.
+A arquitetura segue principalmente os padrões **MVC (Model-View-Controller)** e **Mediator**, promovendo desacoplamento e organização da lógica de negócio.
+
+### Componentes:
+
+- **Controller Plantio**  
+  Atua como ponto de entrada das requisições HTTP (REST). Recebe as solicitações do frontend e as encaminha para a camada de aplicação.
+
+- **MediatR**  
+  Responsável por intermediar a comunicação entre os componentes, desacoplando o controller da lógica de negócio e direcionando as requisições para os handlers apropriados.
+
+- **Handler Plantio**  
+  Contém a lógica de negócio específica das operações relacionadas ao plantio, processando os dados recebidos e coordenando a persistência.
+
+- **Repository Plantio**  
+  Responsável pelo acesso aos dados, executando operações no banco de dados, como inserções e consultas.
+
+O backend também se comunica com um serviço externo de previsão do tempo (OpenWeather), integrando esses dados às funcionalidades do sistema (figura 4).
 
 
 <p align="center">
-  <img src="./images/diagrama_componentes.png" alt="Diagrama de Contexto"><br>
-  Figura 4 – Diagrama de Componentes  (fonte: https://c4model.com/)
+  <img src="./images/diagrama-de-contexto-nivel-3.jpg" alt="Diagrama de Contexto"><br>
+  Figura 4 – Diagrama de Componentes  (fonte: própria)
 </p>
 
-Escreva aqui uma breve explicação sobre o diagrama da Figura 4.
 
 
 ## 3.4 Nível 4: Código
