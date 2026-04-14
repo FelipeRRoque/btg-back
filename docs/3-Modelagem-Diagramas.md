@@ -77,13 +77,11 @@ O backend também se comunica com um serviço externo de previsão do tempo (Ope
 
 ## 3.4 Nível 4: Código
 
-Aqui vocês devem apresentar cada componente para mostrar como ele é implementado como código; serve também para explicar a arquitetura. Pode-se utilizar um diagrama de classe UML, um diagrama de Entidade/Relacionamentos (figura 5), tabelas do banco de dados, estrutura de um JSON, estrutura de classes de código, etc. 
+O Nível 4 do modelo C4 aprofunda-se na estrutura interna de implementação do sistema. Para o projeto BTG, este nível é representado pelo Diagrama Entidade-Relacionamento (DER), que detalha a arquitetura física de persistência no banco de dados MySQL, consumida diretamente pelos componentes de Repositório descritos no nível anterior.
 
-Este modelo pode ser essencial caso a arquitetura utilize uma solução de banco de dados – SQL, distribuído ou NoSQL.
+O diagrama a seguir ilustra a modelagem relacional projetada para suportar de forma íntegra as operações da aplicação. Ele evidencia as tabelas fundamentais e seus relacionamentos: o gerenciamento de perfis de atores (users), a organização do espaço físico rural (properties e planting_areas), o catálogo de sementes (crops), o acompanhamento do calendário agrícola (planting_records) e a estruturação do motor de regras climáticas (recommendations). A utilização de identificadores globais únicos (GUIDs) e colunas de auditoria temporal em todas as entidades garante a segurança, a rastreabilidade e a consistência das informações armazenadas pela plataforma.
 
 <p align="center">
   <img src="./images/diagrama_ER.png" alt="Diagrama de Entidade Relacionamento" width="600"> <br>
-  Figura 5 – Diagrama de Entidade Relacionamento (ER) - exemplo. (Fonte Prof. Pedro Alves)
+  Figura 4 – Diagrama de Entidade Relacionamento (DER)
 </p>
-
-Acrescentem uma breve descrição sobre o diagrama apresentado na Figura 5, descrevendo as entidades que compõem o sistema.
