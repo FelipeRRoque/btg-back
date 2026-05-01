@@ -85,3 +85,89 @@ O diagrama a seguir ilustra a modelagem relacional projetada para suportar de fo
   <img src="./images/diagrama_ER.png" alt="Diagrama de Entidade Relacionamento" width="600"> <br>
   Figura 4 – Diagrama de Entidade Relacionamento (DER)
 </p>
+
+### 3.4.1 Código SQL de criação do banco de dados
+
+-- Criação do banco de dados
+CREATE DATABASE IF NOT EXISTS btg_db;
+USE btg_db;
+
+-- 1. Entidade: Usuários (Atores do sistema)
+CREATE TABLE users (
+    id CHAR(36) PRIMARY KEY,
+    name VARCHAR(150) NOT NULL,
+    email VARCHAR(150) UNIQUE NOT NULL,
+    password_hash VARCHAR(255) NOT NULL,
+    role VARCHAR(50) NOT NULL COMMENT 'Ex: Produtor, Agronomo, Extensionista, Admin',
+    age INT,
+    gender VARCHAR(50),
+    education_level VARCHAR(100),
+    created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+    updated_at DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+);
+
+-- 2. Entidade: Culturas (Catálogo de plantio)
+CREATE TABLE crops (
+    id CHAR(36) PRIMARY KEY,
+    name VARCHAR(100) NOT NULL COMMENT 'Nome popular. Ex: Milho, Feijão',
+    scientific_name VARCHAR(150),
+    technical_info TEXT COMMENT 'Informações e perfil técnico de cultivo',
+    created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+    updated_at DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+);
+
+-- 3. Entidade: Propriedades (Sítios/Fazendas do usuário)
+CREATE TABLE properties (
+    id CHAR(36) PRIMARY KEY,
+    user_id CHAR(36) NOT NULL,
+    name VARCHAR(100) NOT NULL COMMENT 'Nome da propriedade',
+    latitude DECIMAL(10, 8) COMMENT 'Para integração futura de clima exato',
+    longitude DECIMAL(11, 8),
+    city VARCHAR(100),
+    state VARCHAR(2),
+    created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+    updated_at DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    CONSTRAINT fk_property_user FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
+);
+
+-- 4. Entidade: Áreas de Plantio (Subdivisões da propriedade)
+CREATE TABLE planting_areas (
+    id CHAR(36) PRIMARY KEY,
+    property_id CHAR(36) NOT NULL,
+    name VARCHAR(100) NOT NULL COMMENT 'Ex: Talhão Sul, Horta 1',
+    size_hectares DECIMAL(10, 2),
+    soil_type VARCHAR(100),
+    created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+    updated_at DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    CONSTRAINT fk_area_property FOREIGN KEY (property_id) REFERENCES properties(id) ON DELETE CASCADE
+);
+
+-- 5. Entidade: Registros de Plantio (Histórico e acompanhamento)
+CREATE TABLE planting_records (
+    id CHAR(36) PRIMARY KEY,
+    planting_area_id CHAR(36) NOT NULL,
+    crop_id CHAR(36) NOT NULL,
+    plant_date DATE NOT NULL,
+    expected_harvest_date DATE,
+    actual_harvest_date DATE,
+    status VARCHAR(50) NOT NULL COMMENT 'Ex: Planejado, Em Andamento, Colhido, Perdido',
+    notes TEXT COMMENT 'Observações sobre eventos climáticos ou perdas',
+    created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+    updated_at DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    CONSTRAINT fk_record_area FOREIGN KEY (planting_area_id) REFERENCES planting_areas(id) ON DELETE CASCADE,
+    CONSTRAINT fk_record_crop FOREIGN KEY (crop_id) REFERENCES crops(id) ON DELETE RESTRICT
+);
+
+-- 6. Entidade: Recomendações (Regras validadas por agrônomos)
+CREATE TABLE recommendations (
+    id CHAR(36) PRIMARY KEY,
+    crop_id CHAR(36) NOT NULL,
+    author_id CHAR(36) COMMENT 'Agrônomo ou técnico que criou/validou a regra',
+    target_season VARCHAR(50) NOT NULL COMMENT 'Ex: Primavera, Verão',
+    climate_condition VARCHAR(100) NOT NULL COMMENT 'Ex: Chuvoso, Seco',
+    description TEXT NOT NULL COMMENT 'O que deve ser feito (orientação)',
+    created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+    updated_at DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    CONSTRAINT fk_recommendation_crop FOREIGN KEY (crop_id) REFERENCES crops(id) ON DELETE CASCADE,
+    CONSTRAINT fk_recommendation_author FOREIGN KEY (author_id) REFERENCES users(id) ON DELETE SET NULL
+);
