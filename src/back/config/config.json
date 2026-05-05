@@ -14,10 +14,16 @@
     "dialect": "postgres"
   },
   "production": {
-    "username": "postgres",
-    "password": "root",
-    "database": "btg_production",
-    "host": "127.0.0.1",
-    "dialect": "postgres"
+    "username": "besttimetogrow_admin",
+    "password": "btgAdmin2026",
+    "database": "agro_db",
+    "host": "agro-postgres.postgres.database.azure.com",
+    "dialect": "postgres",
+    "dialectOptions": {
+      "ssl": {
+        "require": true,
+        "rejectUnauthorized": false
+        }
+      }
   }
 }
