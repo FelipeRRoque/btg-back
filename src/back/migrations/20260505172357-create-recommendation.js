@@ -2,38 +2,44 @@
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.createTable('users', {
+    await queryInterface.createTable('recommendations', {
       id: {
         allowNull: false,
         primaryKey: true,
         type: Sequelize.UUID,
         defaultValue: Sequelize.UUIDV4
       },
-      name: {
-        type: Sequelize.STRING,
-        allowNull: false
-      },
-      email: {
-        type: Sequelize.STRING,
+      crop_id: {
+        type: Sequelize.UUID,
         allowNull: false,
-        unique: true
+        references: {
+          model: 'crops',
+          key: 'id'
+        },
+        onUpdate: 'CASCADE',
+        onDelete: 'CASCADE'
       },
-      password_hash: {
+      author_id: {
+        type: Sequelize.UUID,
+        allowNull: true,
+        references: {
+          model: 'users',
+          key: 'id'
+        },
+        onUpdate: 'CASCADE',
+        onDelete: 'SET NULL'
+      },
+      target_season: {
         type: Sequelize.STRING,
         allowNull: false
       },
-      role: {
+      climate_condition: {
         type: Sequelize.STRING,
         allowNull: false
       },
-      age: {
-        type: Sequelize.INTEGER
-      },
-      gender: {
-        type: Sequelize.STRING
-      },
-      education_level: {
-        type: Sequelize.STRING
+      description: {
+        type: Sequelize.TEXT,
+        allowNull: false
       },
       created_at: {
         allowNull: false,
@@ -48,6 +54,6 @@ module.exports = {
     });
   },
   async down(queryInterface, Sequelize) {
-    await queryInterface.dropTable('users');
+    await queryInterface.dropTable('recommendations');
   }
 };
