@@ -13,13 +13,16 @@ class UserController {
 
   static async findAll(req, res) {
     try {
-      const users = await UserService.findAll();
-      return res.json(users);
-    } catch (error) {
-      return res.status(500).json({ error: error.message });
-    }
-  }
-
+      if (req.user.role !== 'admin') {
+        return res.status(403).json({ error: 'Acesso restrito a administradores.' });
+        }
+        const users = await UserService.findAll();
+        return res.json(users);
+        } catch (error) {
+          return res.status(500).json({ error: error.message });
+          }
+        }
+        
   static async findById(req, res) {
     try {
       const user = await UserService.findById(req.params.id);
@@ -29,14 +32,21 @@ class UserController {
     }
   }
 
-  static async update(req, res) {
+static async update(req, res) {
     try {
-      const user = await UserService.update(req.params.id, req.body);
-      return res.json(user);
+        const { id } = req.params;
+        if (req.user.id !== id && req.user.role !== 'admin') {
+            return res.status(403).json({
+                error: 'Acesso negado: você não pode alterar dados de outro usuário.'
+            });
+        }
+
+        const result = await UserService.update(id, req.body);
+        return res.json(result);
     } catch (error) {
-      return res.status(400).json({ error: error.message });
+        return res.status(400).json({ error: error.message });
     }
-  }
+}
 
   static async delete(req, res) {
     try {
