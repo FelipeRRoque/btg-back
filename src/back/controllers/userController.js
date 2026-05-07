@@ -33,32 +33,27 @@ class UserController {
   static async findById(req, res) {
     try {
       const { id } = req.params;
-
-      if (req.user.id !== id && req.user.role !== "admin") {
-        return res.status(403).json({
-          error: "Acesso negado",
-        });
+      if (req.user.id !== id && req.user.role !== USER_ROLES.ADMIN) {
+        return res.status(403).json({ error: "Acesso negado" });
       }
-
       const user = await UserService.findById(id);
-
       return res.json(user);
     } catch (error) {
-      return res.status(404).json({
-        error: error.message,
-      });
+      return res.status(404).json({ error: error.message });
     }
   }
 
   static async update(req, res) {
     try {
       const { id } = req.params;
-      if (req.user.id !== id && req.user.role !== "admin") {
-        return res.status(403).json({
-          error: "Acesso negado: você não pode alterar dados de outro usuário.",
-        });
+      if (req.user.id !== id && req.user.role !== USER_ROLES.ADMIN) {
+        return res
+          .status(403)
+          .json({
+            error:
+              "Acesso negado: você não pode alterar dados de outro usuário.",
+          });
       }
-
       const result = await UserService.update(id, req.body);
       return res.json(result);
     } catch (error) {
@@ -69,20 +64,13 @@ class UserController {
   static async delete(req, res) {
     try {
       const { id } = req.params;
-
-      if (req.user.id !== id && req.user.role !== "admin") {
-        return res.status(403).json({
-          error: "Acesso negado",
-        });
+      if (req.user.id !== id && req.user.role !== USER_ROLES.ADMIN) {
+        return res.status(403).json({ error: "Acesso negado" });
       }
-
       const result = await UserService.delete(id);
-
       return res.json(result);
     } catch (error) {
-      return res.status(400).json({
-        error: error.message,
-      });
+      return res.status(400).json({ error: error.message });
     }
   }
 }
