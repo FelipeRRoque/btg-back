@@ -5,6 +5,7 @@ const sequelize = require('./config/database');
 // 1. Importa as rotas
 const userRoutes = require('./routes/userRoutes');
 const authRoutes = require('./routes/authRoutes');
+const propertyRoutes = require('./routes/propertyRoutes'); 
 
 const app = express();
 app.use(express.json());
@@ -12,6 +13,7 @@ app.use(express.json());
 // 2. Registra as rotas (A ordem aqui importa)
 app.use('/api', userRoutes);
 app.use('/api', authRoutes); // Isso registra o /api/login
+app.use('/api', propertyRoutes); 
 
 // 3. Teste de Conexão
 sequelize.authenticate()
