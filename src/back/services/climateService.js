@@ -1,19 +1,19 @@
-const { PropertyService } = require("../models"); 
+const { PropertyService } = require("./propertyService"); 
 
 const { ClimateHistory, DailyClimate } = require("../models/dtos/climateDTOs");
 
 class ClimateService {
   /**
    * Busca dados históricos na Open-Meteo e retorna objetos estruturados (DTOs).
-   * @param {string} userId - ID do usuário (UUID).
+   * @param {property} property - Objeto da propriedade (UUID).
    */
-  static async getHistoricalData(userId) {
+  static async getHistoricalData(property) {
 
     const startDate = '2015-01-01'; 
     const endDate = '2023-12-31';
 
     try {
-      const property = await PropertyService.findPropertiesByUser(userId);
+      const property = property;
       if (!property) {
         throw new Error("Propriedade não encontrada");
       }

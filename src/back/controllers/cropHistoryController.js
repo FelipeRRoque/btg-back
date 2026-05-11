@@ -20,7 +20,7 @@ class CropHistoryController {
       const selectedProperty = properties[0];
 
       // Chama o Serviço de clima.
-      const climateHistory = await ClimateService.getHistoricalData(selectedProperty.id);
+      const climateHistory = await ClimateService.getHistoricalData(selectedProperty);
 
       // Retorna um objeto JSON unificado mostrando os dados da cultura, da propriedade e do histórico climático.
       return res.json({
