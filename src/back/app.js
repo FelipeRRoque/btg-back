@@ -15,7 +15,7 @@ app.use(express.json());
 app.use('/api', userRoutes);
 app.use('/api', authRoutes); // Isso registra o /api/login
 app.use('/api', propertyRoutes); 
-app.use('/api', cropRoutes);
+app.use('/api/crop', cropRoutes);
 
 // 3. Teste de Conexão
 sequelize.authenticate()

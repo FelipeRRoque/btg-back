@@ -50,14 +50,20 @@ class UserService {
     if (!user) {
       throw new Error("Usuário não encontrado");
     }
-    delete data.password_hash;
+
+    const updateData = {
+      name: data.name,
+      age: data.age,
+      education_level: data.education_level,
+      gender: data.gender,
+    };
 
     if (data.password) {
-      data.password_hash = await bcrypt.hash(data.password, 10);
-      delete data.password;
+      updateData.password_hash = await bcrypt.hash(data.password, 10);
     }
 
-    await user.update(data);
+    await user.update(updateData);
+
     return user;
   }
 
