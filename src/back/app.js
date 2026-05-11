@@ -8,6 +8,7 @@ const authRoutes = require('./routes/authRoutes');
 const propertyRoutes = require('./routes/propertyRoutes');
 const cultureRoutes = require('./routes/cultureRoutes');
 const climaticEventRoutes  = require('./routes/climaticEventRoutes');
+const cropRoutes = require('./routes/cropRoutes');
 
 const app = express();
 app.use(express.json());
@@ -18,6 +19,10 @@ app.use('/api/auth', authRoutes);
 app.use('/api/properties', propertyRoutes);
 app.use('/api/cultures', cultureRoutes);
 app.use('/api/climatic-events', climaticEventRoutes);
+//app.use('/api', userRoutes);
+//app.use('/api', authRoutes); // Isso registra o /api/login
+//app.use('/api', propertyRoutes); 
+//app.use('/api', cropRoutes);
 
 // 3. Teste de Conexão
 sequelize.authenticate()
