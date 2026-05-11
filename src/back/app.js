@@ -2,7 +2,9 @@ require('dotenv').config();
 const express = require('express');
 const sequelize = require('./config/database');
 
-// 1. Importa as rotas
+const swaggerUi = require('swagger-ui-express');
+const swaggerFile = require('./swagger-output.json');
+
 const userRoutes = require('./routes/userRoutes');
 const authRoutes = require('./routes/authRoutes');
 const propertyRoutes = require('./routes/propertyRoutes');
@@ -11,7 +13,8 @@ const cropRoutes = require('./routes/cropRoutes');
 const app = express();
 app.use(express.json());
 
-// 2. Registra as rotas (A ordem aqui importa)
+app.use('/docs', swaggerUi.serve, swaggerUi.setup(swaggerFile));
+
 app.use('/api', userRoutes);
 app.use('/api', authRoutes); // Isso registra o /api/login
 app.use('/api', propertyRoutes); 

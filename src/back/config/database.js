@@ -10,7 +10,7 @@ const sequelize = new Sequelize(
     port: process.env.DB_PORT,
     dialect: 'postgres',
     logging: false, // Deixa o terminal mais limpo
-    dialectOptions: process.env.DB_HOST.includes('azure')
+    dialectOptions: (process.env.DB_HOST && process.env.DB_HOST.includes('azure'))
       ? {
           ssl: {
             require: true,
