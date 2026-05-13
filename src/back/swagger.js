@@ -6,7 +6,7 @@ const doc = {
     description: 'Documentação da API para o sistema BTG',
   },
 
-  host: process.env.API_HOST || 'localhost:3000',
+  host: process.env.AZURE_URL || 'localhost:3000',
   schemes: ['http', 'https'],
 
   securityDefinitions: {
