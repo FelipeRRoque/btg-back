@@ -8,14 +8,15 @@
   "host": "localhost:3000",
   "basePath": "/",
   "schemes": [
-    "http"
+    "http",
+    "https"
   ],
   "securityDefinitions": {
     "bearerAuth": {
       "type": "apiKey",
       "name": "Authorization",
       "in": "header",
-      "description": "Digite: Bearer <seu_token_jwt>"
+      "description": "IMPORTANTE: Digite \"Bearer \" seguido do seu token. Ex: Bearer eyJhbG..."
     }
   },
   "paths": {

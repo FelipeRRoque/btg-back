@@ -66,7 +66,7 @@ class CropHistoryController {
 
       const crop = await CropService.findById(id);
 
-      const properties = await PropertyService.findPropertiesByUserId(
+      const properties = await PropertyService.findPropertiesByUser(
         req.user.id,
       );
 

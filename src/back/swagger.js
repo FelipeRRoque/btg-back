@@ -6,15 +6,15 @@ const doc = {
     description: 'Documentação da API para o sistema BTG',
   },
 
-  host: 'localhost:3000',
-  schemes: ['http'],
+  host: process.env.API_HOST || 'localhost:3000',
+  schemes: ['http', 'https'],
 
   securityDefinitions: {
     bearerAuth: {
       type: 'apiKey',
       name: 'Authorization',
       in: 'header',
-      description: 'Digite: Bearer <seu_token_jwt>'
+      description: 'IMPORTANTE: Digite "Bearer " seguido do seu token. Ex: Bearer eyJhbG...'
     }
   },
 
