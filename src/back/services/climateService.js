@@ -9,8 +9,9 @@ class ClimateService {
    */
   static async getHistoricalData(property) {
 
-    const startDate = '2015-01-01'; 
-    const endDate = '2023-12-31';
+    const startDate = '2010-01-01'; 
+
+    const endDate = new Date().toISOString().split('T')[0];
 
     try {
       if (!property) {
