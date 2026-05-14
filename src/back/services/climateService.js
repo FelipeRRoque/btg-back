@@ -13,7 +13,6 @@ class ClimateService {
     const endDate = '2023-12-31';
 
     try {
-      const property = property;
       if (!property) {
         throw new Error("Propriedade não encontrada");
       }
