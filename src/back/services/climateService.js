@@ -1,6 +1,6 @@
 const { PropertyService } = require("./propertyService"); 
 
-const { ClimateHistory, DailyClimate } = require("../models/dtos/climateDTOs");
+const { ClimateHistory, DailyClimate, WeatherResponse } = require("../models/dtos/climateDTOs");
 
 class ClimateService {
   /**
@@ -56,6 +56,9 @@ class ClimateService {
       throw new Error(`Falha ao obter histórico climático: ${error.message}`);
     }
   }
+
+
+  
 }
 
 module.exports = ClimateService;
