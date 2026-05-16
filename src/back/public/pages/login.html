@@ -1,0 +1,958 @@
+<!doctype html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Best Time to Grow - acesso à plataforma">
+  <title>Best Time to Grow | Acesso</title>
+
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --btg-green-950: #102a1f;
+      --btg-green-900: #173b2c;
+      --btg-green-800: #1f5a3f;
+      --btg-green-700: #2d7a50;
+      --btg-green-100: #e8f3ea;
+      --btg-brown-800: #5c3a22;
+      --btg-brown-700: #744b2d;
+      --btg-yellow-500: #f1c84b;
+      --btg-yellow-100: #fff6cf;
+      --btg-white: #ffffff;
+      --btg-black: #151915;
+      --btg-muted: #607067;
+      --btg-border: #dfe8dd;
+      --btg-danger: #b3261e;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      min-height: 100vh;
+      margin: 0;
+      font-family: "Inter", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      color: var(--btg-black);
+      background:
+        radial-gradient(circle at top left, rgba(241, 200, 75, 0.28), transparent 34rem),
+        linear-gradient(135deg, #fbfff7 0%, #edf6ec 48%, #fff9e5 100%);
+    }
+
+    .auth-page {
+      position: relative;
+      overflow: hidden;
+    }
+
+    .auth-page::before,
+    .auth-page::after {
+      content: "";
+      position: fixed;
+      width: 22rem;
+      height: 22rem;
+      border-radius: 50%;
+      filter: blur(10px);
+      opacity: 0.32;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .auth-page::before {
+      top: -8rem;
+      right: -5rem;
+      background: rgba(45, 122, 80, 0.28);
+    }
+
+    .auth-page::after {
+      bottom: -9rem;
+      left: -7rem;
+      background: rgba(116, 75, 45, 0.22);
+    }
+
+    .page-shell {
+      position: relative;
+      z-index: 1;
+    }
+
+    .hero-panel {
+      position: relative;
+      min-height: 620px;
+      padding: clamp(1.5rem, 4vw, 3.25rem);
+      border-radius: 36px;
+      color: var(--btg-white);
+      background:
+        linear-gradient(150deg, rgba(16, 42, 31, 0.96), rgba(31, 90, 63, 0.94)),
+        url("https://images.unsplash.com/photo-1500382017468-9049fed747ef?auto=format&fit=crop&w=1400&q=80") center/cover;
+      box-shadow: 0 2rem 5rem rgba(16, 42, 31, 0.24);
+      overflow: hidden;
+    }
+
+    .hero-panel::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(circle at 18% 20%, rgba(241, 200, 75, 0.2), transparent 18rem),
+        linear-gradient(180deg, rgba(255, 255, 255, 0.07), transparent 42%);
+      pointer-events: none;
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 1;
+    }
+
+    .brand-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.75rem;
+      padding: 0.65rem 0.85rem;
+      border: 1px solid rgba(255, 255, 255, 0.22);
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.11);
+      backdrop-filter: blur(12px);
+    }
+
+    .brand-mark {
+      display: inline-grid;
+      place-items: center;
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      color: var(--btg-green-900);
+      background: var(--btg-yellow-500);
+      font-weight: 800;
+      letter-spacing: -0.04em;
+    }
+
+    .brand-text {
+      font-weight: 800;
+      letter-spacing: -0.02em;
+    }
+
+    .eyebrow,
+    .form-kicker {
+      color: var(--btg-yellow-500);
+      font-size: 0.78rem;
+      font-weight: 800;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+
+    .hero-title {
+      max-width: 760px;
+      font-size: clamp(2.25rem, 6vw, 4.9rem);
+      line-height: 0.96;
+      font-weight: 800;
+      letter-spacing: -0.075em;
+    }
+
+    .hero-description {
+      max-width: 650px;
+      color: rgba(255, 255, 255, 0.82);
+      font-size: 1.08rem;
+      line-height: 1.7;
+    }
+
+    .feature-card {
+      height: 100%;
+      padding: 1rem;
+      border: 1px solid rgba(255, 255, 255, 0.16);
+      border-radius: 20px;
+      background: rgba(255, 255, 255, 0.1);
+    }
+
+    .feature-card strong,
+    .feature-card span {
+      display: block;
+    }
+
+    .feature-card strong {
+      margin-bottom: 0.25rem;
+      color: var(--btg-yellow-500);
+      font-size: 1.02rem;
+    }
+
+    .feature-card span {
+      color: rgba(255, 255, 255, 0.78);
+      font-size: 0.92rem;
+      line-height: 1.45;
+    }
+
+    .notice-card {
+      display: flex;
+      gap: 1rem;
+      align-items: flex-start;
+      max-width: 660px;
+      padding: 1.1rem;
+      border-radius: 22px;
+      background: rgba(255, 255, 255, 0.13);
+      border: 1px solid rgba(255, 255, 255, 0.16);
+    }
+
+    .notice-card p {
+      color: rgba(255, 255, 255, 0.76);
+    }
+
+    .notice-icon {
+      display: inline-grid;
+      place-items: center;
+      min-width: 44px;
+      height: 44px;
+      border-radius: 14px;
+      color: var(--btg-green-950);
+      background: var(--btg-yellow-500);
+      font-weight: 800;
+    }
+
+    .auth-card {
+      border: 1px solid rgba(223, 232, 221, 0.94);
+      border-radius: 32px;
+      padding: clamp(1.35rem, 4vw, 2.4rem);
+      background: rgba(255, 255, 255, 0.92);
+      backdrop-filter: blur(18px);
+      box-shadow: 0 2rem 5rem rgba(16, 42, 31, 0.12);
+    }
+
+    .auth-card h2 {
+      color: var(--btg-green-900);
+      font-size: clamp(1.75rem, 4vw, 2.5rem);
+      font-weight: 800;
+      letter-spacing: -0.045em;
+    }
+
+    .auth-card p,
+    .form-text,
+    .auth-options,
+    .muted-link {
+      color: var(--btg-muted);
+    }
+
+    .form-label {
+      color: var(--btg-green-900);
+      font-weight: 700;
+    }
+
+    .form-control,
+    .form-select {
+      border-color: var(--btg-border);
+      border-radius: 16px;
+      color: var(--btg-black);
+    }
+
+    .form-control:focus,
+    .form-select:focus {
+      border-color: var(--btg-green-700);
+      box-shadow: 0 0 0 0.25rem rgba(45, 122, 80, 0.16);
+    }
+
+    .input-group .form-control {
+      border-radius: 16px 0 0 16px;
+    }
+
+    .input-group .btn {
+      border-radius: 0 16px 16px 0;
+    }
+
+    .btn {
+      border-radius: 16px;
+      font-weight: 800;
+    }
+
+    .btn-primary {
+      border-color: var(--btg-green-700);
+      background: linear-gradient(135deg, var(--btg-green-800), var(--btg-green-700));
+      box-shadow: 0 14px 30px rgba(31, 90, 63, 0.23);
+    }
+
+    .btn-primary:hover,
+    .btn-primary:focus {
+      border-color: var(--btg-green-900);
+      background: linear-gradient(135deg, var(--btg-green-900), var(--btg-green-800));
+    }
+
+    .btn-outline-primary {
+      color: var(--btg-green-800);
+      border-color: rgba(45, 122, 80, 0.42);
+      background: var(--btg-green-100);
+    }
+
+    .btn-outline-primary:hover,
+    .btn-outline-primary:focus {
+      color: var(--btg-white);
+      border-color: var(--btg-green-800);
+      background: var(--btg-green-800);
+    }
+
+    .btn-outline-secondary {
+      color: var(--btg-brown-700);
+      border-color: var(--btg-border);
+      background: #fffaf0;
+    }
+
+    .back-login,
+    .muted-link {
+      color: var(--btg-green-800);
+      font-weight: 700;
+    }
+
+    .divider {
+      display: flex;
+      align-items: center;
+      gap: 0.9rem;
+      margin: 1.35rem 0;
+      color: var(--btg-muted);
+      font-size: 0.88rem;
+      font-weight: 700;
+    }
+
+    .divider::before,
+    .divider::after {
+      content: "";
+      flex: 1;
+      height: 1px;
+      background: var(--btg-border);
+    }
+
+    .alert {
+      border: 0;
+      border-radius: 18px;
+      font-weight: 650;
+    }
+
+    .alert-success {
+      color: var(--btg-green-900);
+      background: #dff2e3;
+    }
+
+    .alert-danger {
+      color: var(--btg-danger);
+      background: #fff0ed;
+    }
+
+    .form-check-input:checked {
+      border-color: var(--btg-green-700);
+      background-color: var(--btg-green-700);
+    }
+
+    .invalid-feedback {
+      font-weight: 600;
+    }
+
+    .footer-note {
+      color: rgba(255, 255, 255, 0.68);
+      font-size: 0.88rem;
+    }
+
+    @media (max-width: 991.98px) {
+      .hero-panel {
+        min-height: auto;
+      }
+
+      .row.min-vh-100 {
+        min-height: auto !important;
+      }
+    }
+
+    @media (max-width: 575.98px) {
+      .container {
+        padding-left: 1rem;
+        padding-right: 1rem;
+      }
+
+      .hero-panel,
+      .auth-card {
+        border-radius: 26px;
+      }
+
+      .hero-panel {
+        padding: 1.35rem;
+      }
+
+      .brand-badge {
+        width: 100%;
+        justify-content: flex-start;
+      }
+
+      .auth-options {
+        flex-direction: column;
+        align-items: flex-start !important;
+      }
+
+      .password-toggle {
+        min-width: 86px;
+        padding-left: 0.5rem;
+        padding-right: 0.5rem;
+        font-size: 0.9rem;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <main class="auth-page min-vh-100">
+    <section class="container py-4 py-lg-5 page-shell">
+      <div class="row align-items-center justify-content-center g-4 g-xl-5 min-vh-100">
+        <aside class="col-12 col-lg-6 col-xl-7">
+          <div class="hero-panel">
+            <div class="hero-content">
+              <div class="brand-badge mb-4" aria-label="Best Time to Grow">
+                <span class="brand-mark">BTG</span>
+                <span class="brand-text">Best Time to Grow</span>
+              </div>
+
+              <p class="eyebrow mb-3">Tecnologia para decisões no campo</p>
+              <h1 class="hero-title mb-3">
+                Planeje o plantio com mais segurança e dados.
+              </h1>
+              <p class="hero-description mb-4">
+                Acesse a plataforma para acompanhar clima, recomendações agrícolas e registros de plantio em uma
+                experiência simples, segura e responsiva.
+              </p>
+
+              <div class="row g-3" aria-label="Destaques da plataforma">
+                <div class="col-12 col-sm-4">
+                  <div class="feature-card">
+                    <strong>Acesso seguro</strong>
+                    <span>Entrada protegida para consultar suas informações.</span>
+                  </div>
+                </div>
+                <div class="col-12 col-sm-4">
+                  <div class="feature-card">
+                    <strong>Cadastro simples</strong>
+                    <span>Registro inicial com dados pessoais essenciais.</span>
+                  </div>
+                </div>
+                <div class="col-12 col-sm-4">
+                  <div class="feature-card">
+                    <strong>Uso mobile</strong>
+                    <span>Layout adaptável para celular, tablet e desktop.</span>
+                  </div>
+                </div>
+              </div>
+
+              <div class="notice-card mt-4">
+                <span class="notice-icon" aria-hidden="true">✓</span>
+                <div>
+                  <strong>Comece pelo acesso.</strong>
+                  <p class="mb-0">As informações da propriedade e das áreas de plantio poderão ser cadastradas em outra
+                    etapa.</p>
+                </div>
+              </div>
+
+              <p class="footer-note mt-4 mb-0">Uma plataforma criada para apoiar produtores com informação clara e
+                decisões mais confiáveis.</p>
+            </div>
+          </div>
+        </aside>
+
+        <section class="col-12 col-md-10 col-lg-6 col-xl-5" aria-labelledby="formTitle">
+          <div class="auth-card">
+            <div class="auth-card-header mb-4">
+              <span class="form-kicker" id="formModeLabel">Acesso restrito</span>
+              <h2 id="formTitle" class="mb-2">Entrar na plataforma</h2>
+              <p id="formSubtitle" class="mb-0">Informe seus dados para acessar sua conta.</p>
+            </div>
+
+            <div id="feedbackArea" class="alert d-none" role="alert" aria-live="polite"></div>
+
+            <form id="loginForm" class="needs-validation" novalidate>
+              <div class="mb-3">
+                <label for="loginEmail" class="form-label">E-mail</label>
+                <input type="email" class="form-control form-control-lg" id="loginEmail" name="email"
+                  placeholder="seuemail@exemplo.com" autocomplete="email" required>
+                <div class="invalid-feedback">Informe um e-mail válido.</div>
+              </div>
+
+              <div class="mb-2">
+                <label for="loginPassword" class="form-label">Senha</label>
+                <div class="input-group input-group-lg has-validation">
+                  <input type="password" class="form-control" id="loginPassword" name="password"
+                    placeholder="Digite sua senha" autocomplete="current-password" required>
+                  <button class="btn btn-outline-secondary password-toggle" type="button" data-target="loginPassword"
+                    aria-label="Mostrar ou ocultar senha">
+                    Mostrar
+                  </button>
+                  <div class="invalid-feedback">Informe uma senha.</div>
+                </div>
+              </div>
+
+              <button type="submit" class="btn btn-primary btn-lg w-100">Entrar</button>
+
+              <div class="divider"><span>ou</span></div>
+
+              <button type="button" class="btn btn-outline-primary btn-lg w-100" id="showRegisterBtn">
+                Cadastrar
+              </button>
+            </form>
+
+            <form id="registerForm" class="needs-validation d-none" novalidate>
+              <div class="row g-3">
+                <div class="col-12">
+                  <label for="registerName" class="form-label">Nome completo</label>
+                  <input type="text" class="form-control form-control-lg" id="registerName" name="name"
+                    placeholder="Ex.: João Batista" autocomplete="name" minlength="3" required>
+                  <div class="invalid-feedback">Informe seu nome completo.</div>
+                </div>
+
+                <div class="col-12">
+                  <label for="registerEmail" class="form-label">E-mail</label>
+                  <input type="email" class="form-control form-control-lg" id="registerEmail" name="email"
+                    placeholder="seuemail@exemplo.com" autocomplete="email" required>
+                  <div class="invalid-feedback">Informe um e-mail válido.</div>
+                </div>
+
+                <div class="col-12 col-sm-6">
+                  <label for="registerAge" class="form-label">Idade</label>
+                  <input type="number" class="form-control form-control-lg" id="registerAge" name="age" min="18"
+                    max="120" placeholder="Ex.: 52" required>
+                  <div class="invalid-feedback">Informe uma idade entre 18 e 120 anos.</div>
+                </div>
+
+                <div class="col-12 col-sm-6">
+                  <label for="registerGender" class="form-label">Gênero</label>
+                  <select class="form-select form-select-lg" id="registerGender" name="gender" required>
+                    <option value="" selected disabled>Selecione</option>
+                    <option value="Feminino">Feminino</option>
+                    <option value="Masculino">Masculino</option>
+                    <option value="Outro">Outro</option>
+                    <option value="Prefiro não informar">Prefiro não informar</option>
+                  </select>
+                  <div class="invalid-feedback">Selecione uma opção.</div>
+                </div>
+
+                <div class="col-12">
+                  <label for="registerEducation" class="form-label">Escolaridade</label>
+                  <select class="form-select form-select-lg" id="registerEducation" name="education_level" required>
+                    <option value="" selected disabled>Selecione sua escolaridade</option>
+                    <option value="Ensino Fundamental incompleto">Ensino Fundamental incompleto</option>
+                    <option value="Ensino Fundamental completo">Ensino Fundamental completo</option>
+                    <option value="Ensino Médio incompleto">Ensino Médio incompleto</option>
+                    <option value="Ensino Médio completo">Ensino Médio completo</option>
+                    <option value="Ensino Técnico">Ensino Técnico</option>
+                    <option value="Ensino Superior em andamento">Ensino Superior em andamento</option>
+                    <option value="Ensino Superior completo">Ensino Superior completo</option>
+                    <option value="Pós-graduação">Pós-graduação</option>
+                  </select>
+                  <div class="invalid-feedback">Informe sua escolaridade.</div>
+                </div>
+
+                <div class="col-12">
+                  <label for="registerRole" class="form-label">Perfil de uso</label>
+                  <select class="form-select form-select-lg" id="registerRole" name="role" required>
+                    <option value="" selected disabled>Selecione seu perfil</option>
+                    <option value="produtor">Produtor familiar</option>
+                    <option value="agronomo">Técnico agrícola ou agrônomo</option>
+                  </select>
+                  <div class="invalid-feedback">Selecione um perfil de uso.</div>
+                </div>
+
+                <div class="col-12">
+                  <label for="registerPassword" class="form-label">Senha</label>
+                  <div class="input-group input-group-lg has-validation">
+                    <input type="password" class="form-control" id="registerPassword" name="password"
+                      placeholder="Crie uma senha" autocomplete="new-password" minlength="6" required>
+                    <button class="btn btn-outline-secondary password-toggle" type="button"
+                      data-target="registerPassword" aria-label="Mostrar ou ocultar senha">
+                      Mostrar
+                    </button>
+                    <div class="invalid-feedback">Use pelo menos 6 caracteres.</div>
+                  </div>
+                  <div class="form-text">A senha deve conter no mínimo 6 caracteres.</div>
+                </div>
+
+                <div class="col-12">
+                  <label for="confirmPassword" class="form-label">Confirmar senha</label>
+                  <div class="input-group input-group-lg has-validation">
+                    <input type="password" class="form-control" id="confirmPassword" name="confirmPassword"
+                      placeholder="Repita a senha" autocomplete="new-password" minlength="6" required>
+                    <button class="btn btn-outline-secondary password-toggle" type="button"
+                      data-target="confirmPassword" aria-label="Mostrar ou ocultar senha">
+                      Mostrar
+                    </button>
+                    <div class="invalid-feedback">As senhas devem ser iguais.</div>
+                  </div>
+                </div>
+
+                <div class="col-12">
+                  <div class="form-check">
+                    <input class="form-check-input" type="checkbox" value="" id="termsCheck" required>
+                    <label class="form-check-label" for="termsCheck">
+                      Confirmo que as informações pessoais estão corretas.
+                    </label>
+                    <div class="invalid-feedback">Confirme as informações para continuar.</div>
+                  </div>
+                </div>
+              </div>
+
+              <button type="submit" class="btn btn-primary btn-lg w-100 mt-4">Criar cadastro</button>
+
+              <button type="button" class="btn btn-link back-login w-100 mt-3 text-decoration-none" id="showLoginBtn">
+                Já tenho conta. Entrar
+              </button>
+            </form>
+          </div>
+        </section>
+      </div>
+    </section>
+  </main>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+  <script>
+    const API_BASE_URL = "/api";
+    const HOME_URL = "/home";
+
+    function getJsonFromLocalStorage(key) {
+      try {
+        const value = localStorage.getItem(key);
+        return value ? JSON.parse(value) : null;
+      } catch (error) {
+        return null;
+      }
+    }
+
+    function getExistingAuthData() {
+      const userData = getJsonFromLocalStorage("userData");
+      const user = getJsonFromLocalStorage("user") || userData?.user || userData?.usuario || null;
+      const token = localStorage.getItem("token")
+        || userData?.token
+        || userData?.accessToken
+        || userData?.authToken
+        || userData?.jwt
+        || null;
+      const userId = user?.id || user?._id || userData?.id || userData?._id || localStorage.getItem("btg_user_id") || null;
+
+      return { token, user, userId };
+    }
+
+    async function redirectLoggedUserAwayFromLogin() {
+      const auth = getExistingAuthData();
+
+      if (!auth.token || !auth.userId) return;
+
+      try {
+        const response = await fetch(`${API_BASE_URL}/users/${encodeURIComponent(auth.userId)}`, {
+          method: "GET",
+          headers: {
+            "Authorization": `Bearer ${auth.token}`,
+            "Content-Type": "application/json"
+          }
+        });
+
+        if (response.ok) {
+          window.location.replace(HOME_URL);
+          return;
+        }
+
+        localStorage.removeItem("userData");
+        localStorage.removeItem("token");
+        localStorage.removeItem("user");
+        localStorage.removeItem("btg_user_id");
+      } catch (error) {
+        localStorage.removeItem("userData");
+        localStorage.removeItem("token");
+        localStorage.removeItem("user");
+        localStorage.removeItem("btg_user_id");
+      }
+    }
+
+    const DOM = {
+      loginForm: document.querySelector("#loginForm"),
+      registerForm: document.querySelector("#registerForm"),
+      showRegisterBtn: document.querySelector("#showRegisterBtn"),
+      showLoginBtn: document.querySelector("#showLoginBtn"),
+      formModeLabel: document.querySelector("#formModeLabel"),
+      formTitle: document.querySelector("#formTitle"),
+      formSubtitle: document.querySelector("#formSubtitle"),
+      feedbackArea: document.querySelector("#feedbackArea"),
+      confirmPassword: document.querySelector("#confirmPassword"),
+      registerPassword: document.querySelector("#registerPassword"),
+      passwordToggles: document.querySelectorAll(".password-toggle")
+    };
+
+    async function initAuthPage() {
+      await redirectLoggedUserAwayFromLogin();
+      DOM.showRegisterBtn.addEventListener("click", showRegisterForm);
+      DOM.showLoginBtn.addEventListener("click", showLoginForm);
+      DOM.loginForm.addEventListener("submit", handleLoginSubmit);
+      DOM.registerForm.addEventListener("submit", handleRegisterSubmit);
+
+      DOM.registerPassword.addEventListener("input", validatePasswordStrength);
+      DOM.confirmPassword.addEventListener("input", validatePasswordConfirmation);
+
+      DOM.passwordToggles.forEach((button) => {
+        button.addEventListener("click", togglePasswordVisibility);
+      });
+    }
+
+    function showRegisterForm() {
+      clearFeedback();
+
+      DOM.loginForm.classList.add("d-none");
+      DOM.registerForm.classList.remove("d-none");
+
+      DOM.formModeLabel.textContent = "Novo cadastro";
+      DOM.formTitle.textContent = "Criar conta";
+      DOM.formSubtitle.textContent = "Preencha apenas seus dados pessoais. As áreas de plantio serão cadastradas depois.";
+
+      DOM.registerForm.querySelector("input, select")?.focus();
+    }
+
+    function showLoginForm() {
+      clearFeedback();
+
+      DOM.registerForm.classList.add("d-none");
+      DOM.loginForm.classList.remove("d-none");
+
+      DOM.formModeLabel.textContent = "Acesso restrito";
+      DOM.formTitle.textContent = "Entrar na plataforma";
+      DOM.formSubtitle.textContent = "Informe seus dados para acessar sua conta.";
+
+      DOM.loginForm.querySelector("input")?.focus();
+    }
+
+    async function handleLoginSubmit(event) {
+      event.preventDefault();
+      clearFeedback();
+
+      if (!validateForm(DOM.loginForm)) return;
+
+      const submitButton = DOM.loginForm.querySelector('button[type="submit"]');
+
+      const payload = {
+        email: DOM.loginForm.email.value.trim(),
+        password: DOM.loginForm.password.value
+      };
+
+      try {
+        setButtonLoading(submitButton, true, "Entrando...");
+
+        const loginData = await loginUser(payload);
+
+        saveAuthData(loginData);
+
+        showFeedback("success", "Login realizado com sucesso. Redirecionando...");
+
+        DOM.loginForm.reset();
+        DOM.loginForm.classList.remove("was-validated");
+
+        redirectToHome();
+      } catch (error) {
+        showFeedback("danger", error.message || "E-mail ou senha inválidos.");
+      } finally {
+        setButtonLoading(submitButton, false, "Entrar");
+      }
+    }
+
+    async function handleRegisterSubmit(event) {
+      event.preventDefault();
+      clearFeedback();
+
+      validatePasswordStrength();
+      validatePasswordConfirmation();
+
+      if (!validateForm(DOM.registerForm)) return;
+
+      const submitButton = DOM.registerForm.querySelector('button[type="submit"]');
+
+      const email = DOM.registerForm.email.value.trim();
+      const password = DOM.registerForm.password.value;
+
+      const registerPayload = {
+        name: DOM.registerForm.name.value.trim(),
+        email,
+        age: Number(DOM.registerForm.age.value),
+        gender: DOM.registerForm.gender.value,
+        education_level: DOM.registerForm.education_level.value,
+        role: DOM.registerForm.role.value,
+        password
+      };
+
+      try {
+        setButtonLoading(submitButton, true, "Criando cadastro...");
+
+        await registerUser(registerPayload);
+
+        setButtonLoading(submitButton, true, "Entrando...");
+
+        const loginData = await loginUser({
+          email,
+          password
+        });
+
+        saveAuthData(loginData);
+
+        showFeedback("success", "Cadastro realizado com sucesso. Redirecionando...");
+
+        DOM.registerForm.reset();
+        DOM.registerForm.classList.remove("was-validated");
+
+        redirectToHome();
+      } catch (error) {
+        showFeedback("danger", error.message || "Não foi possível criar o cadastro ou realizar o login automático.");
+      } finally {
+        setButtonLoading(submitButton, false, "Criar cadastro");
+      }
+    }
+
+    function saveAuthData(data) {
+      if (!data) {
+        throw new Error("O servidor não retornou os dados de autenticação.");
+      }
+
+      const token = getTokenFromLoginResponse(data);
+      const user = getUserFromLoginResponse(data);
+
+      if (!token) {
+        throw new Error("Login realizado, mas o servidor não retornou o token.");
+      }
+
+      localStorage.setItem("userData", JSON.stringify(data));
+    }
+
+    function getTokenFromLoginResponse(data) {
+      return data.token || data.accessToken || data.authToken || data.jwt || null;
+    }
+
+    function getUserFromLoginResponse(data) {
+      if (data.user) return data.user;
+      if (data.usuario) return data.usuario;
+
+      const token = getTokenFromLoginResponse(data);
+
+      if (!token) return null;
+
+      const user = { ...data };
+
+      delete user.token;
+      delete user.accessToken;
+      delete user.authToken;
+      delete user.jwt;
+      delete user.password;
+
+      return Object.keys(user).length ? user : null;
+    }
+
+    function redirectToHome() {
+      window.location.assign(HOME_URL);
+    }
+
+    function validateForm(form) {
+      form.classList.add("was-validated");
+      return form.checkValidity();
+    }
+
+    function validatePasswordStrength() {
+      const password = DOM.registerPassword.value;
+
+      const isValid = password.length >= 6;
+
+      DOM.registerPassword.setCustomValidity(
+        isValid ? "" : "A senha deve ter no mínimo 6 caracteres"
+      );
+
+      return isValid;
+    }
+
+    function validatePasswordConfirmation() {
+      const password = DOM.registerPassword.value;
+      const confirmation = DOM.confirmPassword.value;
+
+      const isValid = password === confirmation;
+
+      DOM.confirmPassword.setCustomValidity(isValid ? "" : "Senhas diferentes");
+
+      return isValid;
+    }
+
+    function togglePasswordVisibility(event) {
+      const button = event.currentTarget;
+      const targetId = button.dataset.target;
+      const input = document.getElementById(targetId);
+
+      if (!input) return;
+
+      const shouldShowPassword = input.type === "password";
+
+      input.type = shouldShowPassword ? "text" : "password";
+      button.textContent = shouldShowPassword ? "Ocultar" : "Mostrar";
+    }
+
+    function showFeedback(type, message) {
+      DOM.feedbackArea.className = `alert alert-${type}`;
+      DOM.feedbackArea.textContent = message;
+    }
+
+    function clearFeedback() {
+      DOM.feedbackArea.className = "alert d-none";
+      DOM.feedbackArea.textContent = "";
+    }
+
+    function setButtonLoading(button, isLoading, text) {
+      if (!button) return;
+
+      button.disabled = isLoading;
+      button.textContent = text;
+    }
+
+    async function loginUser(payload) {
+      const response = await fetch(`${API_BASE_URL}/login`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify(payload)
+      });
+
+      const data = await parseResponse(response);
+
+      if (!response.ok) {
+        throw new Error(data?.message || data?.error || "E-mail ou senha inválidos.");
+      }
+
+      return data;
+    }
+
+    async function registerUser(payload) {
+      const response = await fetch(`${API_BASE_URL}/users`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify(payload)
+      });
+
+      const data = await parseResponse(response);
+
+      if (!response.ok) {
+        throw new Error(data?.message || data?.error || "Não foi possível criar o cadastro.");
+      }
+
+      return data;
+    }
+
+    async function parseResponse(response) {
+      const text = await response.text();
+
+      if (!text) return null;
+
+      try {
+        return JSON.parse(text);
+      } catch (error) {
+        return {
+          message: text
+        };
+      }
+    }
+
+    document.addEventListener("DOMContentLoaded", initAuthPage);
+  </script>
+</body>
+
+</html>
