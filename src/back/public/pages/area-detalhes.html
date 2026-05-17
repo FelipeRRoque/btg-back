@@ -386,7 +386,7 @@
       border-radius: 26px;
       padding: 1.2rem;
       border: 1px solid rgba(241,200,75,0.46);
-      background: linear-gradient(135deg, var(--btg-yellow-100), #ffffff 72%);
+      background: linear-gradient(135deg, var(--btg-yellow-100), #ffffff --);
     }
 
     .recommendation-score {
@@ -571,12 +571,12 @@
         <div class="d-flex flex-column flex-xl-row align-items-xl-end justify-content-between gap-4">
           <div>
             <p class="kicker mb-3">Detalhes da área</p>
-            <h1 id="areaTitle" class="hero-title mb-3">Área Milho Norte</h1>
-            <p class="hero-description mb-4" id="areaDescription">Acompanhe clima, previsão, recomendação de plantio, cultura atual e histórico desta área.</p>
+            <h1 id="areaTitle" class="hero-title mb-3">Carregando área...</h1>
+            <p class="hero-description mb-4" id="areaDescription">Carregando os dados cadastrados da área de plantio.</p>
             <div class="d-flex flex-wrap gap-2" aria-label="Resumo da área">
-              <span class="info-chip" id="propertyChip">🏡 Sítio Boa Esperança</span>
-              <span class="info-chip" id="sizeChip">📐 2,5 hectares</span>
-              <span class="info-chip" id="soilChip">🌱 Solo argiloso</span>
+              <span class="info-chip" id="propertyChip">🏡 Carregando propriedade</span>
+              <span class="info-chip" id="sizeChip">📐 Carregando tamanho</span>
+              <span class="info-chip" id="soilChip">🌱 Carregando solo</span>
             </div>
           </div>
 
@@ -594,15 +594,15 @@
               <div>
                 <p class="kicker mb-2">Clima atual</p>
                 <h2 id="currentWeatherTitle" class="h3 fw-bold mb-1">Condição nesta área</h2>
-                <p class="text-white-50 fw-semibold mb-0" id="weatherLocation">Sítio Boa Esperança, Lavras MG</p>
+                <p class="text-white-50 fw-semibold mb-0" id="weatherLocation">Carregando localização</p>
               </div>
-              <span class="weather-status align-self-start">● Dados de exemplo</span>
+              <span class="weather-status align-self-start">● Em desenvolvimento</span>
             </div>
 
             <div class="d-flex flex-column flex-sm-row align-items-sm-end justify-content-between gap-3 mb-4">
               <div>
-                <div class="weather-temp" id="currentTemperature">24°C</div>
-                <p class="mb-0 text-white-50 fw-semibold" id="currentCondition">Parcialmente nublado</p>
+                <div class="weather-temp" id="currentTemperature">--°C</div>
+                <p class="mb-0 text-white-50 fw-semibold" id="currentCondition">Clima será integrado posteriormente</p>
               </div>
               <div class="display-3" id="currentWeatherIcon" aria-hidden="true">⛅</div>
             </div>
@@ -611,25 +611,25 @@
               <div class="col-6">
                 <div class="metric-tile">
                   <div class="label">Umidade</div>
-                  <div class="value" id="humidityValue">72%</div>
+                  <div class="value" id="humidityValue">--</div>
                 </div>
               </div>
               <div class="col-6">
                 <div class="metric-tile">
                   <div class="label">Chuva hoje</div>
-                  <div class="value" id="rainValue">1,2 mm</div>
+                  <div class="value" id="rainValue">--</div>
                 </div>
               </div>
               <div class="col-6">
                 <div class="metric-tile">
                   <div class="label">Vento</div>
-                  <div class="value" id="windValue">10 km/h</div>
+                  <div class="value" id="windValue">--</div>
                 </div>
               </div>
               <div class="col-6">
                 <div class="metric-tile">
                   <div class="label">Sensação</div>
-                  <div class="value" id="feelsLikeValue">25°C</div>
+                  <div class="value" id="feelsLikeValue">--</div>
                 </div>
               </div>
             </div>
@@ -693,7 +693,7 @@
                   <h2 id="forecastTitle" class="section-title h3 mb-1">Previsão detalhada</h2>
                   <p class="muted-text fw-semibold mb-0">Estrutura preparada para receber dados de uma API pública de clima.</p>
                 </div>
-                <span class="status-badge status-neutral">Dados demonstrativos</span>
+                <span class="status-badge status-neutral">Em desenvolvimento</span>
               </div>
             </div>
             <div class="content-card-body">
@@ -724,7 +724,7 @@
                 <div>
                   <p class="kicker mb-2">Cultura atual</p>
                   <h2 id="cropTitle" class="section-title h3 mb-1">Acompanhamento do cultivo</h2>
-                  <p class="muted-text fw-semibold mb-0">Registro demonstrativo da cultura vinculada à área.</p>
+                  <p class="muted-text fw-semibold mb-0">Funcionalidade será desenvolvida posteriormente.</p>
                 </div>
                 <button type="button" class="btn btn-btg-secondary" data-bs-toggle="offcanvas" data-bs-target="#cropOffcanvas" aria-controls="cropOffcanvas">Atualizar cultura</button>
               </div>
@@ -742,7 +742,7 @@
                 <div>
                   <p class="kicker mb-2">Registros</p>
                   <h2 id="actionsTitle" class="section-title h3 mb-1">Adicionar atividade</h2>
-                  <p class="muted-text fw-semibold mb-0">Cadastro local para simular futuras anotações da área.</p>
+                  <p class="muted-text fw-semibold mb-0">Funcionalidade será desenvolvida posteriormente.</p>
                 </div>
               </div>
             </div>
@@ -965,18 +965,14 @@
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
   <script>
     const API_BASE_URL = "/api";
-    const USE_MOCK_DATA_WHILE_BACKEND_IS_UNAVAILABLE = true;
+    const AREAS_URL = "/areas-plantio";
 
     const state = {
-      userId: localStorage.getItem("btg_user_id") || "6f7b2f4a-7f25-4b91-9870-9f3b0f518ad2",
-      areaId: new URLSearchParams(window.location.search).get("id") || "area-001",
+      userId: null,
+      token: null,
+      areaId: null,
       area: null,
-      property: null,
-      currentWeather: null,
-      forecast: [],
-      recommendation: null,
-      crop: null,
-      history: []
+      property: null
     };
 
     const elements = {
@@ -1006,484 +1002,355 @@
       historyTimeline: document.getElementById("historyTimeline"),
       historyCount: document.getElementById("historyCount"),
       activityForm: document.getElementById("activityForm"),
-      cropForm: document.getElementById("cropForm"),
-      cropName: document.getElementById("cropName"),
-      plantingDate: document.getElementById("plantingDate"),
-      cropStage: document.getElementById("cropStage"),
-      cropNotes: document.getElementById("cropNotes")
+      cropForm: document.getElementById("cropForm")
     };
 
     document.addEventListener("DOMContentLoaded", initAreaDetailsPage);
 
     async function initAreaDetailsPage() {
-      const auth = await requireAuthenticatedUser();
-      setupLogoutButton();
-      state.userId = auth.userId;
-      setupForms();
-      await loadAreaDetailsData();
-      renderPage();
-    }
-
-    async function loadAreaDetailsData() {
       try {
-        if (USE_MOCK_DATA_WHILE_BACKEND_IS_UNAVAILABLE) {
-          loadMockData();
+        const auth = await requireAuthenticatedUser();
+        setupLogoutButton();
+
+        state.userId = auth.userId;
+        state.token = auth.token;
+        state.areaId = getAreaIdFromUrl();
+
+        if (!state.areaId) {
+          redirectToAreas();
           return;
         }
 
-        state.area = await getPlantingAreaById(state.areaId);
-        state.property = await getPropertyById(state.area.property_id);
-        state.currentWeather = await getCurrentWeatherByCoordinates(state.property.latitude, state.property.longitude);
-        state.forecast = await getForecastByCoordinates(state.property.latitude, state.property.longitude);
-        state.crop = await getCurrentCropByAreaId(state.areaId);
-        state.history = await getAreaHistoryByAreaId(state.areaId);
-        state.recommendation = await getPlantingRecommendation(state.areaId);
+        setDevelopmentPlaceholders();
+        disableFutureFeatures();
+
+        const result = await getPlantingAreaOwnedByCurrentUser(state.areaId);
+
+        if (!result?.area) {
+          redirectToAreas();
+          return;
+        }
+
+        state.area = normalizeArea(result.area);
+        state.property = normalizeProperty(result.property);
+
+        renderAreaData();
       } catch (error) {
-        console.error("Não foi possível carregar os dados da área.", error);
-        loadMockData();
+        console.error("Erro ao carregar detalhes da área:", error);
+        redirectToAreas();
       }
     }
 
-    function renderPage() {
-      renderHero();
-      renderCurrentWeather();
-      renderRecommendation();
-      renderForecast();
-      renderAreaDetails();
-      renderCurrentCrop();
-      renderHistory();
-      fillCropForm();
+    function getAreaIdFromUrl() {
+      const params = new URLSearchParams(window.location.search);
+      const queryId = params.get("id") || params.get("areaId") || params.get("area_id");
+
+      if (queryId) return queryId.trim();
+
+      const pathParts = window.location.pathname.split("/").filter(Boolean);
+      const lastPart = pathParts[pathParts.length - 1];
+
+      if (!lastPart) return null;
+
+      const reservedPaths = ["area-detalhes", "area-detalhes.html"];
+      if (reservedPaths.includes(lastPart)) return null;
+
+      return decodeURIComponent(lastPart).trim();
     }
 
-    function renderHero() {
-      elements.areaTitle.textContent = state.area.name;
-      elements.areaDescription.textContent = `Acompanhe informações operacionais da área ${state.area.name}, vinculada à propriedade ${state.property.name}.`;
-      elements.propertyChip.textContent = `🏡 ${state.property.name}`;
-      elements.sizeChip.textContent = `📐 ${formatNumber(state.area.size_hectares)} hectares`;
-      elements.soilChip.textContent = `🌱 Solo ${state.area.soil_type.toLowerCase()}`;
+    async function getPlantingAreaOwnedByCurrentUser(areaId) {
+      const directResult = await tryGetPlantingAreaById(areaId);
+
+      if (directResult?.area) {
+        const directArea = normalizeArea(directResult.area);
+        const directProperty = normalizeProperty(
+          directResult.property || directArea.property || directArea.Property || null
+        );
+
+        if (directProperty?.id) {
+          return {
+            area: directArea,
+            property: directProperty
+          };
+        }
+
+        const propertyFromList = await findPropertyContainingArea(areaId);
+
+        if (!propertyFromList) return null;
+
+        return {
+          area: directArea,
+          property: propertyFromList
+        };
+      }
+
+      const propertyFromList = await findPropertyContainingArea(areaId);
+
+      if (!propertyFromList) return null;
+
+      const areaFromProperty = getAreasFromProperty(propertyFromList)
+        .map(normalizeArea)
+        .find((area) => String(area.id) === String(areaId));
+
+      if (!areaFromProperty) return null;
+
+      return {
+        area: areaFromProperty,
+        property: propertyFromList
+      };
     }
 
-    function renderCurrentWeather() {
-      const weather = state.currentWeather;
-      elements.weatherLocation.textContent = `${state.property.city}, ${state.property.state}`;
-      elements.currentTemperature.textContent = `${weather.temperature}°C`;
-      elements.currentCondition.textContent = weather.condition;
-      elements.currentWeatherIcon.textContent = weather.icon;
-      elements.humidityValue.textContent = `${weather.humidity}%`;
-      elements.rainValue.textContent = `${formatNumber(weather.rain_mm)} mm`;
-      elements.windValue.textContent = `${weather.wind_kmh} km/h`;
-      elements.feelsLikeValue.textContent = `${weather.feels_like}°C`;
+    async function tryGetPlantingAreaById(areaId) {
+      try {
+        const response = await fetch(`${API_BASE_URL}/planting-areas/${encodeURIComponent(areaId)}`, {
+          method: "GET",
+          headers: getAuthHeaders()
+        });
+
+        if (response.status === 401) {
+          redirectToLogin();
+          return null;
+        }
+
+        if (response.status === 403 || response.status === 404) {
+          return null;
+        }
+
+        if (!response.ok) {
+          return null;
+        }
+
+        const data = await response.json();
+
+        return {
+          area: data.area || data.plantingArea || data.planting_area || data,
+          property: data.property || data.propriedade || data.Property || data?.area?.property || null
+        };
+      } catch (error) {
+        return null;
+      }
     }
 
-    function renderRecommendation() {
-      const recommendation = state.recommendation;
-      elements.recommendationStatus.textContent = recommendation.status;
-      elements.recommendationStatus.className = `status-badge align-self-start ${getRecommendationStatusClass(recommendation.status)}`;
-      elements.recommendationScore.textContent = `${recommendation.score}%`;
-      elements.recommendationHeadline.textContent = recommendation.headline;
-      elements.recommendationText.textContent = recommendation.description;
-      elements.seasonValue.textContent = recommendation.season;
-      elements.weatherRiskValue.textContent = recommendation.weather_risk;
-      elements.nextActionValue.textContent = recommendation.next_action;
+    async function findPropertyContainingArea(areaId) {
+      const properties = await getMyProperties();
+
+      return properties.find((property) => {
+        return getAreasFromProperty(property).some((area) => String(area.id) === String(areaId));
+      }) || null;
     }
 
-    function renderForecast() {
-      elements.forecastList.innerHTML = "";
-      state.forecast.forEach((day) => {
-        const card = document.createElement("article");
-        card.className = "forecast-card";
-        card.innerHTML = `
-          <div class="d-flex justify-content-between align-items-start gap-2 mb-3">
-            <div>
-              <p class="data-label mb-1">${day.weekday}</p>
-              <h3 class="h6 fw-bold mb-0">${day.date_label}</h3>
-            </div>
-            <div class="forecast-icon" aria-hidden="true">${day.icon}</div>
-          </div>
-          <p class="forecast-temp mb-1">${day.min_temp}° / ${day.max_temp}°</p>
-          <p class="muted-text fw-semibold small mb-3">${day.condition}</p>
-          <div class="d-grid gap-2">
-            <span class="small fw-bold">Chuva: ${day.rain_probability}%</span>
-            <span class="small fw-bold">Volume: ${formatNumber(day.rain_mm)} mm</span>
-            <span class="small fw-bold">Vento: ${day.wind_kmh} km/h</span>
-          </div>
-        `;
-        elements.forecastList.appendChild(card);
+    async function getMyProperties() {
+      const response = await fetch(`${API_BASE_URL}/properties`, {
+        method: "GET",
+        headers: getAuthHeaders()
       });
+
+      if (response.status === 401) {
+        redirectToLogin();
+        throw new Error("Sessão expirada.");
+      }
+
+      if (!response.ok) {
+        throw new Error("Não foi possível validar as propriedades do usuário.");
+      }
+
+      const data = await response.json();
+      return Array.isArray(data) ? data : data.properties || data.propriedades || [];
     }
 
-    function renderAreaDetails() {
+    function getAreasFromProperty(property) {
+      return property?.planting_areas
+        || property?.plantingAreas
+        || property?.areas
+        || property?.PlantingAreas
+        || [];
+    }
+
+    function renderAreaData() {
+      const area = state.area;
+      const property = state.property;
+      const location = formatLocation(property);
+      const coordinates = formatCoordinates(property);
+
+      document.title = `Best Time to Grow | ${area.name || "Detalhes da área"}`;
+
+      elements.areaTitle.textContent = area.name || "Área de plantio";
+      elements.areaDescription.textContent = `Dados cadastrados da área${area.name ? ` ${area.name}` : ""}${property?.name ? `, vinculada à propriedade ${property.name}` : ""}.`;
+      elements.propertyChip.textContent = `🏡 ${property?.name || "Propriedade não informada"}`;
+      elements.sizeChip.textContent = `📐 ${formatHectares(area.size_hectares)}`;
+      elements.soilChip.textContent = `🌱 ${area.soil_type ? `Solo ${area.soil_type}` : "Solo não informado"}`;
+      elements.weatherLocation.textContent = location || "Localização não informada";
+
       const items = [
-        ["Propriedade", state.property.name],
-        ["Localização", `${state.property.city}, ${state.property.state}`],
-        ["Área", state.area.name],
-        ["Tamanho", `${formatNumber(state.area.size_hectares)} hectares`],
-        ["Tipo de solo", state.area.soil_type],
-        ["Coordenadas", `${state.property.latitude}, ${state.property.longitude}`]
+        ["Área", area.name],
+        ["ID da área", area.id],
+        ["Propriedade", property?.name],
+        ["ID da propriedade", property?.id || area.property_id],
+        ["Localização", location],
+        ["Tamanho", formatHectares(area.size_hectares)],
+        ["Tipo de solo", area.soil_type],
+        ["Coordenadas", coordinates],
+        ["Criada em", formatDateTime(area.created_at || area.createdAt)],
+        ["Atualizada em", formatDateTime(area.updated_at || area.updatedAt)]
       ];
 
       elements.areaDetailsGrid.innerHTML = items.map(([label, value]) => `
         <div class="detail-item">
-          <p class="data-label mb-1">${label}</p>
-          <p class="data-value mb-0">${value}</p>
+          <p class="data-label mb-1">${escapeHtml(label)}</p>
+          <p class="data-value mb-0">${escapeHtml(valueOrFallback(value))}</p>
         </div>
       `).join("");
     }
 
-    function renderCurrentCrop() {
-      if (!state.crop) {
-        elements.currentCropContainer.innerHTML = `
-          <div class="empty-state">
-            <h3 class="h5 fw-bold mb-2">Nenhuma cultura ativa registrada</h3>
-            <p class="mb-3">Registre uma cultura para acompanhar estágio, recomendações e histórico da área.</p>
-            <button type="button" class="btn btn-btg-primary" data-bs-toggle="offcanvas" data-bs-target="#cropOffcanvas">Registrar cultura</button>
-          </div>
-        `;
-        return;
-      }
+    function setDevelopmentPlaceholders() {
+      elements.currentTemperature.textContent = "--°C";
+      elements.currentCondition.textContent = "Clima será integrado posteriormente";
+      elements.currentWeatherIcon.textContent = "🌤️";
+      elements.humidityValue.textContent = "--";
+      elements.rainValue.textContent = "--";
+      elements.windValue.textContent = "--";
+      elements.feelsLikeValue.textContent = "--";
+
+      elements.recommendationStatus.textContent = "Em desenvolvimento";
+      elements.recommendationStatus.className = "status-badge status-neutral align-self-start";
+      elements.recommendationScore.textContent = "--";
+      elements.recommendationHeadline.textContent = "Recomendação de plantio será desenvolvida posteriormente.";
+      elements.recommendationText.textContent = "Esta seção está preparada para receber dados climáticos, cultura atual e regras de recomendação em uma próxima etapa.";
+      elements.seasonValue.textContent = "--";
+      elements.weatherRiskValue.textContent = "--";
+      elements.nextActionValue.textContent = "--";
+
+      elements.forecastList.innerHTML = `
+        <div class="empty-state" style="grid-column: 1 / -1;">
+          <h3 class="h5 fw-bold mb-2">Previsão em desenvolvimento</h3>
+          <p class="mb-0">A integração com clima e previsão detalhada será adicionada posteriormente.</p>
+        </div>
+      `;
 
       elements.currentCropContainer.innerHTML = `
-        <div class="crop-card">
-          <div class="d-flex flex-column flex-md-row justify-content-between gap-3 mb-3">
-            <div>
-              <span class="status-badge status-good mb-3">Cultura ativa</span>
-              <h3 class="h4 fw-bold mb-1">${state.crop.name}</h3>
-              <p class="muted-text fw-semibold mb-0">Plantada em ${formatDate(state.crop.planting_date)}</p>
-            </div>
-            <div class="text-md-end">
-              <p class="data-label mb-1">Estágio</p>
-              <p class="data-value mb-0">${state.crop.stage}</p>
-            </div>
-          </div>
-          <div class="detail-item bg-white">
-            <p class="data-label mb-1">Observações</p>
-            <p class="mb-0 fw-semibold muted-text">${state.crop.notes || "Nenhuma observação cadastrada."}</p>
-          </div>
+        <div class="empty-state">
+          <h3 class="h5 fw-bold mb-2">Cultura atual em desenvolvimento</h3>
+          <p class="mb-0">O vínculo entre área de plantio e cultura será implementado em uma próxima etapa.</p>
+        </div>
+      `;
+
+      elements.historyCount.textContent = "Em desenvolvimento";
+      elements.historyTimeline.innerHTML = `
+        <div class="empty-state">
+          <h3 class="h5 fw-bold mb-2">Histórico em desenvolvimento</h3>
+          <p class="mb-0">Os registros de atividades da área serão implementados posteriormente.</p>
         </div>
       `;
     }
 
-    function renderHistory() {
-      elements.historyCount.textContent = `${state.history.length} ${state.history.length === 1 ? "registro" : "registros"}`;
+    function disableFutureFeatures() {
+      document.querySelectorAll('[data-bs-target="#cropOffcanvas"]').forEach((button) => {
+        button.disabled = true;
+        button.setAttribute("aria-disabled", "true");
+        button.title = "Funcionalidade será desenvolvida posteriormente";
+      });
 
-      if (!state.history.length) {
-        elements.historyTimeline.innerHTML = `
-          <div class="empty-state">
-            <h3 class="h5 fw-bold mb-2">Nenhum histórico registrado</h3>
-            <p class="mb-0">Adicione atividades para criar a linha do tempo desta área.</p>
-          </div>
-        `;
-        return;
+      if (elements.activityForm) {
+        elements.activityForm.querySelectorAll("input, select, textarea, button").forEach((element) => {
+          element.disabled = true;
+        });
       }
 
-      const orderedHistory = [...state.history].sort((a, b) => new Date(b.date) - new Date(a.date));
-      elements.historyTimeline.innerHTML = orderedHistory.map((event) => `
-        <article class="timeline-item">
-          <div class="timeline-icon" aria-hidden="true">${getHistoryIcon(event.type)}</div>
-          <div class="timeline-content">
-            <div class="d-flex flex-column flex-sm-row justify-content-between gap-2 mb-2">
-              <h3 class="h6 fw-bold mb-0">${getHistoryTypeLabel(event.type)}</h3>
-              <span class="small fw-bold muted-text">${formatDate(event.date)}</span>
-            </div>
-            <p class="mb-0 muted-text fw-semibold">${event.description}</p>
-          </div>
-        </article>
-      `).join("");
+      if (elements.cropForm) {
+        elements.cropForm.querySelectorAll("input, select, textarea, button").forEach((element) => {
+          element.disabled = true;
+        });
+      }
     }
 
-    function setupForms() {
-      elements.activityForm.addEventListener("submit", async (event) => {
-        event.preventDefault();
-        elements.activityForm.classList.add("was-validated");
-
-        if (!elements.activityForm.checkValidity()) return;
-
-        const payload = {
-          id: crypto.randomUUID ? crypto.randomUUID() : String(Date.now()),
-          area_id: state.areaId,
-          type: document.getElementById("activityType").value,
-          date: document.getElementById("activityDate").value,
-          description: document.getElementById("activityDescription").value.trim()
-        };
-
-        await createAreaHistoryEvent(payload);
-        state.history.push(payload);
-        elements.activityForm.reset();
-        elements.activityForm.classList.remove("was-validated");
-        renderHistory();
-      });
-
-      elements.cropForm.addEventListener("submit", async (event) => {
-        event.preventDefault();
-        elements.cropForm.classList.add("was-validated");
-
-        if (!elements.cropForm.checkValidity()) return;
-
-        const payload = {
-          id: state.crop?.id || (crypto.randomUUID ? crypto.randomUUID() : String(Date.now())),
-          area_id: state.areaId,
-          name: elements.cropName.value.trim(),
-          planting_date: elements.plantingDate.value,
-          stage: elements.cropStage.value,
-          notes: elements.cropNotes.value.trim()
-        };
-
-        await saveCurrentCrop(payload);
-        state.crop = payload;
-        renderCurrentCrop();
-        renderHistory();
-
-        const offcanvasElement = document.getElementById("cropOffcanvas");
-        const offcanvasInstance = bootstrap.Offcanvas.getInstance(offcanvasElement);
-        offcanvasInstance?.hide();
-      });
-    }
-
-    function fillCropForm() {
-      if (!state.crop) return;
-      elements.cropName.value = state.crop.name;
-      elements.plantingDate.value = state.crop.planting_date;
-      elements.cropStage.value = state.crop.stage;
-      elements.cropNotes.value = state.crop.notes || "";
-    }
-
-    function loadMockData() {
-      state.property = {
-        id: "property-001",
-        user_id: state.userId,
-        name: "Sítio Boa Esperança",
-        city: "Lavras",
-        state: "MG",
-        latitude: -21.2458,
-        longitude: -44.9999
-      };
-
-      state.area = {
-        id: state.areaId,
-        property_id: state.property.id,
-        name: "Área Milho Norte",
-        size_hectares: 2.5,
-        soil_type: "Argiloso"
-      };
-
-      state.currentWeather = {
-        temperature: 24,
-        feels_like: 25,
-        condition: "Parcialmente nublado",
-        icon: "⛅",
-        humidity: 72,
-        rain_mm: 1.2,
-        wind_kmh: 10
-      };
-
-      state.forecast = [
-        { weekday: "Hoje", date_label: "01 mai", condition: "Nublado", icon: "⛅", min_temp: 18, max_temp: 25, rain_probability: 40, rain_mm: 1.2, wind_kmh: 10 },
-        { weekday: "Sábado", date_label: "02 mai", condition: "Chuva leve", icon: "🌦️", min_temp: 17, max_temp: 23, rain_probability: 68, rain_mm: 4.8, wind_kmh: 13 },
-        { weekday: "Domingo", date_label: "03 mai", condition: "Sol entre nuvens", icon: "🌤️", min_temp: 16, max_temp: 26, rain_probability: 22, rain_mm: 0.4, wind_kmh: 9 },
-        { weekday: "Segunda", date_label: "04 mai", condition: "Ensolarado", icon: "☀️", min_temp: 15, max_temp: 27, rain_probability: 8, rain_mm: 0, wind_kmh: 8 },
-        { weekday: "Terça", date_label: "05 mai", condition: "Possível chuva", icon: "🌧️", min_temp: 18, max_temp: 24, rain_probability: 55, rain_mm: 3.1, wind_kmh: 12 }
-      ];
-
-      state.recommendation = {
-        status: "Atenção",
-        score: 68,
-        headline: "Plantio possível, mas exige acompanhamento da chuva.",
-        description: "A previsão indica umidade elevada e possibilidade de chuva nos próximos dias. Evite preparar o solo se ele estiver encharcado e priorize culturas com boa tolerância à umidade.",
-        season: "Outono",
-        weather_risk: "Moderado",
-        next_action: "Verificar solo"
-      };
-
-      state.crop = {
-        id: "crop-001",
-        area_id: state.areaId,
-        name: "Milho",
-        planting_date: "2026-04-10",
-        stage: "Crescimento vegetativo",
-        notes: "Cultura com bom desenvolvimento. Monitorar umidade do solo após previsão de chuva."
-      };
-
-      state.history = [
-        { id: "hist-001", area_id: state.areaId, type: "plantio", date: "2026-04-10", description: "Plantio de milho registrado na área." },
-        { id: "hist-002", area_id: state.areaId, type: "clima", date: "2026-04-18", description: "Chuva moderada observada durante a tarde." },
-        { id: "hist-003", area_id: state.areaId, type: "manejo", date: "2026-04-23", description: "Irrigação complementar realizada no período da manhã." }
-      ];
-    }
-
-    async function getPlantingAreaById(areaId) {
-      const response = await fetch(`${API_BASE_URL}/planting-areas/${areaId}`);
-      if (!response.ok) throw new Error("Erro ao buscar área de plantio.");
-      return response.json();
-    }
-
-    async function getPropertyById(propertyId) {
-      const response = await fetch(`${API_BASE_URL}/properties/${propertyId}`);
-      if (!response.ok) throw new Error("Erro ao buscar propriedade.");
-      return response.json();
-    }
-
-    async function getCurrentWeatherByCoordinates(latitude, longitude) {
-      const response = await fetch(`https://api.open-meteo.com/v1/forecast?latitude=${latitude}&longitude=${longitude}&current=temperature_2m,relative_humidity_2m,apparent_temperature,precipitation,wind_speed_10m,weather_code`);
-      if (!response.ok) throw new Error("Erro ao buscar clima atual.");
-      const data = await response.json();
-      return normalizeCurrentWeatherResponse(data);
-    }
-
-    async function getForecastByCoordinates(latitude, longitude) {
-      const response = await fetch(`https://api.open-meteo.com/v1/forecast?latitude=${latitude}&longitude=${longitude}&daily=weather_code,temperature_2m_max,temperature_2m_min,precipitation_probability_max,precipitation_sum,wind_speed_10m_max&forecast_days=5`);
-      if (!response.ok) throw new Error("Erro ao buscar previsão do tempo.");
-      const data = await response.json();
-      return normalizeForecastResponse(data);
-    }
-
-    async function getCurrentCropByAreaId(areaId) {
-      const response = await fetch(`${API_BASE_URL}/planting-areas/${areaId}/current-crop`);
-      if (!response.ok) throw new Error("Erro ao buscar cultura atual.");
-      return response.json();
-    }
-
-    async function getAreaHistoryByAreaId(areaId) {
-      const response = await fetch(`${API_BASE_URL}/planting-areas/${areaId}/history`);
-      if (!response.ok) throw new Error("Erro ao buscar histórico da área.");
-      return response.json();
-    }
-
-    async function getPlantingRecommendation(areaId) {
-      const response = await fetch(`${API_BASE_URL}/planting-areas/${areaId}/recommendation`);
-      if (!response.ok) throw new Error("Erro ao buscar recomendação de plantio.");
-      return response.json();
-    }
-
-    async function createAreaHistoryEvent(payload) {
-      if (USE_MOCK_DATA_WHILE_BACKEND_IS_UNAVAILABLE) return payload;
-
-      const response = await fetch(`${API_BASE_URL}/planting-areas/${payload.area_id}/history`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(payload)
-      });
-
-      if (!response.ok) throw new Error("Erro ao criar registro no histórico.");
-      return response.json();
-    }
-
-    async function saveCurrentCrop(payload) {
-      if (USE_MOCK_DATA_WHILE_BACKEND_IS_UNAVAILABLE) return payload;
-
-      const response = await fetch(`${API_BASE_URL}/planting-areas/${payload.area_id}/current-crop`, {
-        method: state.crop ? "PUT" : "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(payload)
-      });
-
-      if (!response.ok) throw new Error("Erro ao salvar cultura atual.");
-      return response.json();
-    }
-
-    function normalizeCurrentWeatherResponse(apiResponse) {
-      const current = apiResponse.current || {};
+    function normalizeArea(area) {
       return {
-        temperature: Math.round(current.temperature_2m ?? 0),
-        feels_like: Math.round(current.apparent_temperature ?? current.temperature_2m ?? 0),
-        condition: weatherCodeToText(current.weather_code),
-        icon: weatherCodeToIcon(current.weather_code),
-        humidity: Math.round(current.relative_humidity_2m ?? 0),
-        rain_mm: current.precipitation ?? 0,
-        wind_kmh: Math.round(current.wind_speed_10m ?? 0)
+        ...area,
+        id: area.id || area._id || area.area_id || "",
+        property_id: area.property_id || area.propertyId || area.property?.id || area.Property?.id || "",
+        name: area.name || area.nome || "Área de plantio",
+        size_hectares: area.size_hectares ?? area.sizeHectares ?? area.size ?? null,
+        soil_type: area.soil_type || area.soilType || area.tipo_solo || ""
       };
     }
 
-    function normalizeForecastResponse(apiResponse) {
-      const daily = apiResponse.daily || {};
-      const dates = daily.time || [];
-      return dates.map((date, index) => ({
-        weekday: index === 0 ? "Hoje" : formatWeekday(date),
-        date_label: formatShortDate(date),
-        condition: weatherCodeToText(daily.weather_code?.[index]),
-        icon: weatherCodeToIcon(daily.weather_code?.[index]),
-        min_temp: Math.round(daily.temperature_2m_min?.[index] ?? 0),
-        max_temp: Math.round(daily.temperature_2m_max?.[index] ?? 0),
-        rain_probability: daily.precipitation_probability_max?.[index] ?? 0,
-        rain_mm: daily.precipitation_sum?.[index] ?? 0,
-        wind_kmh: Math.round(daily.wind_speed_10m_max?.[index] ?? 0)
-      }));
-    }
+    function normalizeProperty(property) {
+      if (!property) return null;
 
-    function getRecommendationStatusClass(status) {
-      const normalized = String(status).toLowerCase();
-      if (normalized.includes("favor")) return "status-good";
-      if (normalized.includes("não") || normalized.includes("risco")) return "status-risk";
-      if (normalized.includes("aten")) return "status-warning";
-      return "status-neutral";
-    }
-
-    function getHistoryIcon(type) {
-      const icons = {
-        plantio: "🌱",
-        manejo: "🧺",
-        clima: "🌦️",
-        colheita: "🌽",
-        observacao: "✍️"
+      return {
+        ...property,
+        id: property.id || property._id || property.property_id || "",
+        name: property.name || property.nome || "Propriedade",
+        city: property.city || property.cidade || "",
+        state: property.state || property.uf || "",
+        latitude: property.latitude ?? property.lat ?? null,
+        longitude: property.longitude ?? property.lng ?? property.lon ?? null
       };
-      return icons[type] || "📌";
     }
 
-    function getHistoryTypeLabel(type) {
-      const labels = {
-        plantio: "Plantio",
-        manejo: "Manejo",
-        clima: "Evento climático",
-        colheita: "Colheita",
-        observacao: "Observação"
+    function getAuthHeaders() {
+      return {
+        "Accept": "application/json",
+        "Content-Type": "application/json",
+        "Authorization": `Bearer ${state.token || getStoredAuthData().token}`
       };
-      return labels[type] || "Registro";
     }
 
-    function weatherCodeToText(code) {
-      const weatherMap = {
-        0: "Céu limpo",
-        1: "Predominantemente limpo",
-        2: "Parcialmente nublado",
-        3: "Nublado",
-        45: "Neblina",
-        48: "Neblina com geada",
-        51: "Garoa leve",
-        53: "Garoa moderada",
-        55: "Garoa intensa",
-        61: "Chuva leve",
-        63: "Chuva moderada",
-        65: "Chuva forte",
-        80: "Pancadas de chuva",
-        95: "Trovoadas"
-      };
-      return weatherMap[code] || "Condição não informada";
+    function redirectToAreas() {
+      window.location.replace(AREAS_URL);
     }
 
-    function weatherCodeToIcon(code) {
-      if ([0, 1].includes(code)) return "☀️";
-      if ([2].includes(code)) return "⛅";
-      if ([3, 45, 48].includes(code)) return "☁️";
-      if ([51, 53, 55, 61, 63, 65, 80].includes(code)) return "🌧️";
-      if ([95].includes(code)) return "⛈️";
-      return "🌤️";
+    function formatLocation(property) {
+      if (!property) return "";
+      return [property.city, property.state].filter(Boolean).join(", ");
+    }
+
+    function formatCoordinates(property) {
+      if (!property || property.latitude === null || property.latitude === undefined || property.longitude === null || property.longitude === undefined) {
+        return "Não informado";
+      }
+
+      return `${formatNumber(property.latitude)}, ${formatNumber(property.longitude)}`;
+    }
+
+    function formatHectares(value) {
+      if (value === null || value === undefined || value === "") return "Tamanho não informado";
+      return `${formatNumber(value)} hectares`;
     }
 
     function formatNumber(value) {
-      return Number(value || 0).toLocaleString("pt-BR", { maximumFractionDigits: 2 });
+      const number = Number(value);
+      if (Number.isNaN(number)) return String(value || "");
+      return number.toLocaleString("pt-BR", { maximumFractionDigits: 2 });
     }
 
-    function formatDate(dateString) {
-      if (!dateString) return "Data não informada";
-      return new Date(`${dateString}T00:00:00`).toLocaleDateString("pt-BR");
+    function formatDateTime(value) {
+      if (!value) return "Não informado";
+
+      const date = new Date(value);
+      if (Number.isNaN(date.getTime())) return "Não informado";
+
+      return new Intl.DateTimeFormat("pt-BR", {
+        day: "2-digit",
+        month: "2-digit",
+        year: "numeric",
+        hour: "2-digit",
+        minute: "2-digit"
+      }).format(date);
     }
 
-    function formatShortDate(dateString) {
-      return new Date(`${dateString}T00:00:00`).toLocaleDateString("pt-BR", { day: "2-digit", month: "short" }).replace(".", "");
+    function valueOrFallback(value) {
+      if (value === 0) return "0";
+      return value ? String(value) : "Não informado";
     }
 
-    function formatWeekday(dateString) {
-      const weekday = new Date(`${dateString}T00:00:00`).toLocaleDateString("pt-BR", { weekday: "long" });
-      return weekday.charAt(0).toUpperCase() + weekday.slice(1);
+    function escapeHtml(value) {
+      return String(value ?? "")
+        .replaceAll("&", "&amp;")
+        .replaceAll("<", "&lt;")
+        .replaceAll(">", "&gt;")
+        .replaceAll('"', "&quot;")
+        .replaceAll("'", "&#039;");
     }
   </script>
 </body>

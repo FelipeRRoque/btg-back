@@ -175,6 +175,29 @@ class PropertyService {
       message: "Área de plantio excluída com sucesso.",
     };
   }
+
+  static async findPlantingAreaById(userId, plantingAreaId) {
+    const plantingArea = await PlantingArea.findOne({
+      where: {
+        id: plantingAreaId,
+      },
+      include: [
+        {
+          model: Property,
+          as: "property",
+          where: {
+            user_id: userId,
+          },
+        },
+      ],
+    });
+
+    if (!plantingArea) {
+      throw new Error("Área de plantio não encontrada ou não pertence a você.");
+    }
+
+    return plantingArea;
+  }
 }
 
 module.exports = PropertyService;

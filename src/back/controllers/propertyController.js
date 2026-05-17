@@ -195,6 +195,23 @@ class PropertyController {
       });
     }
   }
+
+  static async findPlantingAreaById(req, res) {
+    try {
+      const { id } = req.params;
+
+      const plantingArea = await PropertyService.findPlantingAreaById(
+        req.user.id,
+        id
+      );
+
+      return res.json(plantingArea);
+    } catch (error) {
+      return res.status(404).json({
+        error: error.message,
+      });
+    }
+  }
 }
 
 module.exports = PropertyController;

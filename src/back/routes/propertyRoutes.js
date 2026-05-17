@@ -25,6 +25,12 @@ router.get(
   PropertyController.getMyProperties
 );
 
+router.get(
+  "/planting-areas/:id",
+  authMiddleware,
+  PropertyController.findPlantingAreaById
+);
+
 router.put(
   "/properties/:id",
   authMiddleware,
