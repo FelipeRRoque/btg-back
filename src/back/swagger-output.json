@@ -724,53 +724,53 @@
       }
     },
     "/api/crop/recommendations": {
-      "tags": [
-        "Crops"
-      ],
-      "summary": "Consultar culturas recomendadas",
-      "description": "Retorna uma lista de culturas recomendadas para a propriedade do usuário com base no histórico climático.",
-      "parameters": [
-        {
-          "name": "authorization",
-          "in": "header",
-          "type": "string"
-        }
-      ],
-      "responses": {
-        "200": {
-          "description": "Lista de culturas recomendadas retornada com sucesso",
-          "schema": {
-            "type": "array",
-            "items": {
-              "type": "object",
-              "properties": {
-                "id": {
-                  "type": "string",
-                  "example": "550e8400-e29b-41d4-a716-446655440000"
-                },
-                "name": {
-                  "type": "string",
-                  "example": "Milho"
-                },
-                "scientific_name": {
-                  "type": "string",
-                  "example": "Zea mays"
-                },
-                "technical_info": {
-                  "type": "string",
-                  "example": "Cultura adaptada ao clima tropical."
+      "get": {
+        "tags": [
+          "Crops"
+        ],
+        "summary": "Consultar culturas recomendadas",
+        "description": "Retorna uma lista de culturas recomendadas para a propriedade do utilizador com base no histórico climático.",
+        "responses": {
+          "200": {
+            "description": "Lista de culturas recomendadas retornada com sucesso",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "string",
+                    "example": "550e8400-e29b-41d4-a716-446655440000"
+                  },
+                  "name": {
+                    "type": "string",
+                    "example": "Milho"
+                  },
+                  "scientific_name": {
+                    "type": "string",
+                    "example": "Zea mays"
+                  },
+                  "technical_info": {
+                    "type": "string",
+                    "example": "Cultura adaptada ao clima tropical."
+                  }
                 }
               }
             }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "500": {
+            "description": "Erro interno do servidor"
           }
         },
-        "401": {
-          "description": "Unauthorized"
-        },
-        "500": {
-          "description": "Erro interno do servidor"
-        }
-      }  
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      } 
     }
   },
   "security": [
