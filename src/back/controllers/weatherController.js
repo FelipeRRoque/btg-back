@@ -17,7 +17,6 @@ class WeatherController {
         });
       }
 
-      // Procura a propriedade específica através do ID recebido nos params
       const selectedProperty = properties.find(
         (prop) => prop.id.toString() === id.toString()
       );
@@ -28,10 +27,8 @@ class WeatherController {
         });
       }
 
-      // Chama o Serviço de clima
       const currentWeather = await ClimateService.getCurrentWeather(selectedProperty);
 
-      // Retorna um objeto JSON unificado mostrando os dados da propriedade e o clima atual
       return res.json({
         property: {
           id: selectedProperty.id,
@@ -44,7 +41,6 @@ class WeatherController {
         current_weather: currentWeather,
       });
     } catch (error) {
-      // Ajusta o status code baseado nos erros lançados pelo ClimateService
       const statusCode = error.message === "Propriedade não encontrada" ? 404 : 500;
 
       return res.status(statusCode).json({
@@ -68,7 +64,6 @@ class WeatherController {
         });
       }
 
-      // Procura a propriedade específica através do ID recebido nos params
       const selectedProperty = properties.find(
         (prop) => prop.id.toString() === id.toString()
       );
@@ -79,10 +74,8 @@ class WeatherController {
         });
       }
 
-      // Chama o Serviço de clima
       const forecastWeather = await ClimateService.getForecast(selectedProperty);
 
-      // Retorna um objeto JSON unificado mostrando os dados da propriedade e a previsão
       return res.json({
         property: {
           id: selectedProperty.id,
@@ -95,7 +88,6 @@ class WeatherController {
         forecast: forecastWeather,
       });
     } catch (error) {
-      // Ajusta o status code baseado nos erros lançados pelo ClimateService
       const statusCode = error.message === "Propriedade não encontrada" ? 404 : 500;
 
       return res.status(statusCode).json({
