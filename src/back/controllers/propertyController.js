@@ -69,12 +69,12 @@ class PropertyController {
 
     try {
       const properties = await PropertyService.findPropertiesByUser(
-        req.user.id,
+        req.user.id
       );
 
       return res.json(properties);
     } catch (error) {
-      return res.status(500).json({
+      return res.status(400).json({
         error: error.message,
       });
     }
@@ -121,6 +121,93 @@ class PropertyController {
       return res.status(201).json(plantingArea);
     } catch (error) {
       return res.status(400).json({
+        error: error.message,
+      });
+    }
+  }
+
+  static async updateProperty(req, res) {
+    try {
+      const { id } = req.params;
+
+      const property = await PropertyService.updateProperty(
+        req.user.id,
+        id,
+        req.body
+      );
+
+      return res.json(property);
+    } catch (error) {
+      return res.status(400).json({
+        error: error.message,
+      });
+    }
+  }
+
+  static async deleteProperty(req, res) {
+    try {
+      const { id } = req.params;
+
+      const result = await PropertyService.deleteProperty(
+        req.user.id,
+        id
+      );
+
+      return res.json(result);
+    } catch (error) {
+      return res.status(400).json({
+        error: error.message,
+      });
+    }
+  }
+
+  static async updatePlantingArea(req, res) {
+    try {
+      const { id } = req.params;
+
+      const plantingArea = await PropertyService.updatePlantingArea(
+        req.user.id,
+        id,
+        req.body
+      );
+
+      return res.json(plantingArea);
+    } catch (error) {
+      return res.status(400).json({
+        error: error.message,
+      });
+    }
+  }
+
+  static async deletePlantingArea(req, res) {
+    try {
+      const { id } = req.params;
+
+      const result = await PropertyService.deletePlantingArea(
+        req.user.id,
+        id
+      );
+
+      return res.json(result);
+    } catch (error) {
+      return res.status(400).json({
+        error: error.message,
+      });
+    }
+  }
+
+  static async findPlantingAreaById(req, res) {
+    try {
+      const { id } = req.params;
+
+      const plantingArea = await PropertyService.findPlantingAreaById(
+        req.user.id,
+        id
+      );
+
+      return res.json(plantingArea);
+    } catch (error) {
+      return res.status(404).json({
         error: error.message,
       });
     }
