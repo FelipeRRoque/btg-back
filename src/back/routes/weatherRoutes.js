@@ -1,9 +1,11 @@
 const express = require('express');
- const router = express.Router();
+const router = express.Router();
 
-// const RecommendationController = require('../controllers/recommendationController');
-// const authMiddleware = require('../middlewares/authMiddleware');
+const WeatherController = require('../controllers/weatherController');
+const authMiddleware = require('../middlewares/authMiddleware');
 
-// router.get('/recommendations/:propertyId', authMiddleware, RecommendationController.getRecommendations);
+router.get('/weather/current/:id', authMiddleware, WeatherController.getCurrentWeatherByProperty);
+
+router.get('/weather/forecast/:id', authMiddleware, WeatherController.getForecastByProperty);
 
 module.exports = router;

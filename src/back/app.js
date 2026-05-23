@@ -13,6 +13,7 @@ const propertyRoutes = require('./routes/propertyRoutes');
 const cropRoutes = require('./routes/cropRoutes');
 const frontRoutes = require('./routes/frontRoutes');
 const recommendationRoutes = require('./routes/recommendationRoutes');
+const weatherRoutes = require('./routes/weatherRoutes');
 
 const app = express();
 
@@ -32,6 +33,7 @@ app.use('/api', authRoutes);
 app.use('/api', propertyRoutes);
 app.use('/api', cropRoutes);
 app.use('/api', recommendationRoutes);
+app.use('/api', weatherRoutes);
 
 // Teste de conexão
 sequelize.authenticate()

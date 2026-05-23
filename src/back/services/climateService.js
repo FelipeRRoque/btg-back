@@ -66,7 +66,7 @@ class ClimateService {
       const params = new URLSearchParams({
         latitude: property.latitude,
         longitude: property.longitude,
-        current_weather: "temperature_2m,precipitation,rain",
+        current: "temperature_2m,precipitation,rain",
         timezone: "America/Sao_Paulo",
       });
 
