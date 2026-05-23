@@ -13,8 +13,8 @@ class RecommendationService {
         const temperature = weatherData.current.temperature;
         const precipitation = weatherData.current.precipitation;
 
-        if(temperature >= 24 && precipitation >= 5){return 'hot_rainy';}
-        if(temperature <= 20){return 'cold';}
+        if (temperature >= 24 && precipitation >= 5) { return 'hot_rainy'; }
+        if (temperature <= 20) { return 'cold'; }
         return 'mild';
     }
 
@@ -39,6 +39,27 @@ class RecommendationService {
             weather: weatherData.current,
             recommendations
         };
+    }
+
+    static async findByCropId(cropId) {
+        const crop = await Crop.findByPk(cropId);
+
+        if (!crop) {
+            throw new Error('Cultura não encontrada.');
+        }
+
+        const recommendations = await Recommendation.findAll({
+            where: {
+                crop_id: cropId,
+            },
+            order: [
+                ['target_season', 'ASC'],
+                ['climate_condition', 'ASC'],
+                ['created_at', 'DESC'],
+            ],
+        });
+
+        return recommendations;
     }
 }
 

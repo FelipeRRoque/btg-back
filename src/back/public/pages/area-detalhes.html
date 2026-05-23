@@ -1183,15 +1183,11 @@
 
       const items = [
         ["Área", area.name],
-        ["ID da área", area.id],
         ["Propriedade", property?.name],
-        ["ID da propriedade", property?.id || area.property_id],
         ["Localização", location],
         ["Tamanho", formatHectares(area.size_hectares)],
         ["Tipo de solo", area.soil_type],
-        ["Coordenadas", coordinates],
-        ["Criada em", formatDateTime(area.created_at || area.createdAt)],
-        ["Atualizada em", formatDateTime(area.updated_at || area.updatedAt)]
+        ["Coordenadas", coordinates]
       ];
 
       elements.areaDetailsGrid.innerHTML = items.map(([label, value]) => `

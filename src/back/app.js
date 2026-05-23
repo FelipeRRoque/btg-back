@@ -30,7 +30,7 @@ app.use('/', frontRoutes);
 app.use('/api', userRoutes);
 app.use('/api', authRoutes);
 app.use('/api', propertyRoutes);
-app.use('/api/crop', cropRoutes);
+app.use('/api', cropRoutes);
 app.use('/api', recommendationRoutes);
 
 // Teste de conexão

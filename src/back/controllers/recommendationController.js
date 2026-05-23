@@ -22,6 +22,17 @@ class RecommendationController {
             return res.status(500).json({ error: error.message });
         }
     }
+
+    static async findByCropId(req, res) {
+        try {
+            const { id } = req.params;
+            const recommendations = await RecommendationService.findByCropId(id);
+
+            return res.json(recommendations);
+        } catch (error) {
+            return res.status(404).json({ error: error.message });
+        }
+    }
 }
 
 module.exports = RecommendationController;

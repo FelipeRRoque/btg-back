@@ -517,6 +517,16 @@
       background: rgba(179, 38, 30, 0.1);
     }
 
+    .form-control[readonly] {
+      background-color: #f3f7f1;
+      color: var(--btg-muted);
+      cursor: not-allowed;
+    }
+
+    .form-control[readonly]::placeholder {
+      color: #8a9a90;
+    }
+
     @media (max-width: 991.98px) {
       .hero-card {
         min-height: auto;
@@ -714,7 +724,7 @@
     </header>
 
     <div class="d-flex justify-content-end mb-3">
-      <button class="btn btn-btg-primary" id="quickCreateButton" type="button">Cadastrar propriedade</button>
+      <button class="btn btn-btg-primary" id="quickCreateButton" type="button">Cadastrar área de plantio</button>
     </div>
 
     <section class="hero-card mb-4">
@@ -764,20 +774,20 @@
 
     <section class="glass-card section-card mb-4" aria-label="Escolha de gerenciamento">
       <div class="management-tabs" role="tablist">
-        <button class="tab-button active" id="propertiesTab" type="button" data-target="propertiesPanel" role="tab"
+        <button class="tab-button active" id="areasTab" type="button" data-target="areasPanel" role="tab"
           aria-selected="true">
-          Propriedades
-          <small>Cadastre sítios, fazendas ou chácaras.</small>
-        </button>
-        <button class="tab-button" id="areasTab" type="button" data-target="areasPanel" role="tab"
-          aria-selected="false">
           Áreas de plantio
           <small>Crie talhões, hortas e espaços produtivos.</small>
+        </button>
+        <button class="tab-button" id="propertiesTab" type="button" data-target="propertiesPanel" role="tab"
+          aria-selected="false">
+          Propriedades
+          <small>Cadastre sítios, fazendas ou chácaras.</small>
         </button>
       </div>
     </section>
 
-    <section class="content-panel active" id="propertiesPanel" role="tabpanel" aria-labelledby="propertiesTab">
+    <section class="content-panel" id="propertiesPanel" role="tabpanel" aria-labelledby="propertiesTab">
       <section class="glass-card section-card mb-4" aria-labelledby="propertiesTitle">
         <div class="d-flex flex-column flex-lg-row align-items-lg-end justify-content-between gap-3 mb-4">
           <div>
@@ -796,7 +806,7 @@
           <div class="d-flex flex-column flex-lg-row justify-content-between gap-3 mb-3">
             <div>
               <h3 class="h4 fw-bold mb-1" id="propertyFormTitle">Nova propriedade</h3>
-              <p class="muted-text mb-0">Informe apenas a identificação e a localização principal da propriedade.</p>
+              <p class="muted-text mb-0">Informe o CEP e o número. Os dados do endereço serão buscados automaticamente e usados para obter as coordenadas da propriedade.</p>
             </div>
             <button class="btn btn-btg-light" id="closePropertyFormButton" type="button">Fechar</button>
           </div>
@@ -811,31 +821,64 @@
                   placeholder="Ex.: Sítio Boa Esperança" required>
                 <div class="invalid-feedback">Informe um nome com pelo menos 3 caracteres.</div>
               </div>
+
+              <div class="col-12 col-md-6 col-lg-3">
+                <label class="form-label" for="propertyCep">CEP</label>
+                <input class="form-control" id="propertyCep" name="propertyCep" type="text" inputmode="numeric"
+                  maxlength="9" placeholder="Ex.: 30140-071" autocomplete="postal-code" required>
+                <div class="invalid-feedback">Informe um CEP válido com 8 números.</div>
+              </div>
+
+              <div class="col-12 col-md-6 col-lg-3">
+                <label class="form-label" for="propertyNumber">Número</label>
+                <input class="form-control" id="propertyNumber" name="propertyNumber" type="text" maxlength="20"
+                  placeholder="Ex.: 123" required>
+                <div class="invalid-feedback">Informe o número do endereço.</div>
+              </div>
+
+              <div class="col-12 col-md-6 col-lg-3">
+                <label class="form-label" for="propertyState">Estado</label>
+                <input class="form-control text-uppercase" id="propertyState" name="propertyState" type="text"
+                  maxlength="2" placeholder="UF" readonly required>
+                <div class="invalid-feedback">Informe a UF com 2 letras.</div>
+              </div>
+
               <div class="col-12 col-md-6 col-lg-3">
                 <label class="form-label" for="propertyCity">Cidade</label>
                 <input class="form-control" id="propertyCity" name="propertyCity" type="text" maxlength="100"
-                  placeholder="Ex.: Belo Horizonte" required>
+                  placeholder="Cidade" readonly required>
                 <div class="invalid-feedback">Informe a cidade.</div>
               </div>
+
               <div class="col-12 col-md-6 col-lg-3">
-                <label class="form-label" for="propertyState">UF</label>
-                <input class="form-control text-uppercase" id="propertyState" name="propertyState" type="text"
-                  maxlength="2" placeholder="MG" required>
-                <div class="invalid-feedback">Informe a UF com 2 letras.</div>
+                <label class="form-label" for="propertyNeighborhood">Bairro</label>
+                <input class="form-control" id="propertyNeighborhood" name="propertyNeighborhood" type="text"
+                  maxlength="120" placeholder="Bairro" readonly>
+                <div class="invalid-feedback">Informe o bairro ou deixe em branco se não existir.</div>
               </div>
+
+              <div class="col-12 col-md-6 col-lg-3">
+                <label class="form-label" for="propertyStreet">Rua</label>
+                <input class="form-control" id="propertyStreet" name="propertyStreet" type="text" maxlength="160"
+                  placeholder="Rua, avenida, estrada..." readonly required>
+                <div class="invalid-feedback">Informe a rua/logradouro.</div>
+              </div>
+
               <div class="col-12 col-md-6">
                 <label class="form-label" for="propertyLatitude">Latitude</label>
                 <input class="form-control" id="propertyLatitude" name="propertyLatitude" type="number" step="0.000001"
-                  min="-90" max="90" placeholder="Ex.: -19.916681">
-                <div class="invalid-feedback">Informe uma latitude entre -90 e 90.</div>
+                  min="-90" max="90" placeholder="Preenchida após salvar" readonly>
+                <div class="invalid-feedback">Não foi possível obter uma latitude válida.</div>
               </div>
+
               <div class="col-12 col-md-6">
                 <label class="form-label" for="propertyLongitude">Longitude</label>
                 <input class="form-control" id="propertyLongitude" name="propertyLongitude" type="number"
-                  step="0.000001" min="-180" max="180" placeholder="Ex.: -43.934493">
-                <div class="invalid-feedback">Informe uma longitude entre -180 e 180.</div>
+                  step="0.000001" min="-180" max="180" placeholder="Preenchida após salvar" readonly>
+                <div class="invalid-feedback">Não foi possível obter uma longitude válida.</div>
               </div>
             </div>
+
             <div class="d-flex flex-column flex-sm-row justify-content-end gap-2 mt-4">
               <button class="btn btn-btg-light" id="cancelPropertyFormButton" type="button">Cancelar</button>
               <button class="btn btn-btg-primary" id="propertySubmitButton" type="submit">Salvar propriedade</button>
@@ -873,7 +916,7 @@
       </section>
     </section>
 
-    <section class="content-panel" id="areasPanel" role="tabpanel" aria-labelledby="areasTab">
+    <section class="content-panel active" id="areasPanel" role="tabpanel" aria-labelledby="areasTab">
       <section class="glass-card section-card" aria-labelledby="areasTitle">
         <div class="d-flex flex-column flex-lg-row align-items-lg-end justify-content-between gap-3 mb-4">
           <div>
@@ -991,7 +1034,7 @@
 
     const state = {
       auth: null,
-      activePanel: "propertiesPanel",
+      activePanel: "areasPanel",
       properties: [],
       plantingAreas: [],
       filteredProperties: [],
@@ -1021,8 +1064,12 @@
       propertyFormTitle: document.getElementById("propertyFormTitle"),
       propertySubmitButton: document.getElementById("propertySubmitButton"),
       propertyName: document.getElementById("propertyName"),
-      propertyCity: document.getElementById("propertyCity"),
+      propertyCep: document.getElementById("propertyCep"),
+      propertyNumber: document.getElementById("propertyNumber"),
       propertyState: document.getElementById("propertyState"),
+      propertyCity: document.getElementById("propertyCity"),
+      propertyNeighborhood: document.getElementById("propertyNeighborhood"),
+      propertyStreet: document.getElementById("propertyStreet"),
       propertyLatitude: document.getElementById("propertyLatitude"),
       propertyLongitude: document.getElementById("propertyLongitude"),
       emptyPropertiesState: document.getElementById("emptyPropertiesState"),
@@ -1070,7 +1117,7 @@
         tab.addEventListener("click", () => switchPanel(tab.dataset.target));
       });
 
-      elements.quickCreateButton.addEventListener("click", () => openPropertyForm(true));
+      elements.quickCreateButton.addEventListener("click", () => openAreaForm());
       elements.openPropertyFormButton.addEventListener("click", () => openPropertyForm(false));
       elements.closePropertyFormButton.addEventListener("click", closePropertyForm);
       elements.cancelPropertyFormButton.addEventListener("click", closePropertyForm);
@@ -1094,6 +1141,9 @@
         field.addEventListener("input", () => validatePropertyField(field));
         field.addEventListener("blur", () => validatePropertyField(field));
       });
+
+      elements.propertyCep.addEventListener("input", handleCepInput);
+      elements.propertyCep.addEventListener("blur", lookupCepAndFillAddress);
 
       areaFields().forEach((field) => {
         field.addEventListener("input", () => validateAreaField(field));
@@ -1527,10 +1577,15 @@
 
       if (property) {
         elements.propertyName.value = property.name || "";
-        elements.propertyCity.value = property.city || "";
+        elements.propertyCep.value = "";
+        elements.propertyNumber.value = "";
         elements.propertyState.value = property.state || "";
+        elements.propertyCity.value = property.city || "";
+        elements.propertyNeighborhood.value = "";
+        elements.propertyStreet.value = "";
         elements.propertyLatitude.value = property.latitude ?? "";
         elements.propertyLongitude.value = property.longitude ?? "";
+        setAddressFieldsReadonly(true);
       } else {
         resetPropertyForm();
       }
@@ -1590,20 +1645,33 @@
       event.preventDefault();
       hideFeedback(elements.propertyFeedback);
 
+      if (normalizeCep(elements.propertyCep.value).length === 8 && (!elements.propertyCity.value || !elements.propertyState.value || !elements.propertyStreet.value)) {
+        await lookupCepAndFillAddress();
+      }
+
       if (!validatePropertyForm()) {
         showFeedback(elements.propertyFeedback, "Revise os campos destacados antes de salvar.");
         return;
       }
 
-      const payload = {
-        name: elements.propertyName.value.trim(),
-        city: elements.propertyCity.value.trim(),
-        state: elements.propertyState.value.trim().toUpperCase(),
-        latitude: optionalNumber(elements.propertyLatitude.value),
-        longitude: optionalNumber(elements.propertyLongitude.value)
-      };
+      const addressPayload = getAddressPayloadFromPropertyForm();
 
       try {
+        setButtonLoading(elements.propertySubmitButton, true, "Obtendo coordenadas...");
+
+        const coordinates = await getCoordinatesForPropertySubmit(addressPayload);
+
+        const payload = {
+          name: elements.propertyName.value.trim(),
+          city: addressPayload.city,
+          state: addressPayload.state,
+          latitude: coordinates.latitude,
+          longitude: coordinates.longitude
+        };
+
+        elements.propertyLatitude.value = coordinates.latitude;
+        elements.propertyLongitude.value = coordinates.longitude;
+
         setButtonLoading(elements.propertySubmitButton, true, state.editingPropertyId ? "Salvando..." : "Cadastrando...");
 
         if (state.editingPropertyId) {
@@ -1781,6 +1849,192 @@
       }
     }
 
+    function handleCepInput(event) {
+      event.target.value = formatCepInput(event.target.value);
+      clearAddressFields(false);
+      setAddressFieldsReadonly(true);
+    }
+
+    async function lookupCepAndFillAddress() {
+      const cep = normalizeCep(elements.propertyCep.value);
+
+      if (cep.length !== 8) {
+        validatePropertyField(elements.propertyCep);
+        return;
+      }
+
+      try {
+        showFeedback(elements.propertyFeedback, "Buscando endereço pelo CEP...");
+        const address = await fetchAddressByCep(cep);
+        fillAddressFieldsFromCep(address);
+        hideFeedback(elements.propertyFeedback);
+      } catch (error) {
+        setAddressFieldsReadonly(false);
+        showFeedback(elements.propertyFeedback, error.message || "Não foi possível buscar o CEP. Preencha o endereço manualmente.");
+      }
+    }
+
+    async function fetchAddressByCep(cep) {
+      const response = await fetch(`https://viacep.com.br/ws/${cep}/json/`);
+      const data = await parseExternalResponse(response);
+
+      if (!response.ok || data?.erro) {
+        throw new Error("CEP não encontrado. Preencha o endereço manualmente.");
+      }
+
+      return {
+        cep,
+        state: data.uf || "",
+        city: data.localidade || "",
+        neighborhood: data.bairro || "",
+        street: data.logradouro || ""
+      };
+    }
+
+    function fillAddressFieldsFromCep(address) {
+      elements.propertyState.value = address.state || "";
+      elements.propertyCity.value = address.city || "";
+      elements.propertyNeighborhood.value = address.neighborhood || "";
+      elements.propertyStreet.value = address.street || "";
+
+      setFieldReadonlyByValue(elements.propertyState);
+      setFieldReadonlyByValue(elements.propertyCity);
+      setFieldReadonlyByValue(elements.propertyNeighborhood);
+      setFieldReadonlyByValue(elements.propertyStreet);
+
+      [
+        elements.propertyState,
+        elements.propertyCity,
+        elements.propertyNeighborhood,
+        elements.propertyStreet
+      ].forEach((field) => {
+        field.classList.remove("is-invalid", "is-valid");
+        validatePropertyField(field);
+      });
+    }
+
+    function setFieldReadonlyByValue(field) {
+      field.readOnly = Boolean(field.value.trim());
+    }
+
+    function setAddressFieldsReadonly(isReadonly) {
+      [
+        elements.propertyState,
+        elements.propertyCity,
+        elements.propertyNeighborhood,
+        elements.propertyStreet
+      ].forEach((field) => {
+        field.readOnly = isReadonly;
+      });
+
+      elements.propertyLatitude.readOnly = true;
+      elements.propertyLongitude.readOnly = true;
+    }
+
+    function clearAddressFields(shouldClearCoordinates = true) {
+      elements.propertyState.value = "";
+      elements.propertyCity.value = "";
+      elements.propertyNeighborhood.value = "";
+      elements.propertyStreet.value = "";
+
+      if (shouldClearCoordinates) {
+        elements.propertyLatitude.value = "";
+        elements.propertyLongitude.value = "";
+      }
+    }
+
+    function getAddressPayloadFromPropertyForm() {
+      return {
+        cep: normalizeCep(elements.propertyCep.value),
+        number: elements.propertyNumber.value.trim(),
+        state: elements.propertyState.value.trim().toUpperCase(),
+        city: elements.propertyCity.value.trim(),
+        neighborhood: elements.propertyNeighborhood.value.trim(),
+        street: elements.propertyStreet.value.trim()
+      };
+    }
+
+    function getCoordinatesForPropertySubmit(address) {
+      const canKeepCurrentCoordinates = Boolean(
+        state.editingPropertyId
+        && !address.cep
+        && !address.number
+        && elements.propertyLatitude.value
+        && elements.propertyLongitude.value
+      );
+
+      if (canKeepCurrentCoordinates) {
+        return {
+          latitude: Number(elements.propertyLatitude.value),
+          longitude: Number(elements.propertyLongitude.value)
+        };
+      }
+
+      return resolveCoordinatesFromAddress(address);
+    }
+
+    async function resolveCoordinatesFromAddress(address) {
+      const query = [
+        `${address.street}, ${address.number}`,
+        address.neighborhood,
+        address.city,
+        address.state,
+        address.cep,
+        "Brasil"
+      ].filter(Boolean).join(", ");
+
+      const url = new URL("https://nominatim.openstreetmap.org/search");
+      url.searchParams.set("format", "jsonv2");
+      url.searchParams.set("limit", "1");
+      url.searchParams.set("countrycodes", "br");
+      url.searchParams.set("q", query);
+
+      const response = await fetch(url.toString(), {
+        headers: {
+          "Accept": "application/json"
+        }
+      });
+
+      const data = await parseExternalResponse(response);
+
+      if (!response.ok || !Array.isArray(data) || !data.length) {
+        throw new Error("Não foi possível obter as coordenadas desse endereço. Revise CEP, rua, número, bairro, cidade e estado.");
+      }
+
+      const latitude = Number(data[0].lat);
+      const longitude = Number(data[0].lon);
+
+      if (!Number.isFinite(latitude) || !Number.isFinite(longitude)) {
+        throw new Error("As coordenadas retornadas para esse endereço são inválidas.");
+      }
+
+      return {
+        latitude,
+        longitude
+      };
+    }
+
+    async function parseExternalResponse(response) {
+      const text = await response.text();
+
+      if (!text) return null;
+
+      try {
+        return JSON.parse(text);
+      } catch (error) {
+        return { message: text };
+      }
+    }
+
+    function normalizeCep(value) {
+      return String(value || "").replace(/\D/g, "").slice(0, 8);
+    }
+
+    function formatCepInput(value) {
+      const cep = normalizeCep(value);
+      return cep.length > 5 ? `${cep.slice(0, 5)}-${cep.slice(5)}` : cep;
+    }
+
     function validatePropertyForm() {
       return propertyFields().map(validatePropertyField).every(Boolean);
     }
@@ -1793,11 +2047,32 @@
       const value = field.value.trim();
       let isValid = true;
 
-      if (field === elements.propertyName) isValid = value.length >= 3;
-      if (field === elements.propertyCity) isValid = value.length >= 2;
-      if (field === elements.propertyState) isValid = /^[A-Z]{2}$/.test(value.toUpperCase());
-      if (field === elements.propertyLatitude && value) isValid = Number(value) >= -90 && Number(value) <= 90;
-      if (field === elements.propertyLongitude && value) isValid = Number(value) >= -180 && Number(value) <= 180;
+      if (field === elements.propertyName) {
+        isValid = value.length >= 3;
+       } else if (field === elements.propertyCep) {
+        const canKeepCurrentCoordinates = Boolean(state.editingPropertyId && elements.propertyLatitude.value && elements.propertyLongitude.value && !value);
+        isValid = canKeepCurrentCoordinates || normalizeCep(value).length === 8;
+      } else if (field === elements.propertyNumber) {
+        const canKeepCurrentCoordinates = Boolean(state.editingPropertyId && elements.propertyLatitude.value && elements.propertyLongitude.value && !elements.propertyCep.value.trim() && !value);
+        isValid = canKeepCurrentCoordinates || value.length > 0;
+      } else if (field === elements.propertyState) {
+        isValid = /^[A-Z]{2}$/.test(value.toUpperCase());
+      } else if (field === elements.propertyCity) {
+        isValid = value.length >= 2;
+      } else if (field === elements.propertyStreet) {
+        const canKeepCurrentCoordinates = Boolean(
+          state.editingPropertyId
+          && elements.propertyLatitude.value
+          && elements.propertyLongitude.value
+          && !elements.propertyCep.value.trim()
+          && !elements.propertyNumber.value.trim()
+        );
+        isValid = canKeepCurrentCoordinates || value.length >= 2;
+      } else if (field === elements.propertyLatitude && value) {
+        isValid = Number(value) >= -90 && Number(value) <= 90;
+      } else if (field === elements.propertyLongitude && value) {
+        isValid = Number(value) >= -180 && Number(value) <= 180;
+      }
 
       field.classList.toggle("is-invalid", !isValid);
       field.classList.toggle("is-valid", isValid && value.length > 0);
@@ -1820,8 +2095,12 @@
     function propertyFields() {
       return [
         elements.propertyName,
-        elements.propertyCity,
+        elements.propertyCep,
+        elements.propertyNumber,
         elements.propertyState,
+        elements.propertyCity,
+        elements.propertyNeighborhood,
+        elements.propertyStreet,
         elements.propertyLatitude,
         elements.propertyLongitude
       ];
@@ -1838,6 +2117,7 @@
 
     function resetPropertyForm() {
       elements.propertyForm.reset();
+      setAddressFieldsReadonly(true);
       propertyFields().forEach((field) => field.classList.remove("is-invalid", "is-valid"));
     }
 
