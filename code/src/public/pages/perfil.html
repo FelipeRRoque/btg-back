@@ -1,5 +1,6 @@
 <!doctype html>
 <html lang="pt-BR">
+
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -31,7 +32,9 @@
       --btg-soft: #f7fbf5;
     }
 
-    * { box-sizing: border-box; }
+    * {
+      box-sizing: border-box;
+    }
 
     body {
       min-height: 100vh;
@@ -135,7 +138,10 @@
       pointer-events: none;
     }
 
-    .hero-card > * { position: relative; z-index: 1; }
+    .hero-card>* {
+      position: relative;
+      z-index: 1;
+    }
 
     .kicker {
       color: var(--btg-yellow-500);
@@ -170,8 +176,13 @@
     }
 
     .profile-card,
-    .form-card { padding: clamp(1.25rem, 4vw, 2rem); }
-    .summary-card { padding: 1.25rem; }
+    .form-card {
+      padding: clamp(1.25rem, 4vw, 2rem);
+    }
+
+    .summary-card {
+      padding: 1.25rem;
+    }
 
     .avatar {
       display: grid;
@@ -341,7 +352,9 @@
       background: var(--btg-yellow-100);
     }
 
-    .invalid-feedback { font-weight: 600; }
+    .invalid-feedback {
+      font-weight: 600;
+    }
 
     .skeleton {
       position: relative;
@@ -355,32 +368,72 @@
       position: absolute;
       inset: 0;
       transform: translateX(-100%);
-      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.55), transparent);
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.55), transparent);
       animation: shimmer 1.2s infinite;
     }
 
-    .skeleton-line { height: 18px; margin-bottom: 0.75rem; }
-    .skeleton-title { height: 34px; width: 70%; margin-bottom: 0.9rem; }
+    .skeleton-line {
+      height: 18px;
+      margin-bottom: 0.75rem;
+    }
 
-    @keyframes shimmer { 100% { transform: translateX(100%); } }
+    .skeleton-title {
+      height: 34px;
+      width: 70%;
+      margin-bottom: 0.9rem;
+    }
+
+    @keyframes shimmer {
+      100% {
+        transform: translateX(100%);
+      }
+    }
 
     @media (max-width: 991.98px) {
-      .hero-card { min-height: auto; }
-      .info-grid { grid-template-columns: 1fr; }
+      .hero-card {
+        min-height: auto;
+      }
+
+      .info-grid {
+        grid-template-columns: 1fr;
+      }
     }
 
     @media (max-width: 575.98px) {
-      .container { padding-left: 1rem; padding-right: 1rem; }
+      .container {
+        padding-left: 1rem;
+        padding-right: 1rem;
+      }
+
       .topbar,
       .hero-card,
       .profile-card,
       .form-card,
-      .summary-card { border-radius: 24px; }
-      .topbar { gap: 1rem; }
-      .brand-text { display: none; }
-      .avatar { width: 76px; height: 76px; border-radius: 24px; }
-      .profile-actions { flex-direction: column; }
-      .profile-actions .btn { width: 100%; }
+      .summary-card {
+        border-radius: 24px;
+      }
+
+      .topbar {
+        gap: 1rem;
+      }
+
+      .brand-text {
+        display: none;
+      }
+
+      .avatar {
+        width: 76px;
+        height: 76px;
+        border-radius: 24px;
+      }
+
+      .profile-actions {
+        flex-direction: column;
+      }
+
+      .profile-actions .btn {
+        width: 100%;
+      }
     }
 
 
@@ -424,9 +477,9 @@
     .logout-pill {
       cursor: pointer;
     }
-
   </style>
 </head>
+
 <body>
   <main class="profile-page min-vh-100">
     <section class="container py-4 py-lg-5 page-shell">
@@ -454,7 +507,8 @@
         <p class="kicker mb-3">Minha conta</p>
         <h1 id="pageTitle" class="hero-title mb-3">Dados cadastrais</h1>
         <p class="hero-description mb-0">
-          Consulte e mantenha suas informações pessoais atualizadas para uma experiência mais segura e organizada na plataforma.
+          Consulte e mantenha suas informações pessoais atualizadas para uma experiência mais segura e organizada na
+          plataforma.
         </p>
       </section>
 
@@ -469,10 +523,18 @@
           </div>
         </div>
         <div class="row g-3">
-          <div class="col-12 col-md-6"><div class="skeleton" style="height: 96px;"></div></div>
-          <div class="col-12 col-md-6"><div class="skeleton" style="height: 96px;"></div></div>
-          <div class="col-12 col-md-6"><div class="skeleton" style="height: 96px;"></div></div>
-          <div class="col-12 col-md-6"><div class="skeleton" style="height: 96px;"></div></div>
+          <div class="col-12 col-md-6">
+            <div class="skeleton" style="height: 96px;"></div>
+          </div>
+          <div class="col-12 col-md-6">
+            <div class="skeleton" style="height: 96px;"></div>
+          </div>
+          <div class="col-12 col-md-6">
+            <div class="skeleton" style="height: 96px;"></div>
+          </div>
+          <div class="col-12 col-md-6">
+            <div class="skeleton" style="height: 96px;"></div>
+          </div>
         </div>
       </div>
 
@@ -535,13 +597,15 @@
           <div class="row g-3">
             <div class="col-12 col-lg-6">
               <label for="name" class="form-label">Nome completo</label>
-              <input type="text" class="form-control form-control-lg" id="name" name="name" autocomplete="name" minlength="3" required>
+              <input type="text" class="form-control form-control-lg" id="name" name="name" autocomplete="name"
+                minlength="3" required>
               <div class="invalid-feedback">Informe seu nome completo com pelo menos 3 caracteres.</div>
             </div>
 
             <div class="col-12 col-lg-6">
               <label for="email" class="form-label">E-mail</label>
-              <input type="email" class="form-control form-control-lg" id="email" name="email" autocomplete="email" required>
+              <input type="email" class="form-control form-control-lg" id="email" name="email" autocomplete="email"
+                required>
               <div class="invalid-feedback">Informe um e-mail válido.</div>
             </div>
 
@@ -557,7 +621,8 @@
 
             <div class="col-12 col-sm-6 col-lg-4">
               <label for="age" class="form-label">Idade</label>
-              <input type="number" class="form-control form-control-lg" id="age" name="age" min="16" max="120" inputmode="numeric">
+              <input type="number" class="form-control form-control-lg" id="age" name="age" min="18" max="120"
+                inputmode="numeric">
               <div class="invalid-feedback">Informe uma idade entre 16 e 120 anos.</div>
             </div>
 
@@ -959,4 +1024,5 @@
     }
   </script>
 </body>
+
 </html>

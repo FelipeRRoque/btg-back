@@ -47,15 +47,30 @@ class UserService {
 
   static async update(id, data) {
     const user = await User.findByPk(id);
+
     if (!user) {
       throw new Error("Usuário não encontrado");
     }
 
+    if (data.email && data.email !== user.email) {
+      const emailAlreadyExists = await User.findOne({
+        where: {
+          email: data.email,
+        },
+      });
+
+      if (emailAlreadyExists) {
+        throw new Error("E-mail já cadastrado por outro usuário.");
+      }
+    }
+
     const updateData = {
-      name: data.name,
-      age: data.age,
-      education_level: data.education_level,
-      gender: data.gender,
+      name: data.name ?? user.name,
+      email: data.email ?? user.email,
+      role: data.role ?? user.role,
+      age: data.age ?? user.age,
+      education_level: data.education_level ?? user.education_level,
+      gender: data.gender ?? user.gender,
     };
 
     if (data.password) {
@@ -64,7 +79,10 @@ class UserService {
 
     await user.update(updateData);
 
-    return user;
+    const updatedUser = user.toJSON();
+    delete updatedUser.password_hash;
+
+    return updatedUser;
   }
 
   static async delete(id) {

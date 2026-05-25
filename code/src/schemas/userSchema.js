@@ -1,5 +1,6 @@
 const { z } = require("zod");
 const { USER_ROLES } = require("../utils/constants");
+
 const userCreateSchema = z.object({
   name: z.string().min(3, "O nome deve ter no mínimo 3 caracteres"),
   email: z.string().email("Formato de e-mail inválido"),
@@ -12,4 +13,13 @@ const userCreateSchema = z.object({
   gender: z.string().optional(),
 });
 
-module.exports = { userCreateSchema };
+const userUpdateSchema = userCreateSchema
+  .omit({
+    password: true,
+  })
+  .partial();
+
+module.exports = {
+  userCreateSchema,
+  userUpdateSchema,
+};

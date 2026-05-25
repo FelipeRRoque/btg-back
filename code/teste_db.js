@@ -1,4 +1,4 @@
-const { User, Property, PlantingArea, Crop, PlantingRecord, Recommendation } = require('./models');
+const { User, Property, PlantingArea, Crop, PlantingRecord, Recommendation } = require("./src/models");
 
 async function testarRelacionamentos() {
   try {
@@ -9,7 +9,7 @@ async function testarRelacionamentos() {
       name: "Agrônomo de Teste",
       email: `teste_${Date.now()}@btg.com`,
       password_hash: "123456",
-      role: "Agronomo"
+      role: "agronomo"
     });
     console.log("✅ Usuário criado!");
 

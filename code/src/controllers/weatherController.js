@@ -27,12 +27,21 @@ class WeatherController {
         });
       }
 
+      if (
+        selectedProperty.latitude == null ||
+        selectedProperty.longitude == null
+      ) {
+        return res.status(400).json({
+          error: "A propriedade não possui latitude e longitude cadastradas.",
+        });
+      }
+
       const currentWeather = await ClimateService.getCurrentWeather(selectedProperty);
 
       return res.json({
         property: {
           id: selectedProperty.id,
-          name: selectedProperty.name, 
+          name: selectedProperty.name,
           location: {
             lat: selectedProperty.latitude,
             lon: selectedProperty.longitude,
@@ -71,6 +80,15 @@ class WeatherController {
       if (!selectedProperty) {
         return res.status(404).json({
           error: "Propriedade não encontrada ou não pertence a este usuário.",
+        });
+      }
+
+      if (
+        selectedProperty.latitude == null ||
+        selectedProperty.longitude == null
+      ) {
+        return res.status(400).json({
+          error: "A propriedade não possui latitude e longitude cadastradas.",
         });
       }
 
