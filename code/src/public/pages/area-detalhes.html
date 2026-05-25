@@ -1,0 +1,1671 @@
+<!doctype html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Best Time to Grow - detalhes da área de plantio">
+  <title>Best Time to Grow | Detalhes da área</title>
+
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --btg-green-950: #102a1f;
+      --btg-green-900: #173b2c;
+      --btg-green-800: #1f5a3f;
+      --btg-green-700: #2d7a50;
+      --btg-green-100: #e8f3ea;
+      --btg-brown-800: #5c3a22;
+      --btg-brown-100: #f2e8dc;
+      --btg-yellow-500: #f1c84b;
+      --btg-yellow-100: #fff6cf;
+      --btg-white: #ffffff;
+      --btg-black: #151915;
+      --btg-muted: #607067;
+      --btg-border: #dfe8dd;
+      --btg-soft: #f7fbf5;
+      --btg-danger: #b3261e;
+      --btg-warning: #8a6100;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      min-height: 100vh;
+      margin: 0;
+      overflow-x: hidden;
+      font-family: "Inter", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      color: var(--btg-black);
+      background:
+        radial-gradient(circle at top left, rgba(241, 200, 75, 0.28), transparent 34rem),
+        radial-gradient(circle at bottom right, rgba(45, 122, 80, 0.16), transparent 30rem),
+        linear-gradient(135deg, #fbfff7 0%, #edf6ec 52%, #fff9e5 100%);
+    }
+
+    .page-bg {
+      position: relative;
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    .page-bg::before,
+    .page-bg::after {
+      content: "";
+      position: fixed;
+      width: 22rem;
+      height: 22rem;
+      border-radius: 50%;
+      filter: blur(10px);
+      opacity: 0.32;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .page-bg::before {
+      top: -9rem;
+      right: -6rem;
+      background: rgba(45, 122, 80, 0.28);
+    }
+
+    .page-bg::after {
+      bottom: -10rem;
+      left: -8rem;
+      background: rgba(116, 75, 45, 0.22);
+    }
+
+    .page-shell {
+      position: relative;
+      z-index: 1;
+    }
+
+    .topbar,
+    .content-card,
+    .stats-card {
+      border: 1px solid rgba(223, 232, 221, 0.94);
+      background: rgba(255, 255, 255, 0.92);
+      backdrop-filter: blur(18px);
+      box-shadow: 0 1.5rem 4rem rgba(16, 42, 31, 0.09);
+    }
+
+    .topbar {
+      border-radius: 28px;
+    }
+
+    .content-card,
+    .stats-card {
+      border-radius: 30px;
+      overflow: hidden;
+    }
+
+    .content-card-header {
+      padding: 1.35rem 1.35rem 0;
+    }
+
+    .content-card-body {
+      padding: 1.25rem 1.35rem 1.35rem;
+    }
+
+    .brand-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.75rem;
+      color: var(--btg-green-950);
+      text-decoration: none;
+    }
+
+    .brand-mark {
+      display: inline-grid;
+      place-items: center;
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      color: var(--btg-green-900);
+      background: var(--btg-yellow-500);
+      font-weight: 800;
+      letter-spacing: -0.04em;
+    }
+
+    .brand-text {
+      font-weight: 800;
+      letter-spacing: -0.02em;
+    }
+
+    .muted-text {
+      color: var(--btg-muted);
+    }
+
+    .topbar-actions {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .nav-pill {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 42px;
+      padding: 0.65rem 1rem;
+      border: 1px solid rgba(45, 122, 80, 0.24);
+      border-radius: 999px;
+      color: var(--btg-green-900);
+      background: rgba(255, 255, 255, 0.72);
+      font-size: 0.92rem;
+      font-weight: 800;
+      text-decoration: none;
+      transition: 0.2s ease;
+    }
+
+    .nav-pill:hover,
+    .nav-pill:focus,
+    .nav-pill.active {
+      color: var(--btg-white);
+      border-color: var(--btg-green-800);
+      background: var(--btg-green-800);
+      box-shadow: 0 10px 22px rgba(31, 90, 63, 0.18);
+    }
+
+    .logout-pill {
+      cursor: pointer;
+    }
+
+    .hero-card {
+      position: relative;
+      overflow: hidden;
+      padding: clamp(1.35rem, 4vw, 2.75rem);
+      border-radius: 34px;
+      color: var(--btg-white);
+      background: linear-gradient(145deg, rgba(16, 42, 31, 0.98), rgba(31, 90, 63, 0.94));
+      box-shadow: 0 2rem 5rem rgba(16, 42, 31, 0.2);
+    }
+
+    .hero-card::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(circle at 18% 18%, rgba(241, 200, 75, 0.22), transparent 18rem),
+        radial-gradient(circle at 90% 10%, rgba(255, 255, 255, 0.12), transparent 18rem),
+        linear-gradient(180deg, rgba(255, 255, 255, 0.08), transparent 42%);
+      pointer-events: none;
+    }
+
+    .hero-card > * {
+      position: relative;
+      z-index: 1;
+    }
+
+    .kicker {
+      color: var(--btg-yellow-500);
+      font-size: 0.78rem;
+      font-weight: 800;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+
+    .hero-title {
+      max-width: 780px;
+      font-size: clamp(2rem, 5vw, 4.2rem);
+      line-height: 0.98;
+      letter-spacing: -0.06em;
+      font-weight: 800;
+    }
+
+    .hero-description {
+      max-width: 760px;
+      color: rgba(255, 255, 255, 0.82);
+      font-size: 1.02rem;
+      line-height: 1.7;
+    }
+
+    .info-chip,
+    .status-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.45rem;
+      width: fit-content;
+      border-radius: 999px;
+      font-weight: 800;
+      white-space: nowrap;
+    }
+
+    .info-chip {
+      min-height: 38px;
+      padding: 0.55rem 0.8rem;
+      border: 1px solid rgba(255, 255, 255, 0.18);
+      color: rgba(255, 255, 255, 0.88);
+      background: rgba(255, 255, 255, 0.1);
+      font-size: 0.88rem;
+    }
+
+    .status-badge {
+      padding: 0.45rem 0.7rem;
+      font-size: 0.78rem;
+      letter-spacing: 0.02em;
+    }
+
+    .status-good {
+      color: #0f5d3a;
+      background: #e0f4e8;
+    }
+
+    .status-warning {
+      color: var(--btg-warning);
+      background: var(--btg-yellow-100);
+    }
+
+    .status-risk {
+      color: var(--btg-danger);
+      background: #fde8e6;
+    }
+
+    .status-neutral {
+      color: var(--btg-green-900);
+      background: var(--btg-green-100);
+    }
+
+    .weather-main {
+      position: relative;
+      overflow: hidden;
+      min-height: 100%;
+      border-radius: 30px;
+      color: var(--btg-white);
+      background: linear-gradient(155deg, var(--btg-green-950), var(--btg-green-800));
+      box-shadow: 0 1.5rem 3.5rem rgba(16, 42, 31, 0.18);
+    }
+
+    .weather-main::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(circle at 20% 8%, rgba(241, 200, 75, 0.22), transparent 13rem),
+        radial-gradient(circle at 86% 12%, rgba(255, 255, 255, 0.12), transparent 10rem);
+      pointer-events: none;
+    }
+
+    .weather-main > * {
+      position: relative;
+      z-index: 1;
+    }
+
+    .weather-temp {
+      font-size: clamp(3.4rem, 9vw, 5.8rem);
+      line-height: 0.9;
+      letter-spacing: -0.07em;
+      font-weight: 800;
+    }
+
+    .metric-tile {
+      padding: 1rem;
+      border-radius: 22px;
+      background: rgba(255, 255, 255, 0.12);
+      border: 1px solid rgba(255, 255, 255, 0.14);
+    }
+
+    .metric-tile .label,
+    .data-label {
+      color: var(--btg-muted);
+      font-size: 0.78rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+
+    .metric-tile .label {
+      color: rgba(255, 255, 255, 0.65);
+    }
+
+    .metric-tile .value {
+      color: var(--btg-white);
+      font-size: 1.2rem;
+      font-weight: 800;
+    }
+
+    .section-title,
+    .data-value {
+      color: var(--btg-green-950);
+      font-weight: 800;
+    }
+
+    .section-title {
+      letter-spacing: -0.035em;
+    }
+
+    .forecast-scroll {
+      display: grid;
+      grid-template-columns: repeat(7, minmax(160px, 1fr));
+      gap: 0.9rem;
+      overflow-x: auto;
+      padding-bottom: 0.2rem;
+      scrollbar-width: thin;
+    }
+
+    .forecast-card,
+    .detail-item,
+    .entity-card,
+    .timeline-content {
+      border: 1px solid var(--btg-border);
+      background: var(--btg-soft);
+    }
+
+    .forecast-card {
+      min-width: 160px;
+      padding: 1rem;
+      border-radius: 24px;
+    }
+
+    .forecast-temp {
+      color: var(--btg-green-950);
+      font-size: 1.35rem;
+      font-weight: 800;
+    }
+
+    .detail-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 0.85rem;
+    }
+
+    .detail-item,
+    .entity-card {
+      padding: 0.95rem;
+      border-radius: 20px;
+    }
+
+    .timeline {
+      display: grid;
+      gap: 1rem;
+    }
+
+    .timeline-item {
+      display: grid;
+      grid-template-columns: 44px minmax(0, 1fr);
+      gap: 0.85rem;
+      align-items: start;
+    }
+
+    .timeline-icon {
+      display: grid;
+      place-items: center;
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      color: var(--btg-green-950);
+      background: var(--btg-yellow-500);
+      font-size: 1.1rem;
+      font-weight: 800;
+    }
+
+    .timeline-content {
+      padding: 0.95rem;
+      border-radius: 20px;
+      background: var(--btg-white);
+    }
+
+    .empty-state {
+      border: 1px dashed rgba(96, 112, 103, 0.45);
+      border-radius: 22px;
+      padding: 1.25rem;
+      color: var(--btg-muted);
+      background: rgba(247, 251, 245, 0.72);
+      text-align: center;
+    }
+
+    .form-control,
+    .form-select,
+    textarea.form-control {
+      min-height: 48px;
+      border-radius: 18px;
+      border: 1px solid var(--btg-border);
+      font-weight: 600;
+    }
+
+    .form-control:focus,
+    .form-select:focus,
+    textarea.form-control:focus {
+      border-color: var(--btg-green-700);
+      box-shadow: 0 0 0 0.25rem rgba(45, 122, 80, 0.14);
+    }
+
+    .form-label {
+      color: var(--btg-green-950);
+      font-size: 0.9rem;
+      font-weight: 800;
+    }
+
+    .btn-btg-primary,
+    .btn-btg-secondary,
+    .btn-btg-light {
+      min-height: 48px;
+      padding: 0.75rem 1.1rem;
+      border-radius: 999px;
+      font-weight: 800;
+      border: 0;
+    }
+
+    .btn-btg-primary {
+      color: var(--btg-green-950);
+      background: var(--btg-yellow-500);
+      box-shadow: 0 1rem 2rem rgba(241, 200, 75, 0.26);
+    }
+
+    .btn-btg-secondary {
+      color: var(--btg-white);
+      background: var(--btg-green-800);
+    }
+
+    .btn-btg-light {
+      color: var(--btg-white);
+      background: rgba(255, 255, 255, 0.13);
+      border: 1px solid rgba(255, 255, 255, 0.22);
+    }
+
+    .btn-icon-danger {
+      border: 1px solid rgba(179, 38, 30, 0.22);
+      border-radius: 999px;
+      padding: 0.35rem 0.65rem;
+      color: var(--btg-danger);
+      background: rgba(179, 38, 30, 0.05);
+      font-size: 0.82rem;
+      font-weight: 800;
+    }
+
+    .alert {
+      border: 0;
+      border-radius: 18px;
+      font-weight: 650;
+    }
+
+    @media (max-width: 991.98px) {
+      .topbar-actions {
+        width: 100%;
+        overflow-x: auto;
+        flex-wrap: nowrap;
+        padding-bottom: 0.25rem;
+      }
+
+      .detail-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .forecast-scroll {
+        grid-template-columns: repeat(7, 170px);
+      }
+    }
+
+    @media (max-width: 575.98px) {
+      .page-shell {
+        padding-left: 0.75rem;
+        padding-right: 0.75rem;
+      }
+
+      .hero-card,
+      .content-card,
+      .weather-main,
+      .stats-card {
+        border-radius: 24px;
+      }
+
+      .content-card-header,
+      .content-card-body {
+        padding-left: 1rem;
+        padding-right: 1rem;
+      }
+
+      .btn-btg-primary,
+      .btn-btg-secondary,
+      .btn-btg-light {
+        width: 100%;
+      }
+
+      .info-chip {
+        width: 100%;
+        justify-content: center;
+      }
+
+      .timeline-item {
+        grid-template-columns: 38px minmax(0, 1fr);
+      }
+
+      .timeline-icon {
+        width: 38px;
+        height: 38px;
+      }
+    }
+
+    .global-loader-overlay {
+      position: fixed;
+      inset: 0;
+      z-index: 2000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 1.5rem;
+      background: rgba(16, 42, 31, 0.38);
+      backdrop-filter: blur(6px);
+    }
+
+    .global-loader-overlay.d-none {
+      display: none !important;
+    }
+
+    .global-loader-card {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      max-width: 420px;
+      width: 100%;
+      padding: 1.1rem 1.25rem;
+      border: 1px solid rgba(223, 232, 221, 0.94);
+      border-radius: 24px;
+      background: rgba(255, 255, 255, 0.96);
+      box-shadow: 0 1.5rem 4rem rgba(16, 42, 31, 0.2);
+    }
+
+    .global-loader-spinner {
+      width: 42px;
+      height: 42px;
+      flex: 0 0 auto;
+      border: 4px solid var(--btg-green-100);
+      border-top-color: var(--btg-green-800);
+      border-radius: 50%;
+      animation: globalLoaderSpin 0.85s linear infinite;
+    }
+
+    .global-loader-title {
+      margin: 0;
+      color: var(--btg-green-950);
+      font-weight: 800;
+      line-height: 1.2;
+    }
+
+    .global-loader-message {
+      margin: 0.15rem 0 0;
+      color: var(--btg-muted);
+      font-size: 0.92rem;
+      font-weight: 650;
+    }
+
+    body.is-loading {
+      cursor: progress;
+    }
+
+    @keyframes globalLoaderSpin {
+      to {
+        transform: rotate(360deg);
+      }
+    }
+
+  </style>
+</head>
+
+<body>
+  
+  <div id="globalLoader" class="global-loader-overlay d-none" role="status" aria-live="polite" aria-label="Carregando">
+    <div class="global-loader-card">
+      <div class="global-loader-spinner" aria-hidden="true"></div>
+      <div>
+        <p class="global-loader-title">Processando solicitação</p>
+        <p class="global-loader-message" id="globalLoaderMessage">Carregando dados...</p>
+      </div>
+    </div>
+  </div>
+
+<div class="page-bg">
+    <main class="page-shell container-xxl px-3 px-md-4 py-3 py-md-4">
+      <header class="topbar p-3 p-md-4 mb-4">
+        <div class="d-flex flex-column flex-lg-row align-items-lg-center justify-content-between gap-3">
+          <a href="/home" class="brand-badge" aria-label="Página inicial Best Time to Grow">
+            <span class="brand-mark">BTG</span>
+            <span>
+              <span class="brand-text d-block">Best Time to Grow</span>
+              <span class="muted-text small fw-semibold">Painel do produtor</span>
+            </span>
+          </a>
+
+          <nav class="topbar-actions" aria-label="Menu principal">
+            <a href="/home" class="nav-pill">Início</a>
+            <a href="/culturas" class="nav-pill">Culturas</a>
+            <a href="/areas-plantio" class="nav-pill active" aria-current="page">Propriedades e áreas</a>
+            <a href="/perfil" class="nav-pill">Perfil</a>
+            <button class="nav-pill logout-pill" id="logoutBtn" type="button">Sair</button>
+          </nav>
+        </div>
+      </header>
+
+      <div id="feedbackArea" class="alert d-none" role="alert" aria-live="polite"></div>
+
+      <section class="hero-card mb-4" aria-labelledby="areaTitle">
+        <div class="d-flex flex-column flex-xl-row align-items-xl-end justify-content-between gap-4">
+          <div>
+            <p class="kicker mb-3">Detalhes da área</p>
+            <h1 id="areaTitle" class="hero-title mb-3">Carregando área...</h1>
+            <p class="hero-description mb-4" id="areaDescription">
+              Consulte clima, previsão, recomendações e histórico de culturas e eventos climáticos desta área.
+            </p>
+            <div class="d-flex flex-wrap gap-2" aria-label="Resumo da área">
+              <span class="info-chip" id="propertyChip">🏡 Propriedade</span>
+              <span class="info-chip" id="sizeChip">📐 Área</span>
+              <span class="info-chip" id="soilChip">🌱 Solo</span>
+            </div>
+          </div>
+
+          <div class="d-flex flex-column flex-sm-row gap-2">
+            <a href="/areas-plantio" class="btn btn-btg-light">Voltar para áreas</a>
+            <a href="#historyForm" class="btn btn-btg-primary">Registrar histórico</a>
+          </div>
+        </div>
+      </section>
+
+      <section class="row g-4 mb-4" aria-label="Clima e recomendações">
+        <div class="col-xl-5">
+          <article class="weather-main p-4 p-lg-5" aria-labelledby="currentWeatherTitle">
+            <div class="d-flex flex-column flex-sm-row justify-content-between gap-3 mb-4">
+              <div>
+                <h2 id="currentWeatherTitle" class="h3 fw-bold mb-1">Clima atual</h2>
+                <p class="text-white-50 fw-semibold mb-0" id="weatherLocation">Localização da propriedade</p>
+              </div>
+              <span class="status-badge status-neutral align-self-start" id="weatherStatus">Carregando</span>
+            </div>
+
+            <div class="d-flex flex-column flex-sm-row align-items-sm-end justify-content-between gap-3 mb-4">
+              <div>
+                <div class="weather-temp" id="currentTemperature">--°C</div>
+                <p class="mb-0 text-white-50 fw-semibold" id="currentCondition">Condição não carregada</p>
+              </div>
+              <div class="display-3" id="currentWeatherIcon" aria-hidden="true">🌤️</div>
+            </div>
+
+            <div class="row g-3">
+              <div class="col-6">
+                <div class="metric-tile">
+                  <div class="label">Precipitação</div>
+                  <div class="value" id="precipitationValue">-- mm</div>
+                </div>
+              </div>
+              <div class="col-6">
+                <div class="metric-tile">
+                  <div class="label">Chuva</div>
+                  <div class="value" id="rainValue">-- mm</div>
+                </div>
+              </div>
+            </div>
+          </article>
+        </div>
+
+        <div class="col-xl-7">
+          <article class="content-card h-100" aria-labelledby="recommendationTitle">
+            <div class="content-card-header">
+              <div class="d-flex flex-column flex-md-row justify-content-between gap-3">
+                <div>
+                  <h2 id="recommendationTitle" class="section-title h3 mb-1">Recomendações de plantio</h2>
+                  <p class="muted-text fw-semibold mb-0">
+                    Recomendações baseadas na estação do ano e na condição climática atual da propriedade.
+                  </p>
+                </div>
+                <span class="status-badge status-neutral align-self-start" id="recommendationMeta">Carregando</span>
+              </div>
+            </div>
+            <div class="content-card-body">
+              <div class="row g-3" id="recommendationsContainer"></div>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <section class="content-card mb-4" aria-labelledby="forecastTitle">
+        <div class="content-card-header">
+          <div class="d-flex flex-column flex-md-row align-items-md-center justify-content-between gap-3">
+            <div>
+              <h2 id="forecastTitle" class="section-title h3 mb-1">Previsão detalhada dos próximos dias</h2>
+              <p class="muted-text fw-semibold mb-0">Previsão obtida a partir da localização da propriedade vinculada à área.</p>
+            </div>
+            <span class="status-badge status-neutral" id="forecastStatus">Carregando</span>
+          </div>
+        </div>
+        <div class="content-card-body">
+          <div class="forecast-scroll" id="forecastList" aria-live="polite"></div>
+        </div>
+      </section>
+
+      <section class="row g-4 mb-4">
+        <div class="col-lg-5">
+          <article class="content-card h-100" aria-labelledby="areaInfoTitle">
+            <div class="content-card-header">
+              <p class="kicker mb-2">Área selecionada</p>
+              <h2 id="areaInfoTitle" class="section-title h3 mb-1">Dados da área</h2>
+              <p class="muted-text fw-semibold mb-0">Informações cadastradas para organização da produção.</p>
+            </div>
+            <div class="content-card-body">
+              <div class="detail-grid" id="areaDetailsGrid"></div>
+            </div>
+          </article>
+        </div>
+
+        <div class="col-lg-7">
+          <article class="content-card h-100" aria-labelledby="historyTitle">
+            <div class="content-card-header">
+              <div class="d-flex flex-column flex-md-row align-items-md-center justify-content-between gap-3">
+                <div>
+                  <h2 id="historyTitle" class="section-title h3 mb-1">Histórico da área</h2>
+                  <p class="muted-text fw-semibold mb-0">
+                    Consulta de culturas plantadas registradas e eventos climáticos observados.
+                  </p>
+                </div>
+                <span class="status-badge status-neutral" id="historyCount">0 registros</span>
+              </div>
+            </div>
+            <div class="content-card-body">
+              <div class="timeline" id="historyTimeline" aria-live="polite"></div>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <section class="row g-4 mb-4">
+        <div class="col-lg-6">
+          <article class="content-card h-100" aria-labelledby="historyFormTitle">
+            <div class="content-card-header">
+              <h2 id="historyFormTitle" class="section-title h3 mb-1">Registrar cultura ou evento climático</h2>
+              <p class="muted-text fw-semibold mb-0">
+                Use o mesmo histórico para registrar plantios e eventos climáticos observados na área.
+              </p>
+            </div>
+            <div class="content-card-body">
+              <form id="historyForm" novalidate>
+                <div class="row g-3">
+                  <div class="col-md-6">
+                    <label for="historyType" class="form-label">Tipo de registro</label>
+                    <select class="form-select" id="historyType" required>
+                      <option value="plantio">Cultura plantada</option>
+                      <option value="clima">Evento climático</option>
+                    </select>
+                  </div>
+                  <div class="col-md-6">
+                    <label for="historyDate" class="form-label">Data</label>
+                    <input type="date" class="form-control" id="historyDate" required>
+                    <div class="invalid-feedback">Informe a data do registro.</div>
+                  </div>
+                  <div class="col-md-6" id="cropFieldGroup">
+                    <label for="cropId" class="form-label">Cultura</label>
+                    <select class="form-select" id="cropId">
+                      <option value="">Carregando culturas...</option>
+                    </select>
+                    <div class="invalid-feedback">Selecione a cultura plantada.</div>
+                  </div>
+                  <div class="col-md-6">
+                    <label for="historyStatus" class="form-label">Status / título</label>
+                    <input type="text" class="form-control" id="historyStatus" maxlength="120" placeholder="Ex.: Plantio realizado, Chuva forte" required>
+                    <div class="invalid-feedback">Informe um status ou título.</div>
+                  </div>
+                  <div class="col-md-6 optional-planting-field">
+                    <label for="expectedHarvestDate" class="form-label">Previsão de colheita</label>
+                    <input type="date" class="form-control" id="expectedHarvestDate">
+                  </div>
+                  <div class="col-md-6 optional-planting-field">
+                    <label for="actualHarvestDate" class="form-label">Colheita realizada</label>
+                    <input type="date" class="form-control" id="actualHarvestDate">
+                  </div>
+                  <div class="col-12">
+                    <label for="historyNotes" class="form-label">Descrição / observações</label>
+                    <textarea class="form-control" id="historyNotes" rows="4" maxlength="500" placeholder="Descreva o plantio, manejo, chuva, geada, estiagem ou outro evento relevante."></textarea>
+                  </div>
+                  <div class="col-12 d-flex justify-content-end">
+                    <button type="submit" class="btn btn-btg-secondary" id="historySubmitButton">Salvar registro</button>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </article>
+        </div>
+
+        <div class="col-lg-6">
+          <article class="content-card h-100" aria-labelledby="climateHistoryTitle">
+            <div class="content-card-header">
+              <div class="d-flex flex-column flex-md-row align-items-md-center justify-content-between gap-3">
+                <div>
+                  <h2 id="climateHistoryTitle" class="section-title h3 mb-1">Eventos climáticos recentes</h2>
+                  <p class="muted-text fw-semibold mb-0">
+                    Consulta automática do histórico climático recente da localização da área.
+                  </p>
+                </div>
+                <span class="status-badge status-neutral" id="climateHistoryStatus">Carregando</span>
+              </div>
+            </div>
+            <div class="content-card-body">
+              <div class="timeline" id="climateHistoryTimeline" aria-live="polite"></div>
+            </div>
+          </article>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script>
+
+    let globalLoaderCounter = 0;
+
+    function getGlobalLoaderElement() {
+      return document.getElementById("globalLoader");
+    }
+
+    function getGlobalLoaderMessageElement() {
+      return document.getElementById("globalLoaderMessage");
+    }
+
+    function getRequestLoaderMessage(method = "GET") {
+      const normalizedMethod = String(method || "GET").toUpperCase();
+
+      if (normalizedMethod === "GET") return "Carregando dados...";
+      if (normalizedMethod === "POST") return "Salvando dados...";
+      if (normalizedMethod === "PUT" || normalizedMethod === "PATCH") return "Atualizando dados...";
+      if (normalizedMethod === "DELETE") return "Excluindo dados...";
+
+      return "Processando solicitação...";
+    }
+
+    function showGlobalLoader(message = "Carregando dados...") {
+      globalLoaderCounter += 1;
+
+      const loader = getGlobalLoaderElement();
+      const messageElement = getGlobalLoaderMessageElement();
+
+      if (messageElement) {
+        messageElement.textContent = message;
+      }
+
+      if (loader) {
+        loader.classList.remove("d-none");
+      }
+
+      document.body.classList.add("is-loading");
+    }
+
+    function hideGlobalLoader() {
+      globalLoaderCounter = Math.max(0, globalLoaderCounter - 1);
+
+      if (globalLoaderCounter > 0) return;
+
+      const loader = getGlobalLoaderElement();
+
+      if (loader) {
+        loader.classList.add("d-none");
+      }
+
+      document.body.classList.remove("is-loading");
+    }
+
+    async function withGlobalLoader(callback, message = "Carregando dados...") {
+      showGlobalLoader(message);
+
+      try {
+        return await callback();
+      } finally {
+        hideGlobalLoader();
+      }
+    }
+
+    async function fetchWithLoader(input, init = {}, message = null) {
+      const method = init?.method || "GET";
+      return withGlobalLoader(
+        () => fetch(input, init),
+        message || getRequestLoaderMessage(method)
+      );
+    }
+
+    const API_BASE_URL = "/api";
+    const LOGIN_URL = "/login";
+    const AREAS_URL = "/areas-plantio";
+
+    const state = {
+      auth: null,
+      areaId: null,
+      area: null,
+      property: null,
+      currentWeather: null,
+      forecast: [],
+      recommendations: null,
+      crops: [],
+      history: [],
+      climateHistory: null,
+    };
+
+    const el = {
+      logoutBtn: document.getElementById("logoutBtn"),
+      feedbackArea: document.getElementById("feedbackArea"),
+      areaTitle: document.getElementById("areaTitle"),
+      areaDescription: document.getElementById("areaDescription"),
+      propertyChip: document.getElementById("propertyChip"),
+      sizeChip: document.getElementById("sizeChip"),
+      soilChip: document.getElementById("soilChip"),
+      weatherLocation: document.getElementById("weatherLocation"),
+      weatherStatus: document.getElementById("weatherStatus"),
+      currentTemperature: document.getElementById("currentTemperature"),
+      currentCondition: document.getElementById("currentCondition"),
+      currentWeatherIcon: document.getElementById("currentWeatherIcon"),
+      precipitationValue: document.getElementById("precipitationValue"),
+      rainValue: document.getElementById("rainValue"),
+      recommendationMeta: document.getElementById("recommendationMeta"),
+      recommendationsContainer: document.getElementById("recommendationsContainer"),
+      forecastStatus: document.getElementById("forecastStatus"),
+      forecastList: document.getElementById("forecastList"),
+      areaDetailsGrid: document.getElementById("areaDetailsGrid"),
+      historyCount: document.getElementById("historyCount"),
+      historyTimeline: document.getElementById("historyTimeline"),
+      historyForm: document.getElementById("historyForm"),
+      historyType: document.getElementById("historyType"),
+      historyDate: document.getElementById("historyDate"),
+      cropFieldGroup: document.getElementById("cropFieldGroup"),
+      cropId: document.getElementById("cropId"),
+      historyStatus: document.getElementById("historyStatus"),
+      expectedHarvestDate: document.getElementById("expectedHarvestDate"),
+      actualHarvestDate: document.getElementById("actualHarvestDate"),
+      historyNotes: document.getElementById("historyNotes"),
+      historySubmitButton: document.getElementById("historySubmitButton"),
+      climateHistoryStatus: document.getElementById("climateHistoryStatus"),
+      climateHistoryTimeline: document.getElementById("climateHistoryTimeline"),
+      optionalPlantingFields: Array.from(document.querySelectorAll(".optional-planting-field")),
+    };
+
+    document.addEventListener("DOMContentLoaded", initializePage);
+
+    async function initializePage() {
+      try {
+        state.auth = await requireAuthenticatedUser();
+        setupLogoutButton();
+        setupHistoryForm();
+        state.areaId = getAreaIdFromUrl();
+
+        if (!state.areaId) {
+          redirectToAreas();
+          return;
+        }
+
+        await loadInitialData();
+        renderPage();
+      } catch (error) {
+        console.error(error);
+        showFeedback(error.message || "Não foi possível carregar os dados da área.");
+      }
+    }
+
+    async function loadInitialData() {
+      await loadArea();
+      await Promise.allSettled([
+        loadWeather(),
+        loadForecast(),
+        loadRecommendations(),
+        loadCrops(),
+        loadAreaHistory(),
+      ]);
+    }
+
+    async function loadArea() {
+      try {
+        const data = await apiRequest(`/planting-areas/${encodeURIComponent(state.areaId)}`);
+        const normalized = normalizePlantingAreaResponse(data);
+
+        state.area = normalized.area;
+        state.property = normalized.property;
+
+        if (!state.area?.id || !state.property?.id) {
+          throw new Error("Área de plantio inválida ou sem propriedade vinculada.");
+        }
+      } catch (error) {
+        console.error("Erro ao carregar área de plantio:", error);
+        redirectToAreas();
+        throw error;
+      }
+    }
+
+    async function loadWeather() {
+      if (!state.property?.id) return;
+      const data = await apiRequest(`/weather/current/${encodeURIComponent(state.property.id)}`);
+      state.currentWeather = normalizeCurrentWeather(data);
+    }
+
+    async function loadForecast() {
+      if (!state.property?.id) return;
+      const data = await apiRequest(`/weather/forecast/${encodeURIComponent(state.property.id)}`);
+      state.forecast = normalizeForecast(data);
+    }
+
+    async function loadRecommendations() {
+      if (!state.property?.id) return;
+      const data = await apiRequest(`/recommendations/${encodeURIComponent(state.property.id)}`);
+      state.recommendations = normalizeRecommendationsPayload(data);
+    }
+
+    async function loadCrops() {
+      const data = await apiRequest("/crops");
+      state.crops = normalizeArray(data);
+    }
+
+    async function loadAreaHistory() {
+      const data = await apiRequest(`/planting-areas/${encodeURIComponent(state.areaId)}/history`);
+      state.history = normalizeHistoryArray(data?.planting_records || data?.records || data?.history || []);
+      state.climateHistory = data?.climate_history || null;
+    }
+
+    function renderPage() {
+      renderHero();
+      renderAreaDetails();
+      renderWeather();
+      renderForecast();
+      renderRecommendations();
+      renderCropsOptions();
+      renderHistory();
+      renderClimateHistory();
+    }
+
+    function renderHero() {
+      el.areaTitle.textContent = state.area.name;
+      el.areaDescription.textContent = `Área vinculada à propriedade ${state.property.name}. Consulte clima, previsão, recomendações e histórico operacional.`;
+      el.propertyChip.textContent = `🏡 ${state.property.name}`;
+      el.sizeChip.textContent = `📐 ${formatDecimal(state.area.size_hectares)} ha`;
+      el.soilChip.textContent = `🌱 ${state.area.soil_type || "Solo não informado"}`;
+    }
+
+    function renderAreaDetails() {
+      const items = [
+        ["Propriedade", state.property.name],
+        ["Localização", formatLocation(state.property)],
+        ["Área", state.area.name],
+        ["Tamanho", `${formatDecimal(state.area.size_hectares)} hectares`],
+        ["Tipo de solo", state.area.soil_type || "Não informado"],
+        ["Coordenadas", formatCoordinates(state.property)],
+      ];
+
+      el.areaDetailsGrid.innerHTML = items
+        .map(([label, value]) => `
+          <div class="detail-item">
+            <p class="data-label mb-1">${escapeHtml(label)}</p>
+            <p class="data-value mb-0">${escapeHtml(value)}</p>
+          </div>
+        `)
+        .join("");
+    }
+
+    function renderWeather() {
+      const weather = state.currentWeather;
+      el.weatherLocation.textContent = formatLocation(state.property);
+
+      if (!weather) {
+        el.weatherStatus.textContent = "Indisponível";
+        el.weatherStatus.className = "status-badge status-risk align-self-start";
+        return;
+      }
+
+      el.weatherStatus.textContent = "Atual";
+      el.weatherStatus.className = "status-badge status-good align-self-start";
+      el.currentTemperature.textContent = `${formatDecimal(weather.temperature)}°C`;
+      el.currentCondition.textContent = classifyCurrentWeatherText(weather);
+      el.currentWeatherIcon.textContent = weatherIconFromRain(weather.rain || weather.precipitation);
+      el.precipitationValue.textContent = `${formatDecimal(weather.precipitation)} mm`;
+      el.rainValue.textContent = `${formatDecimal(weather.rain)} mm`;
+    }
+
+    function renderForecast() {
+      el.forecastStatus.textContent = state.forecast.length ? `${state.forecast.length} dias` : "Indisponível";
+      el.forecastStatus.className = `status-badge ${state.forecast.length ? "status-good" : "status-risk"}`;
+
+      if (!state.forecast.length) {
+        el.forecastList.innerHTML = `<div class="empty-state">Não foi possível carregar a previsão do tempo.</div>`;
+        return;
+      }
+
+      el.forecastList.innerHTML = state.forecast
+        .map((day, index) => `
+          <article class="forecast-card">
+            <div class="d-flex justify-content-between align-items-start gap-2 mb-3">
+              <div>
+                <p class="kicker mb-1">${index === 0 ? "Hoje" : formatWeekday(day.date)}</p>
+                <h3 class="h6 fw-bold mb-0">${formatShortDate(day.date)}</h3>
+              </div>
+              <div class="fs-2">${weatherIconFromRain(day.precipitation)}</div>
+            </div>
+            <p class="forecast-temp mb-1">${formatDecimal(day.minTemp)}° / ${formatDecimal(day.maxTemp)}°</p>
+            <p class="muted-text fw-semibold small mb-0">Chuva: ${formatDecimal(day.precipitation)} mm</p>
+          </article>
+        `)
+        .join("");
+    }
+
+    function renderRecommendations() {
+      const payload = state.recommendations;
+      const items = payload?.recommendations || [];
+
+      el.recommendationMeta.textContent = payload
+        ? `${seasonLabel(payload.season)} • ${climateLabel(payload.climateCondition)}`
+        : "Indisponível";
+      el.recommendationMeta.className = `status-badge ${items.length ? "status-good" : "status-warning"}`;
+
+      if (!items.length) {
+        el.recommendationsContainer.innerHTML = `
+          <div class="col-12">
+            <div class="empty-state">
+              <h3 class="h5 fw-bold">Nenhuma recomendação encontrada</h3>
+              <p class="mb-0">Cadastre recomendações compatíveis com a estação e condição climática atual.</p>
+            </div>
+          </div>
+        `;
+        return;
+      }
+
+      el.recommendationsContainer.innerHTML = items
+        .map((item) => `
+          <div class="col-md-6">
+            <article class="entity-card h-100">
+              <span class="status-badge status-good mb-3">${escapeHtml(item.crop?.name || "Cultura")}</span>
+              <h3 class="h5 fw-bold">${escapeHtml(item.crop?.scientific_name || item.crop?.name || "Cultura recomendada")}</h3>
+              <p class="muted-text fw-semibold mb-0">${escapeHtml(item.description || "Sem descrição cadastrada.")}</p>
+            </article>
+          </div>
+        `)
+        .join("");
+    }
+
+    function renderCropsOptions() {
+      el.cropId.innerHTML = `
+        <option value="">Selecione a cultura</option>
+        ${state.crops
+          .map((crop) => `
+            <option value="${escapeHtml(crop.id)}">
+              ${escapeHtml(crop.name)}${crop.scientific_name ? ` • ${escapeHtml(crop.scientific_name)}` : ""}
+            </option>
+          `)
+          .join("")}
+      `;
+    }
+
+    function renderHistory() {
+      el.historyCount.textContent = `${state.history.length} ${state.history.length === 1 ? "registro" : "registros"}`;
+
+      if (!state.history.length) {
+        el.historyTimeline.innerHTML = `
+          <div class="empty-state">
+            <h3 class="h5 fw-bold mb-2">Nenhum histórico registrado</h3>
+            <p class="mb-0">Use o formulário para manter registros de culturas plantadas e eventos climáticos.</p>
+          </div>
+        `;
+        return;
+      }
+
+      const orderedHistory = [...state.history].sort((a, b) => new Date(b.date) - new Date(a.date));
+      el.historyTimeline.innerHTML = orderedHistory
+        .map((item) => `
+          <article class="timeline-item">
+            <div class="timeline-icon" aria-hidden="true">${historyIcon(item.type)}</div>
+            <div class="timeline-content">
+              <div class="d-flex flex-column flex-sm-row justify-content-between gap-2 mb-2">
+                <h3 class="h6 fw-bold mb-0">${escapeHtml(historyTitle(item))}</h3>
+                <span class="small fw-bold muted-text">${formatDate(item.date)}</span>
+              </div>
+              <p class="mb-2 muted-text fw-semibold">${escapeHtml(item.description || "Sem descrição.")}</p>
+              <div class="d-flex flex-wrap gap-2 align-items-center justify-content-between">
+                ${item.crop_name ? `<span class="status-badge status-neutral">${escapeHtml(item.crop_name)}</span>` : ""}
+                <button class="btn-icon-danger" type="button" data-record-id="${escapeHtml(item.id)}">Excluir</button>
+              </div>
+            </div>
+          </article>
+        `)
+        .join("");
+
+      el.historyTimeline.querySelectorAll("button[data-record-id]").forEach((button) => {
+        button.addEventListener("click", () => deleteHistoryRecord(button.dataset.recordId));
+      });
+    }
+
+    function renderClimateHistory() {
+      const records = state.climateHistory?.dailyRecords || state.climateHistory?.daily_records || [];
+      el.climateHistoryStatus.textContent = records.length ? `${records.length} dias` : "Indisponível";
+      el.climateHistoryStatus.className = `status-badge ${records.length ? "status-good" : "status-warning"}`;
+
+      if (!records.length) {
+        el.climateHistoryTimeline.innerHTML = `
+          <div class="empty-state">
+            <h3 class="h5 fw-bold mb-2">Histórico climático não carregado</h3>
+            <p class="mb-0">Verifique se a propriedade possui latitude e longitude cadastradas.</p>
+          </div>
+        `;
+        return;
+      }
+
+      const orderedRecords = [...records]
+        .slice(-10)
+        .sort((a, b) => new Date(b.date) - new Date(a.date));
+
+      el.climateHistoryTimeline.innerHTML = orderedRecords
+        .map((item) => `
+          <article class="timeline-item">
+            <div class="timeline-icon" aria-hidden="true">${weatherIconFromRain(item.precipitation)}</div>
+            <div class="timeline-content">
+              <div class="d-flex flex-column flex-sm-row justify-content-between gap-2 mb-2">
+                <h3 class="h6 fw-bold mb-0">Evento climático consultado</h3>
+                <span class="small fw-bold muted-text">${formatDate(item.date)}</span>
+              </div>
+              <p class="mb-0 muted-text fw-semibold">
+                Máx. ${formatDecimal(item.maxTemp)}°C • Mín. ${formatDecimal(item.minTemp)}°C • Chuva ${formatDecimal(item.precipitation)} mm
+              </p>
+            </div>
+          </article>
+        `)
+        .join("");
+    }
+
+    function setupHistoryForm() {
+      el.historyDate.value = new Date().toISOString().slice(0, 10);
+      updateHistoryFormMode();
+      el.historyType.addEventListener("change", updateHistoryFormMode);
+      el.historyForm.addEventListener("submit", handleHistorySubmit);
+    }
+
+    function updateHistoryFormMode() {
+      const isClimateEvent = el.historyType.value === "clima";
+      el.cropFieldGroup.classList.toggle("d-none", isClimateEvent);
+      el.optionalPlantingFields.forEach((field) => field.classList.toggle("d-none", isClimateEvent));
+      el.cropId.required = !isClimateEvent;
+      el.historyStatus.placeholder = isClimateEvent
+        ? "Ex.: Chuva forte, geada, estiagem"
+        : "Ex.: Plantio realizado, em desenvolvimento, colhido";
+    }
+
+    async function handleHistorySubmit(event) {
+      event.preventDefault();
+      el.historyForm.classList.add("was-validated");
+
+      if (!el.historyForm.checkValidity()) return;
+
+      const isClimateEvent = el.historyType.value === "clima";
+      const payload = {
+        type: el.historyType.value,
+        crop_id: isClimateEvent ? null : el.cropId.value,
+        event_date: el.historyDate.value,
+        plant_date: el.historyDate.value,
+        expected_harvest_date: isClimateEvent ? null : el.expectedHarvestDate.value || null,
+        actual_harvest_date: isClimateEvent ? null : el.actualHarvestDate.value || null,
+        status: el.historyStatus.value.trim(),
+        notes: el.historyNotes.value.trim() || null,
+      };
+
+      try {
+        setButtonLoading(el.historySubmitButton, true, "Salvando...");
+        const created = await apiRequest(`/planting-areas/${encodeURIComponent(state.areaId)}/history`, {
+          method: "POST",
+          body: payload,
+        });
+
+        state.history.unshift(normalizeHistoryRecord(created));
+        el.historyForm.reset();
+        el.historyDate.value = new Date().toISOString().slice(0, 10);
+        el.historyForm.classList.remove("was-validated");
+        updateHistoryFormMode();
+        renderHistory();
+        showFeedback("Registro salvo com sucesso.", "success");
+      } catch (error) {
+        showFeedback(error.message || "Não foi possível salvar o registro.");
+      } finally {
+        setButtonLoading(el.historySubmitButton, false, "Salvar registro");
+      }
+    }
+
+    async function deleteHistoryRecord(recordId) {
+      if (!confirm("Deseja excluir este registro do histórico?")) return;
+
+      try {
+        await apiRequest(`/planting-areas/${encodeURIComponent(state.areaId)}/history/${encodeURIComponent(recordId)}`, {
+          method: "DELETE",
+        });
+        state.history = state.history.filter((item) => String(item.id) !== String(recordId));
+        renderHistory();
+        showFeedback("Registro excluído com sucesso.", "success");
+      } catch (error) {
+        showFeedback(error.message || "Não foi possível excluir o registro.");
+      }
+    }
+
+    async function requireAuthenticatedUser() {
+      const auth = getStoredAuthData();
+
+      if (!auth.token || !auth.userId) {
+        redirectToLogin();
+        throw new Error("Usuário não autenticado.");
+      }
+
+      try {
+        const freshUser = await apiRequest(`/users/${encodeURIComponent(auth.userId)}`, {
+          method: "GET",
+          token: auth.token,
+        });
+        const user = freshUser?.user || freshUser?.usuario || freshUser;
+        const userId = user?.id || user?._id || auth.userId;
+
+        if (!userId) {
+          redirectToLogin();
+          throw new Error("Dados do usuário inválidos.");
+        }
+
+        localStorage.setItem("token", auth.token);
+        localStorage.setItem("user", JSON.stringify(user));
+        localStorage.setItem("btg_user_id", userId);
+
+        return {
+          token: auth.token,
+          user,
+          userId,
+        };
+      } catch (error) {
+        redirectToLogin();
+        throw error;
+      }
+    }
+
+    function getStoredAuthData() {
+      const userData = getJsonFromLocalStorage("userData");
+      const storedUser = getJsonFromLocalStorage("user");
+      const token = localStorage.getItem("token") || userData?.token || userData?.accessToken || userData?.authToken || userData?.jwt || null;
+      const user = storedUser || userData?.user || userData?.usuario || null;
+      const userId = user?.id || user?._id || userData?.id || userData?._id || localStorage.getItem("btg_user_id") || null;
+
+      return {
+        token,
+        user,
+        userId,
+        userData,
+      };
+    }
+
+    function getJsonFromLocalStorage(key) {
+      try {
+        const value = localStorage.getItem(key);
+        return value ? JSON.parse(value) : null;
+      } catch {
+        return null;
+      }
+    }
+
+    function clearAuthData() {
+      localStorage.removeItem("userData");
+      localStorage.removeItem("token");
+      localStorage.removeItem("user");
+      localStorage.removeItem("btg_user_id");
+    }
+
+    function setupLogoutButton() {
+      el.logoutBtn?.addEventListener("click", () => {
+        clearAuthData();
+        window.location.replace(LOGIN_URL);
+      });
+    }
+
+    function redirectToLogin() {
+      clearAuthData();
+      window.location.replace(LOGIN_URL);
+    }
+
+    function redirectToAreas() {
+      window.location.replace(AREAS_URL);
+    }
+
+    function getAreaIdFromUrl() {
+      const params = new URLSearchParams(window.location.search);
+      const queryId = params.get("id") || params.get("areaId");
+      if (queryId) return queryId;
+
+      const pathParts = window.location.pathname.split("/").filter(Boolean);
+      return pathParts[pathParts.length - 1] !== "area-detalhes" ? pathParts[pathParts.length - 1] : null;
+    }
+
+    async function apiRequest(path, options = {}) {
+      const token = options.token || state.auth?.token || localStorage.getItem("token");
+      const headers = {
+        Accept: "application/json",
+        ...(options.body ? { "Content-Type": "application/json" } : {}),
+        ...(token ? { Authorization: `Bearer ${token}` } : {}),
+      };
+
+      const response = await fetchWithLoader(`${API_BASE_URL}${path}`, {
+        method: options.method || "GET",
+        headers,
+        body: options.body ? JSON.stringify(options.body) : undefined,
+      });
+
+      const data = await parseResponse(response);
+
+      if (!response.ok) {
+        throw new Error(data?.error || data?.message || `Erro HTTP ${response.status}`);
+      }
+
+      return data;
+    }
+
+    async function parseResponse(response) {
+      const text = await response.text();
+      if (!text) return null;
+
+      try {
+        return JSON.parse(text);
+      } catch {
+        return { message: text };
+      }
+    }
+
+    function normalizeSingle(data) {
+      return data?.data || data?.plantingArea || data?.planting_area || data?.area || data;
+    }
+
+    function normalizePlantingAreaResponse(data) {
+      const area = data?.data || data?.plantingArea || data?.planting_area || data?.area || data;
+
+      return {
+        area: normalizePlantingArea(area),
+        property: normalizeProperty(area?.property || area?.Property || data?.property || data?.Property),
+      };
+    }
+
+    function normalizeArray(data) {
+      if (Array.isArray(data)) return data;
+      if (Array.isArray(data?.data)) return data.data;
+      if (Array.isArray(data?.items)) return data.items;
+      if (Array.isArray(data?.records)) return data.records;
+      if (Array.isArray(data?.history)) return data.history;
+      return [];
+    }
+
+    function normalizeProperty(property) {
+      property = property || {};
+      return {
+        ...property,
+        id: property.id || property._id,
+        name: property.name || "Propriedade",
+        city: property.city || "",
+        state: property.state || "",
+        latitude: property.latitude,
+        longitude: property.longitude,
+      };
+    }
+
+    function normalizePlantingArea(area) {
+      area = area || {};
+      return {
+        ...area,
+        id: area.id || area._id,
+        property_id: area.property_id || area.propertyId,
+        name: area.name || "Área",
+        size_hectares: area.size_hectares ?? area.sizeHectares ?? 0,
+        soil_type: area.soil_type || area.soilType || "",
+        property: area.property,
+      };
+    }
+
+    function normalizeCurrentWeather(data) {
+      const weather = data?.current_weather || data?.current || data;
+      return {
+        temperature: Number(weather.temperature ?? weather.temperature_2m ?? 0),
+        precipitation: Number(weather.precipitation ?? 0),
+        rain: Number(weather.rain ?? 0),
+      };
+    }
+
+    function normalizeForecast(data) {
+      const raw = data?.forecast || data?.daily || data || [];
+      if (!Array.isArray(raw)) return [];
+
+      return raw.map((item) => ({
+        date: item.date || item.time,
+        maxTemp: Number(item.maxTemp ?? item.max_temp ?? item.temperature_2m_max ?? 0),
+        minTemp: Number(item.minTemp ?? item.min_temp ?? item.temperature_2m_min ?? 0),
+        precipitation: Number(item.precipitation ?? item.precipitation_sum ?? 0),
+      }));
+    }
+
+    function normalizeRecommendationsPayload(data) {
+      const box = data?.recommendations || data;
+      const list = Array.isArray(box?.recommendations) ? box.recommendations : Array.isArray(box) ? box : [];
+
+      return {
+        season: box?.season,
+        climateCondition: box?.climateCondition,
+        weather: box?.weather,
+        recommendations: list,
+      };
+    }
+
+    function normalizeHistoryArray(data) {
+      return normalizeArray(data).map(normalizeHistoryRecord);
+    }
+
+    function normalizeHistoryRecord(record) {
+      const crop = record.crop || {};
+      const isClimateEvent = String(record.status || "").startsWith("EVENTO_CLIMATICO:") || (!record.crop_id && !record.crop);
+      const status = String(record.status || "").replace("EVENTO_CLIMATICO:", "").trim();
+
+      return {
+        id: record.id || cryptoId(),
+        type: isClimateEvent ? "clima" : "plantio",
+        date: record.plant_date || record.event_date || record.date || record.created_at || new Date().toISOString().slice(0, 10),
+        description: record.notes || status || "Registro sem descrição",
+        status,
+        crop_name: crop.name || record.crop_name || "",
+        raw: record,
+      };
+    }
+
+    function cryptoId() {
+      return crypto.randomUUID ? crypto.randomUUID() : String(Date.now());
+    }
+
+    function formatLocation(property) {
+      return `${property.city || "Cidade não informada"}/${property.state || "UF"}`;
+    }
+
+    function formatCoordinates(property) {
+      if (!property || property.latitude == null || property.longitude == null) return "Não informado";
+      return `${Number(property.latitude).toFixed(6)}, ${Number(property.longitude).toFixed(6)}`;
+    }
+
+    function formatDecimal(value) {
+      return Number(value || 0).toLocaleString("pt-BR", {
+        maximumFractionDigits: 2,
+      });
+    }
+
+    function formatShortDate(date) {
+      if (!date) return "--";
+      return new Date(`${String(date).slice(0, 10)}T00:00:00`).toLocaleDateString("pt-BR", {
+        day: "2-digit",
+        month: "short",
+      }).replace(".", "");
+    }
+
+    function formatWeekday(date) {
+      if (!date) return "Dia";
+      const weekday = new Date(`${String(date).slice(0, 10)}T00:00:00`).toLocaleDateString("pt-BR", {
+        weekday: "long",
+      });
+      return weekday.charAt(0).toUpperCase() + weekday.slice(1);
+    }
+
+    function formatDate(date) {
+      if (!date) return "Data não informada";
+      return new Date(`${String(date).slice(0, 10)}T00:00:00`).toLocaleDateString("pt-BR");
+    }
+
+    function weatherIconFromRain(value) {
+      if (Number(value || 0) > 5) return "🌧️";
+      if (Number(value || 0) > 0) return "🌦️";
+      return "☀️";
+    }
+
+    function classifyCurrentWeatherText(weather) {
+      if (Number(weather.rain) > 5 || Number(weather.precipitation) > 5) return "Chuva significativa";
+      if (Number(weather.rain) > 0 || Number(weather.precipitation) > 0) return "Chuva leve";
+      if (Number(weather.temperature) >= 28) return "Quente e seco";
+      if (Number(weather.temperature) <= 18) return "Temperatura amena/fria";
+      return "Condição estável";
+    }
+
+    function seasonLabel(season) {
+      return {
+        summer: "Verão",
+        autumn: "Outono",
+        winter: "Inverno",
+        spring: "Primavera",
+      }[season] || "Estação atual";
+    }
+
+    function climateLabel(climate) {
+      return {
+        hot_rainy: "Quente e chuvoso",
+        cold: "Frio",
+        mild: "Ameno",
+      }[climate] || "Condição climática";
+    }
+
+    function historyIcon(type) {
+      return {
+        plantio: "🌱",
+        clima: "🌦️",
+        manejo: "🧺",
+        colheita: "🌽",
+        observacao: "✍️",
+      }[type] || "📌";
+    }
+
+    function historyTitle(item) {
+      if (item.type === "plantio") return item.status || "Cultura plantada";
+      if (item.type === "clima") return item.status || "Evento climático";
+      return item.status || "Registro";
+    }
+
+    function escapeHtml(value) {
+      return String(value ?? "")
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#039;");
+    }
+
+    function showFeedback(message, type = "danger") {
+      el.feedbackArea.textContent = message;
+      el.feedbackArea.className = `alert alert-${type}`;
+    }
+
+    function setButtonLoading(button, isLoading, text) {
+      button.disabled = isLoading;
+      button.textContent = text;
+    }
+  </script>
+</body>
+
+</html>
