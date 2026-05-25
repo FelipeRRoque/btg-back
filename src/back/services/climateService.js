@@ -1,5 +1,3 @@
-const { PropertyService } = require("./propertyService");
-
 const {
   ClimateHistory,
   DailyClimate,
@@ -9,20 +7,26 @@ const {
 } = require("../models/dtos/climateDTOs");
 
 class ClimateService {
-  /**
-   * Busca dados históricos na Open-Meteo e retorna objetos estruturados (DTOs).
-   * @param {property} property - Objeto da propriedade (UUID).
-   */
   static async getHistoricalData(property) {
-    const startDate = "2010-01-01";
+    return this.getRecentHistoricalData(property, {
+      startDate: "2010-01-01",
+      endDate: new Date().toISOString().split("T")[0],
+    });
+  }
 
-    const endDate = new Date().toISOString().split("T")[0];
+  static async getRecentHistoricalData(property, options = {}) {
+    if (!property) {
+      throw new Error("Propriedade não encontrada");
+    }
+
+    const endDate = options.endDate || new Date().toISOString().split("T")[0];
+    const startDate =
+      options.startDate ||
+      new Date(Date.now() - Number(options.days || 15) * 24 * 60 * 60 * 1000)
+        .toISOString()
+        .split("T")[0];
 
     try {
-      if (!property) {
-        throw new Error("Propriedade não encontrada");
-      }
-
       const baseUrl = "https://archive-api.open-meteo.com/v1/archive";
       const params = new URLSearchParams({
         latitude: property.latitude,
@@ -40,8 +44,9 @@ class ClimateService {
       }
 
       const rawData = await response.json();
+      const times = rawData.daily?.time || [];
 
-      const dailyRecords = rawData.daily.time.map((dateStr, index) => {
+      const dailyRecords = times.map((dateStr, index) => {
         return new DailyClimate(
           dateStr,
           rawData.daily.temperature_2m_max[index],
@@ -71,6 +76,7 @@ class ClimateService {
       });
 
       const response = await fetch(`${baseUrl}?${params.toString()}`);
+
       if (!response.ok) {
         throw new Error(`Erro na API Open-Meteo: Status ${response.status}`);
       }
@@ -103,13 +109,15 @@ class ClimateService {
       });
 
       const response = await fetch(`${baseUrl}?${params.toString()}`);
+
       if (!response.ok) {
         throw new Error(`Erro na API Open-Meteo: Status ${response.status}`);
       }
 
       const rawData = await response.json();
+      const times = rawData.daily?.time || [];
 
-      return rawData.daily.time.map((date, index) => {
+      return times.map((date, index) => {
         return new ForecastWeather(
           date,
           rawData.daily.temperature_2m_max[index],
@@ -137,6 +145,7 @@ class ClimateService {
       });
 
       const response = await fetch(`${baseUrl}?${params.toString()}`);
+
       if (!response.ok) {
         throw new Error(`Erro na API Open-Meteo: Status ${response.status}`);
       }

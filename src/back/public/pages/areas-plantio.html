@@ -698,11 +698,86 @@
     .logout-pill {
       cursor: pointer;
     }
+
+    .global-loader-overlay {
+      position: fixed;
+      inset: 0;
+      z-index: 2000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 1.5rem;
+      background: rgba(16, 42, 31, 0.38);
+      backdrop-filter: blur(6px);
+    }
+
+    .global-loader-overlay.d-none {
+      display: none !important;
+    }
+
+    .global-loader-card {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      max-width: 420px;
+      width: 100%;
+      padding: 1.1rem 1.25rem;
+      border: 1px solid rgba(223, 232, 221, 0.94);
+      border-radius: 24px;
+      background: rgba(255, 255, 255, 0.96);
+      box-shadow: 0 1.5rem 4rem rgba(16, 42, 31, 0.2);
+    }
+
+    .global-loader-spinner {
+      width: 42px;
+      height: 42px;
+      flex: 0 0 auto;
+      border: 4px solid var(--btg-green-100);
+      border-top-color: var(--btg-green-800);
+      border-radius: 50%;
+      animation: globalLoaderSpin 0.85s linear infinite;
+    }
+
+    .global-loader-title {
+      margin: 0;
+      color: var(--btg-green-950);
+      font-weight: 800;
+      line-height: 1.2;
+    }
+
+    .global-loader-message {
+      margin: 0.15rem 0 0;
+      color: var(--btg-muted);
+      font-size: 0.92rem;
+      font-weight: 650;
+    }
+
+    body.is-loading {
+      cursor: progress;
+    }
+
+    @keyframes globalLoaderSpin {
+      to {
+        transform: rotate(360deg);
+      }
+    }
+
   </style>
 </head>
 
 <body class="page-bg">
-  <main class="page-shell container py-4 py-lg-5">
+  
+  <div id="globalLoader" class="global-loader-overlay d-none" role="status" aria-live="polite" aria-label="Carregando">
+    <div class="global-loader-card">
+      <div class="global-loader-spinner" aria-hidden="true"></div>
+      <div>
+        <p class="global-loader-title">Processando solicitação</p>
+        <p class="global-loader-message" id="globalLoaderMessage">Carregando dados...</p>
+      </div>
+    </div>
+  </div>
+
+<main class="page-shell container py-4 py-lg-5">
     <header class="topbar p-3 p-md-4 mb-4">
       <div class="d-flex flex-column flex-lg-row align-items-lg-center justify-content-between gap-3">
         <a href="/home" class="brand-badge" aria-label="Página inicial Best Time to Grow">
@@ -879,6 +954,17 @@
               </div>
             </div>
 
+            <div class="inline-hint mt-3">
+              <div class="fs-4">📍</div>
+              <div>
+                <strong>Busca automática de endereço.</strong>
+                <p class="muted-text mb-0">
+                  Após informar o CEP, os campos de endereço serão preenchidos automaticamente. Se algum dado não vier da busca,
+                  o campo será liberado para preenchimento manual. Ao salvar, serão enviados ao backend o nome, a cidade, o estado, a latitude e a longitude.
+                </p>
+              </div>
+            </div>
+
             <div class="d-flex flex-column flex-sm-row justify-content-end gap-2 mt-4">
               <button class="btn btn-btg-light" id="cancelPropertyFormButton" type="button">Cancelar</button>
               <button class="btn btn-btg-primary" id="propertySubmitButton" type="submit">Salvar propriedade</button>
@@ -1029,6 +1115,77 @@
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
   <script>
+
+    let globalLoaderCounter = 0;
+
+    function getGlobalLoaderElement() {
+      return document.getElementById("globalLoader");
+    }
+
+    function getGlobalLoaderMessageElement() {
+      return document.getElementById("globalLoaderMessage");
+    }
+
+    function getRequestLoaderMessage(method = "GET") {
+      const normalizedMethod = String(method || "GET").toUpperCase();
+
+      if (normalizedMethod === "GET") return "Carregando dados...";
+      if (normalizedMethod === "POST") return "Salvando dados...";
+      if (normalizedMethod === "PUT" || normalizedMethod === "PATCH") return "Atualizando dados...";
+      if (normalizedMethod === "DELETE") return "Excluindo dados...";
+
+      return "Processando solicitação...";
+    }
+
+    function showGlobalLoader(message = "Carregando dados...") {
+      globalLoaderCounter += 1;
+
+      const loader = getGlobalLoaderElement();
+      const messageElement = getGlobalLoaderMessageElement();
+
+      if (messageElement) {
+        messageElement.textContent = message;
+      }
+
+      if (loader) {
+        loader.classList.remove("d-none");
+      }
+
+      document.body.classList.add("is-loading");
+    }
+
+    function hideGlobalLoader() {
+      globalLoaderCounter = Math.max(0, globalLoaderCounter - 1);
+
+      if (globalLoaderCounter > 0) return;
+
+      const loader = getGlobalLoaderElement();
+
+      if (loader) {
+        loader.classList.add("d-none");
+      }
+
+      document.body.classList.remove("is-loading");
+    }
+
+    async function withGlobalLoader(callback, message = "Carregando dados...") {
+      showGlobalLoader(message);
+
+      try {
+        return await callback();
+      } finally {
+        hideGlobalLoader();
+      }
+    }
+
+    async function fetchWithLoader(input, init = {}, message = null) {
+      const method = init?.method || "GET";
+      return withGlobalLoader(
+        () => fetch(input, init),
+        message || getRequestLoaderMessage(method)
+      );
+    }
+
     const API_BASE_URL = "/api";
     const LOGIN_URL = "/login";
 
@@ -1324,7 +1481,7 @@
         ...(token ? { "Authorization": `Bearer ${token}` } : {})
       };
 
-      const response = await fetch(`${API_BASE_URL}${path}`, {
+      const response = await fetchWithLoader(`${API_BASE_URL}${path}`, {
         method: options.method || "GET",
         headers,
         body: options.body ? JSON.stringify(options.body) : undefined
@@ -1875,7 +2032,7 @@
     }
 
     async function fetchAddressByCep(cep) {
-      const response = await fetch(`https://viacep.com.br/ws/${cep}/json/`);
+      const response = await fetchWithLoader(`https://viacep.com.br/ws/${cep}/json/`);
       const data = await parseExternalResponse(response);
 
       if (!response.ok || data?.erro) {
@@ -1989,7 +2146,7 @@
       url.searchParams.set("countrycodes", "br");
       url.searchParams.set("q", query);
 
-      const response = await fetch(url.toString(), {
+      const response = await fetchWithLoader(url.toString(), {
         headers: {
           "Accept": "application/json"
         }
