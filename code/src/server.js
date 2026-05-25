@@ -9,11 +9,8 @@ async function startServer() {
   try {
     await sequelize.authenticate();
 
-    console.log("🚀 Conectado ao PostgreSQL!");
-
     app.listen(PORT, () => {
-      console.log(`✅ Servidor rodando na porta ${PORT}`);
-      console.log(`🌐 Login: http://localhost:${PORT}/login`);
+      console.log(`🚀 Conectado ao PostgreSQL em: ${sequelize.config.host}`);
       console.log(`🌐 Home: http://localhost:${PORT}/home`);
       console.log(`📚 Docs: http://localhost:${PORT}/docs`);
     });
