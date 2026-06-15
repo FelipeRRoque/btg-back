@@ -12,7 +12,9 @@ if (missingEnvVars.length > 0) {
   );
 }
 
-const isAzurePostgres = String(process.env.DB_HOST).includes("postgres.database.azure.com");
+// ALTERAÇÃO: Detecta se o banco é da Azure ou do Render
+const hostStr = String(process.env.DB_HOST);
+const exigeSSL = hostStr.includes("postgres.database.azure.com") || hostStr.includes("render.com");
 
 const databaseConfig = {
   username: process.env.DB_USER,
@@ -21,7 +23,8 @@ const databaseConfig = {
   host: process.env.DB_HOST,
   port: Number(process.env.DB_PORT || 5432),
   dialect: "postgres",
-  dialectOptions: isAzurePostgres
+  // Se for Azure ou Render, injeta a configuração de SSL obrigatória
+  dialectOptions: exigeSSL
     ? {
         ssl: {
           require: true,
