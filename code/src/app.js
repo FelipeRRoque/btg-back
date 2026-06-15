@@ -16,7 +16,7 @@ const recommendationRoutes = require("./routes/recommendationRoutes");
 const weatherRoutes = require("./routes/weatherRoutes");
 
 const app = express();
-
+console.log("🔥 CORS CONFIGURADO");
 app.use(
   cors({
     origin: [
