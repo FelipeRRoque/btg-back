@@ -959,10 +959,10 @@
         ),
       );
     }
-async function refreshWeatherAndRecommendations() {
+    async function refreshWeatherAndRecommendations() {
       clearFeedback();
       if (!state.selectedProperty) return;
-      
+
       const propId = encodeURIComponent(state.selectedProperty.id);
 
       try {
@@ -1030,9 +1030,6 @@ async function refreshWeatherAndRecommendations() {
         el.weatherStatus.textContent = "Atualizado Agora";
         el.weatherStatus.className = "status-badge status-good align-self-start";
       }
-      el.weatherStatus.textContent = "Atual";
-      el.weatherStatus.className =
-        "status-badge status-good align-self-start";
       el.currentTemperature.textContent = `${formatDecimal(w.temperature)}°C`;
       el.currentCondition.textContent = classifyCurrentWeatherText(w);
       el.currentWeatherIcon.textContent = weatherIconFromRain(
