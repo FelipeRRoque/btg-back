@@ -959,52 +959,30 @@
         ),
       );
     }
-    async function refreshWeatherAndRecommendations() {
+async function refreshWeatherAndRecommendations() {
       clearFeedback();
       if (!state.selectedProperty) return;
+      
+      const propId = encodeURIComponent(state.selectedProperty.id);
+
       try {
-        const [current, forecast, recommendations] = await Promise.allSettled(
-          [
-            apiRequest(
-              `/weather/current/${encodeURIComponent(state.selectedProperty.id)}`,
-              { method: "GET" },
-            ),
-            apiRequest(
-              `/weather/forecast/${encodeURIComponent(state.selectedProperty.id)}`,
-              { method: "GET" },
-            ),
-            apiRequest(
-              `/recommendations/${encodeURIComponent(state.selectedProperty.id)}`,
-              { method: "GET" },
-            ),
-          ],
-        );
-        state.currentWeather =
-          current.status === "fulfilled"
-            ? normalizeCurrentWeather(current.value)
-            : null;
-        state.forecast =
-          forecast.status === "fulfilled"
-            ? normalizeForecast(forecast.value)
-            : [];
-        state.recommendations =
-          recommendations.status === "fulfilled"
-            ? normalizeRecommendationsPayload(recommendations.value)
-            : null;
-        if (
-          current.status === "rejected" ||
-          forecast.status === "rejected" ||
-          recommendations.status === "rejected"
-        )
-          showFeedback(
-            "Alguns dados climáticos ou recomendações não foram carregados. Verifique as rotas do backend.",
-            "danger",
-          );
+        const [current, forecast, recommendations] = await Promise.allSettled([
+          apiRequestWithFallback(`/weather/current/${propId}`, `btg_weather_current_${propId}`),
+          apiRequestWithFallback(`/weather/forecast/${propId}`, `btg_weather_forecast_${propId}`),
+          apiRequest(`/recommendations/${propId}`, { method: "GET" }),
+        ]);
+
+        state.currentWeather = current.status === "fulfilled" ? normalizeCurrentWeather(current.value) : null;
+        if (state.currentWeather && current.value?._isCached) state.currentWeather._isCached = true;
+
+        state.forecast = forecast.status === "fulfilled" ? normalizeForecast(forecast.value) : [];
+        state.recommendations = recommendations.status === "fulfilled" ? normalizeRecommendationsPayload(recommendations.value) : null;
+
+        if (current.status === "rejected" || forecast.status === "rejected" || recommendations.status === "rejected") {
+          showFeedback("Alguns dados não puderam ser atualizados e o cache estava vazio.", "warning");
+        }
       } catch (error) {
-        showFeedback(
-          error.message || "Não foi possível carregar clima e recomendações.",
-          "danger",
-        );
+        showFeedback(error.message || "Não foi possível carregar o clima.", "danger");
       }
     }
 
@@ -1045,15 +1023,12 @@
       el.weatherLocation.textContent = p
         ? `${p.name} • ${formatLocation(p)}`
         : "Selecione uma propriedade";
-      if (!w) {
-        el.weatherStatus.textContent = "Indisponível";
-        el.weatherStatus.className =
-          "status-badge status-risk align-self-start";
-        el.currentTemperature.textContent = "--°C";
-        el.currentCondition.textContent = "Clima não carregado";
-        el.precipitationValue.textContent = "-- mm";
-        el.rainValue.textContent = "-- mm";
-        return;
+      if (w._isCached) {
+        el.weatherStatus.textContent = "Offline (Usando Cache)";
+        el.weatherStatus.className = "status-badge status-warning align-self-start";
+      } else {
+        el.weatherStatus.textContent = "Atualizado Agora";
+        el.weatherStatus.className = "status-badge status-good align-self-start";
       }
       el.weatherStatus.textContent = "Atual";
       el.weatherStatus.className =
@@ -1154,6 +1129,37 @@
           data?.error || data?.message || `Erro HTTP ${response.status}`,
         );
       return data;
+    }
+
+    async function apiRequestWithFallback(path, cacheKey) {
+      try {
+        const data = await apiRequest(path, { method: "GET" });
+
+        localStorage.setItem(cacheKey, JSON.stringify({
+          timestamp: Date.now(),
+          data: data
+        }));
+
+        if (typeof data === 'object' && data !== null) {
+          data._isCached = false;
+        }
+        return data;
+
+      } catch (error) {
+        const cachedItem = localStorage.getItem(cacheKey);
+
+        if (cachedItem) {
+          console.warn(`[Fallback] Falha ao acessar ${path}. Usando dados do cache local.`);
+          const parsed = JSON.parse(cachedItem);
+
+          if (typeof parsed.data === 'object' && parsed.data !== null) {
+            parsed.data._isCached = true;
+          }
+          return parsed.data;
+        }
+
+        throw error;
+      }
     }
     async function parseResponse(response) {
       const text = await response.text();
