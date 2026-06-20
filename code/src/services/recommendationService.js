@@ -2,10 +2,6 @@ const { Recommendation, Crop } = require('../models');
 
 class RecommendationService {
 
-    static async create(data) {
-    return await Recommendation.create(data);
-    }
-    
     static getCurrentSeason() {
         const month = new Date().getMonth() + 1; // getMonth() returns 0-11
         if ([12, 1, 2].includes(month)) return 'summer';

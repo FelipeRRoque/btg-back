@@ -4,7 +4,6 @@ const router = express.Router();
 const RecommendationController = require('../controllers/recommendationController');
 const authMiddleware = require('../middlewares/authMiddleware');
 
-router.post('/', authMiddleware, RecommendationController.create);
 router.get('/:propertyId', authMiddleware, RecommendationController.getRecommendations);
 
 module.exports = router;

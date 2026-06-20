@@ -4,15 +4,6 @@ const RecommendationService = require('../services/recommendationService');
 
 class RecommendationController {
 
-    static async create(req, res) {
-    try {
-        const recommendation = await RecommendationService.create(req.body);
-        return res.status(201).json(recommendation);
-    } catch (error) {
-        return res.status(400).json({ error: error.message });
-    }
-    }
-    
     static async getRecommendations(req, res) {
         try {
             const { propertyId } = req.params;
