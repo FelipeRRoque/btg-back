@@ -959,26 +959,52 @@
         ),
       );
     }
-    async function refreshWeatherAndRecommendations() {
+async function refreshWeatherAndRecommendations() {
       clearFeedback();
       if (!state.selectedProperty) return;
-
-      const propId = encodeURIComponent(state.selectedProperty.id);
-
       try {
-        const [current, forecast, recommendations] = await Promise.allSettled([
-          apiRequestWithFallback(`/weather/current/${propId}`, `btg_weather_current_${propId}`),
-          apiRequestWithFallback(`/weather/forecast/${propId}`, `btg_weather_forecast_${propId}`),
-          apiRequest(`/recommendations/${propId}`, { method: "GET" }),
-        ]);
-
-        state.currentWeather = current.status === "fulfilled" ? normalizeCurrentWeather(current.value) : null;
-        if (state.currentWeather && current.value?._isCached) state.currentWeather._isCached = true;
-
-        state.forecast = forecast.status === "fulfilled" ? normalizeForecast(forecast.value) : [];
-        state.recommendations = recommendations.status === "fulfilled" ? normalizeRecommendationsPayload(recommendations.value) : null;
+        const [current, forecast, recommendations] = await Promise.allSettled(
+          [
+            apiRequest(
+              `/weather/current/${encodeURIComponent(state.selectedProperty.id)}`,
+              { method: "GET" },
+            ),
+            apiRequest(
+              `/weather/forecast/${encodeURIComponent(state.selectedProperty.id)}`,
+              { method: "GET" },
+            ),
+            apiRequest(
+              `/recommendations/${encodeURIComponent(state.selectedProperty.id)}`,
+              { method: "GET" },
+            ),
+          ],
+        );
+        state.currentWeather =
+          current.status === "fulfilled"
+            ? normalizeCurrentWeather(current.value)
+            : null;
+        state.forecast =
+          forecast.status === "fulfilled"
+            ? normalizeForecast(forecast.value)
+            : [];
+        state.recommendations =
+          recommendations.status === "fulfilled"
+            ? normalizeRecommendationsPayload(recommendations.value)
+            : null;
+        if (
+          current.status === "rejected" ||
+          forecast.status === "rejected" ||
+          recommendations.status === "rejected"
+        )
+          showFeedback(
+            "Alguns dados climáticos ou recomendações não foram carregados. Verifique as rotas do backend.",
+            "danger",
+          );
       } catch (error) {
-        showFeedback(error.message || "Não foi possível carregar o clima.", "danger");
+        showFeedback(
+          error.message || "Não foi possível carregar clima e recomendações.",
+          "danger",
+        );
       }
     }
 
