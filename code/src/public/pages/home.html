@@ -977,10 +977,6 @@
 
         state.forecast = forecast.status === "fulfilled" ? normalizeForecast(forecast.value) : [];
         state.recommendations = recommendations.status === "fulfilled" ? normalizeRecommendationsPayload(recommendations.value) : null;
-
-        if (current.status === "rejected" || forecast.status === "rejected" || recommendations.status === "rejected") {
-          showFeedback("Alguns dados não puderam ser atualizados e o cache estava vazio.", "warning");
-        }
       } catch (error) {
         showFeedback(error.message || "Não foi possível carregar o clima.", "danger");
       }
@@ -1023,13 +1019,8 @@
       el.weatherLocation.textContent = p
         ? `${p.name} • ${formatLocation(p)}`
         : "Selecione uma propriedade";
-      if (w._isCached) {
-        el.weatherStatus.textContent = "Offline (Usando Cache)";
-        el.weatherStatus.className = "status-badge status-warning align-self-start";
-      } else {
-        el.weatherStatus.textContent = "Atualizado Agora";
-        el.weatherStatus.className = "status-badge status-good align-self-start";
-      }
+      el.weatherStatus.textContent = "Atual";
+      el.weatherStatus.className = "status-badge status-good align-self-start";
       el.currentTemperature.textContent = `${formatDecimal(w.temperature)}°C`;
       el.currentCondition.textContent = classifyCurrentWeatherText(w);
       el.currentWeatherIcon.textContent = weatherIconFromRain(
