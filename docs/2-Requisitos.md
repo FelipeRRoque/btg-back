@@ -132,7 +132,7 @@ As histórias de usuário representam as necessidades dos principais atores iden
 
 ## 2.6 Restrições Arquiteturais
 * O sistema deverá ser desenvolvido utilizando arquitetura cliente-servidor, com separação entre frontend e backend.
-* O backend da aplicação deverá ser desenvolvido utilizando C#, implementando uma API no padrão RESTful para comunicação com o frontend.
+* O backend da aplicação deverá ser desenvolvido utilizando Node, implementando uma API no padrão RESTful para comunicação com o frontend.
 * O frontend deverá ser desenvolvido utilizando JavaScript, garantindo uma interface web responsiva e de fácil utilização para produtores rurais.
 * A comunicação entre frontend e backend deverá ocorrer através de requisições HTTP utilizando JSON como formato padrão de troca de dados.
 * O sistema deverá integrar-se com APIs externas de dados meteorológicos para obtenção de informações de clima atual e previsão do tempo.
@@ -148,8 +148,8 @@ A tabela abaixo descreve as escolhas técnicas para sustentar as funcionalidades
 |--- | --- | --- |
 | Persistência | ORM | PostgreSQL ou MySQL |
 | Front end | Interface Web Responsiva / JS | JavaScript |
-| Back end | API RESTful / Arquitetura em Camadas | C# (ASP.NET Core) |
-| Integração | Consumo de API Externa (JSON/HTTP) | HttpClient (C#) para APIs Meteorológicas |
+| Back end | API RESTful / Arquitetura em Camadas | Node |
+| Integração | Consumo de API Externa (JSON/HTTP) | HttpClient (Node) para APIs Meteorológicas |
 | Deploy | Versionamento e Hospedagem | Git / GitHub e Provedor de Nuvem |
 | Tratamento de Exceções | Mensagens Informativas / Middleware | Blocos Try-Catch e Global Error Handling |
 
