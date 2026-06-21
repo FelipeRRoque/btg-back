@@ -3,20 +3,26 @@ const { Recommendation, Crop } = require('../models');
 class RecommendationService {
 
     static getCurrentSeason() {
-        const month = new Date().getMonth() + 1; // getMonth() returns 0-11
-        if ([12, 1, 2].includes(month)) return 'summer';
-        if ([3, 4, 5].includes(month)) return 'autumn';
-        if ([6, 7, 8].includes(month)) return 'winter';
-        return 'spring';
+        const month = new Date().getMonth() + 1;
+
+        if ([12, 1, 2].includes(month)) return 'Verão';
+        if ([3, 4, 5].includes(month)) return 'Outono';
+        if ([6, 7, 8].includes(month)) return 'Inverno';
+
+        return 'Primavera';
     }
 
     static classifyClimate(weatherData) {
         const temperature = weatherData.current.temperature;
         const precipitation = weatherData.current.precipitation;
 
-        if (temperature >= 24 && precipitation >= 5) { return 'hot_rainy'; }
-        if (temperature <= 20) { return 'cold'; }
-        return 'mild';
+        if (temperature >= 24 && precipitation >= 5)
+            return 'Quente e chuvoso';
+
+        if (temperature <= 20)
+            return 'Frio';
+
+        return 'Ameno';
     }
 
     static async generateRecommendations(weatherData) {
